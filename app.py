@@ -68,7 +68,7 @@ st.set_page_config(page_title="Recomendador de Mercados de Exportación", page_i
 
 # Cargar el logo de la Cámara de Comercio y Servicios del Uruguay
 logo_url = "https://www.ccsuy.org.uy/wp-content/uploads/2020/09/camara-comercio-servicios-uruguay-logo.png"
-st.image(logo_url, use_column_width=True)
+st.image(logo_url, use_container_width=True)
 
 # Título principal
 st.markdown("<h1 style='color: #3E8E41;'>Bienvenido al Recomendador de Mercados de Exportación 🌎</h1>", unsafe_allow_html=True)
@@ -81,7 +81,7 @@ st.markdown(
     """
 )
 
-# Selección de producto
+# Selección de categoría y producto
 categoria = st.selectbox("Selecciona la categoría de tu producto", afinidad_df['Categoria'].unique())
 
 # Filtrar por categoría
@@ -110,7 +110,7 @@ if st.button("Obtener recomendaciones"):
     st.dataframe(df_recomendado)
 
 # Estilo con colores y emojis para la interfaz
-st.markdown("""
+st.markdown(""" 
     <style>
         .stButton > button {
             background-color: #3E8E41;
@@ -119,6 +119,9 @@ st.markdown("""
         }
         .stButton > button:hover {
             background-color: #45a049;
+        }
+        h1 {
+            color: #3E8E41;
         }
     </style>
 """, unsafe_allow_html=True)
