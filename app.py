@@ -13,7 +13,7 @@ afinidad_df = pd.read_csv('afinidad_producto_país.csv', encoding='ISO-8859-1')
 
 # Mapeo de las métricas en los archivos CSV
 mercados_df['Facilidad Negocios'] = mercados_df['Facilidad Negocios (WB 2019)']
-mercados_df['PIB per cápita'] = mercados_df['PIB per cápita (USD)']
+mercados_df['PIB per cápita (USD)'] = mercados_df['PIB per cápita (USD)']
 mercados_df['Crecimiento Anual PIB'] = mercados_df['Crecimiento Anual PIB (%)']
 mercados_df['Tamaño del Mercado'] = mercados_df['Tamaño del Mercado Total (Millones USD)']
 mercados_df['Población'] = mercados_df['Población (Millones)']
