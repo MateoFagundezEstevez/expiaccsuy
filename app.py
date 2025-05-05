@@ -64,7 +64,7 @@ st.markdown("""
 # Logo centrado y grande
 st.markdown("""
     <div class="logo-container">
-        <img src="logo_ccsuy.png">
+
     </div>
 """, unsafe_allow_html=True)
 
