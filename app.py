@@ -47,7 +47,7 @@ def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
 
     df_recomendado = pd.concat([top_latam, top_global])
 
-    # Agregar info de acuerdos comerciales
+    # Agregar info de acuerdos comerciales, incluso si es nulo
     df_recomendado = pd.merge(df_recomendado, acuerdos_df[['País', 'Acuerdo Comercial', 'Vigencia', 'Enlace', 'Descripción']], on='País', how='left')
 
     recomendaciones = []
@@ -171,3 +171,4 @@ st.markdown("""
         .stButton > button:hover { background-color: #45a049; } 
     </style> 
 """, unsafe_allow_html=True)
+
