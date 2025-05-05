@@ -32,17 +32,18 @@ pesos = {
 scaler = MinMaxScaler()
 df = mercados_df.copy()
 
+# Normalización de los indicadores
 for col in indicadores:
     if col == 'Distancia a Uruguay (km)':
-        # Normalización inversa para la distancia (menos distancia mejor)
+        # Normalización inversa para la distancia (menor distancia mejor)
         df[col + '_norm'] = 1 - scaler.fit_transform(df[[col]])
     else:
         df[col + '_norm'] = scaler.fit_transform(df[[col]])
 
-# Calcular la afinidad
+# Calcular la afinidad base
 df['Afinidad_base'] = sum(df[ind + '_norm'] * pesos[ind] for ind in indicadores)
 
-# Añadir una variación aleatoria a la afinidad (entre -5 y 5)
+# Añadir variación aleatoria a la afinidad
 np.random.seed(42)  # Para reproducibilidad
 df['Afinidad'] = df['Afinidad_base'] + np.random.uniform(-5, 5, len(df))
 
@@ -62,7 +63,7 @@ producto_seleccionado = st.sidebar.selectbox('Selecciona un Producto', afinidad_
 # Filtrar los datos por el producto seleccionado
 df_producto = df_final[df_final['Producto'] == producto_seleccionado]
 
-# Mostrar tabla con afinidad calculada para el producto
+# Mostrar tabla con afinidad calculada para el producto seleccionado
 st.write(f"**Afinidad para el producto '{producto_seleccionado}'**")
 st.dataframe(df_producto[['País', 'Afinidad']])
 
@@ -80,7 +81,7 @@ fig = px.choropleth(
 # Mostrar el mapa interactivo
 st.plotly_chart(fig)
 
-# Mostrar los resultados más relevantes
-st.sidebar.header("Resultados Relevantes")
+# Mostrar los resultados más relevantes en la barra lateral
+st.sidebar.header("Mercados Recomendados")
 top_resultados = df_producto.sort_values(by='Afinidad', ascending=False).head(10)
 st.sidebar.write(top_resultados[['País', 'Afinidad']])
