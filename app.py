@@ -6,7 +6,69 @@ import numpy as np
 afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
 mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
 
-# Definir la función principal
+# Definir la función principal para calcular la afinidad
+def calcular_afinidad(pais, afinidad_producto, mercados_df):
+    # Obtener las métricas del país
+    pais_data = mercados_df[mercados_df['País'] == pais].iloc[0]
+    
+    # Definir los indicadores clave
+    indicadores = {
+        'Facilidad para hacer negocios': pais_data['Facilidad Negocios (WB 2019)'],
+        'Tamaño del Mercado Total (Millones USD)': pais_data['Tamaño del Mercado Total (Millones USD)'],
+        'Crecimiento Anual PIB (%)': pais_data['Crecimiento Anual PIB (%)'],
+        'Crecimiento Importaciones (%)': pais_data['Crecimiento Importaciones (%)'],
+        'Performance Logística (LPI 2023)': pais_data['Logística (LPI 2023)'],
+        'Distancia a Uruguay (km)': pais_data['Distancia a Uruguay (km)']
+    }
+
+    # Normalizar las métricas
+    max_values = {
+        'Facilidad para hacer negocios': mercados_df['Facilidad Negocios (WB 2019)'].max(),
+        'Tamaño del Mercado Total (Millones USD)': mercados_df['Tamaño del Mercado Total (Millones USD)'].max(),
+        'Crecimiento Anual PIB (%)': mercados_df['Crecimiento Anual PIB (%)'].max(),
+        'Crecimiento Importaciones (%)': mercados_df['Crecimiento Importaciones (%)'].max(),
+        'Performance Logística (LPI 2023)': mercados_df['Logística (LPI 2023)'].max(),
+        'Distancia a Uruguay (km)': mercados_df['Distancia a Uruguay (km)'].max()
+    }
+
+    min_values = {
+        'Facilidad para hacer negocios': mercados_df['Facilidad Negocios (WB 2019)'].min(),
+        'Tamaño del Mercado Total (Millones USD)': mercados_df['Tamaño del Mercado Total (Millones USD)'].min(),
+        'Crecimiento Anual PIB (%)': mercados_df['Crecimiento Anual PIB (%)'].min(),
+        'Crecimiento Importaciones (%)': mercados_df['Crecimiento Importaciones (%)'].min(),
+        'Performance Logística (LPI 2023)': mercados_df['Logística (LPI 2023)'].min(),
+        'Distancia a Uruguay (km)': mercados_df['Distancia a Uruguay (km)'].min()
+    }
+
+    # Normalizar cada indicador
+    for indicador, valor in indicadores.items():
+        if indicador == 'Distancia a Uruguay (km)':
+            indicadores[indicador] = 1 - (valor - min_values[indicador]) / (max_values[indicador] - min_values[indicador])
+        else:
+            indicadores[indicador] = (valor - min_values[indicador]) / (max_values[indicador] - min_values[indicador])
+
+    # Ponderar las métricas
+    pesos = {
+        'Facilidad para hacer negocios': 0.2,
+        'Tamaño del Mercado Total (Millones USD)': 0.3,
+        'Crecimiento Anual PIB (%)': 0.2,
+        'Crecimiento Importaciones (%)': 0.1,
+        'Performance Logística (LPI 2023)': 0.1,
+        'Distancia a Uruguay (km)': 0.1
+    }
+
+    puntaje_base = sum(indicadores[indicador] * pesos[indicador] for indicador in indicadores)
+
+    # Añadir variación por producto (simulada)
+    variacion_producto = np.random.uniform(-0.05, 0.05)  # Ajuste aleatorio entre -5% y +5%
+    puntaje_final = puntaje_base + variacion_producto
+
+    # Escalar el puntaje final a un rango de 0 a 100
+    puntaje_final = max(0, min(100, puntaje_final * 100))  # Escalar y limitar el puntaje
+
+    return puntaje_final
+
+# Función principal para recomendar mercados
 def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
     # Lista de países de Latinoamérica
     latinoamerica = [
@@ -23,23 +85,7 @@ def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
     df_completo = pd.merge(afinidad_producto[['País', 'Afinidad']], mercados_df, on='País', how='inner')
 
     # Calcular puntajes ponderados
-    def calcular_puntaje(row):
-        if row['Región'] == 'Latinoamérica':
-            return (
-                0.6 * row['Afinidad'] +
-                0.15 * row['Tamaño del Mercado Total (Millones USD)'] +
-                0.1 * row['Facilidad Negocios (WB 2019)'] +
-                0.15 * row['Crecimiento Anual PIB (%)']
-            )
-        else:
-            return (
-                0.4 * row['Afinidad'] +
-                0.25 * row['Tamaño del Mercado Total (Millones USD)'] +
-                0.2 * row['Facilidad Negocios (WB 2019)'] +
-                0.15 * row['Crecimiento Anual PIB (%)']
-            )
-    
-    df_completo['Puntaje'] = df_completo.apply(calcular_puntaje, axis=1)
+    df_completo['Puntaje'] = df_completo['País'].apply(lambda x: calcular_afinidad(x, afinidad_producto, mercados_df))
 
     # Seleccionar mercados recomendados
     top_latam = df_completo[df_completo['Región'] == 'Latinoamérica'].sort_values(by='Puntaje', ascending=False).head(3)
@@ -72,114 +118,50 @@ st.image("logo_ccsuy.png", use_container_width=True)
 st.markdown("<h1 style='color: #3E8E41;'>Bienvenido al Recomendador de Mercados de Exportación 🌎</h1>", unsafe_allow_html=True)
 st.markdown("🚀 Selecciona tu producto y descubre los mejores mercados para exportarlo. Priorizamos Latinoamérica, pero puedes explorar también el resto del mundo.")
 with st.expander("ℹ️ ¿Cómo funciona esta herramienta?"):
- st.markdown("""
-  # Recomendador de Mercados de Exportación 🌎
+    st.markdown("""
+    # Recomendador de Mercados de Exportación 🌎
 
-## Descripción
+    ## Descripción
 
-Este es un **Recomendador de Mercados de Exportación** diseñado para ayudar a los exportadores uruguayos a identificar los mejores mercados para sus productos. La herramienta está basada en indicadores clave que incluyen la **afinidad del producto**, el **tamaño del mercado**, la **facilidad para hacer negocios** y el **crecimiento económico** de los países. 
+    Este es un **Recomendador de Mercados de Exportación** diseñado para ayudar a los exportadores uruguayos a identificar los mejores mercados para sus productos. La herramienta está basada en indicadores clave que incluyen la **afinidad del producto**, el **tamaño del mercado**, la **facilidad para hacer negocios** y el **crecimiento económico** de los países. 
 
-La recomendación de mercados se prioriza primero para **Latinoamérica** (debido a la cercanía geográfica y la afinidad cultural), seguida de las mejores opciones del **resto del mundo**.
+    La recomendación de mercados se prioriza primero para **Latinoamérica** (debido a la cercanía geográfica y la afinidad cultural), seguida de las mejores opciones del **resto del mundo**.
 
-## ¿Cómo Funciona?
+    ## ¿Cómo Funciona?
 
-### Cálculo de Afinidad por Producto
+    ### Cálculo de Afinidad por Producto
 
-El cálculo de afinidad por producto se basa en datos históricos de comercio entre Uruguay y los países. Esto permite determinar qué tan bien un producto uruguayo se adapta a las necesidades de un mercado específico, lo cual es clave para identificar mercados potencialmente rentables.
+    La afinidad es un puntaje de potencial estimado que se calcula para cada combinación posible de Producto y País de destino. Se basa en una selección de características clave que posee ese país, ponderadas según su relevancia para la oportunidad de exportación.
 
-Para cada producto, se utiliza un puntaje de afinidad que se combina con otros indicadores para determinar qué mercados son los más adecuados para exportar.
+    El proceso de cálculo para obtener el puntaje de afinidad de un Producto en un País es el siguiente:
 
-### Indicadores Utilizados
+    1. **Obtener las Métricas del País**: Se toman los valores específicos que tiene ese país para indicadores como Facilidad para hacer negocios, Tamaño del Mercado, Crecimiento del PIB, entre otros.
+    2. **Normalizar las Métricas**: Se convierten a una escala común (por ejemplo, de 0 a 1) para permitir su comparación.
+    3. **Ponderar las Métricas**: Cada puntaje normalizado se multiplica por un peso predefinido.
+    4. **Sumar los Puntajes Ponderados**: Se obtiene un puntaje base, que representa la evaluación general del potencial de mercado.
+    5. **Añadir Variación por Producto (Simulada)**: Se ajusta el puntaje para reflejar variabilidad específica del producto.
+    6. **Escalar y Limitar el Puntaje Final**: El puntaje final se ajusta para asegurar que no exceda el máximo ni sea menor que el mínimo.
 
-La recomendación de mercados se realiza tomando en cuenta los siguientes indicadores:
+    Con base en estos cálculos, podrás explorar las mejores opciones para tu producto y encontrar mercados con mayores oportunidades de exportación.
+    """)
 
-- **Afinidad del Producto**: Puntaje que refleja la afinidad histórica entre el producto y el mercado.
-- **Demanda Esperada**: Proyección de la demanda o consumo del producto en el mercado destino.
-- **Facilidad para Hacer Negocios**: Índice global que mide cuán fácil es hacer negocios en un país (según el Banco Mundial).
-- **Beneficios Arancelarios**: Preferencias arancelarias entre Uruguay y el país destino, que facilitan el comercio.
-- **Estabilidad Política**: Indicador de la estabilidad política en cada país (según fuentes como el Banco Mundial o Economist Intelligence Unit).
-- **Tamaño del Mercado Total**: Estimación del tamaño del mercado para productos similares en millones de USD.
-- **Crecimiento Anual del PIB**: Proyección de crecimiento económico del país en el corto y mediano plazo.
+# Implementación de la selección de productos y países
+# Definir los productos disponibles
+productos = afinidad_df['Producto'].unique()
 
-### Lógica de Recomendación
+# Seleccionar el producto
+producto_seleccionado = st.selectbox("Selecciona tu Producto", productos)
 
-1. **Cálculo de Puntajes**: Los puntajes se calculan a partir de una combinación ponderada de estos indicadores. Los países de Latinoamérica tienen un mayor peso en la afinidad, mientras que los mercados fuera de Latinoamérica se priorizan en otros indicadores como el tamaño del mercado y el crecimiento económico.
-   
-2. **Selección de Mercados**: Se seleccionan los mejores mercados dentro de Latinoamérica y el resto del mundo en función del puntaje final. Los mercados se ordenan de mayor a menor puntaje, y se muestran los mejores según la cantidad seleccionada por el usuario.
-
-3. **Personalización de Resultados**: El usuario puede ver más mercados globales adicionales ajustando un control deslizante, lo que permite explorar más opciones fuera de Latinoamérica.
-
-### Fuentes de Información
-
-Los datos utilizados en esta herramienta provienen de diversas fuentes confiables y actualizadas, que incluyen:
-
-- **Banco Mundial**: Información sobre facilidad para hacer negocios, estabilidad política, etc.
-- **Banco Interamericano de Desarrollo (BID)**: Datos sobre el crecimiento económico y otros indicadores clave.
-- **OMC (Organización Mundial del Comercio)**: Información sobre comercio internacional y acuerdos preferenciales.
-- **Trademap (ITC - Centro de Comercio Internacional)**: Datos sobre el comercio internacional y exportaciones.
-- **Cámara de Comercio y Servicios del Uruguay**: Información consolidada sobre acuerdos comerciales y relaciones internacionales.
-
-### Recomendaciones
-
-Al obtener las recomendaciones, los usuarios verán los mercados sugeridos junto con una descripción detallada de los indicadores que contribuyeron a la recomendación. Estos fundamentos proporcionan un análisis completo de las razones por las que un mercado fue seleccionado.
-
-## Uso de la Herramienta
-
-### 1. Selección de Producto
-
-El primer paso es elegir el producto que deseas exportar desde un listado disponible. Esto determinará el cálculo de afinidad para ese producto en particular.
-
-### 2. Obtener Recomendaciones
-
-Haz clic en el botón **"Obtener recomendaciones"** para que la herramienta te muestre los mercados recomendados. Los mercados se clasificarán primero por los mejores puntajes en **Latinoamérica**, seguidos de los mercados globales con mejor puntaje.
-
-### 3. Más Mercados Globales
-
-Si deseas explorar más mercados fuera de Latinoamérica, puedes usar el control deslizante para ajustar cuántos mercados adicionales del resto del mundo deseas ver.
-
-### 4. Tabla de Puntajes
-
-En la sección **"Tabla de Puntajes"**, podrás ver los puntajes calculados para cada país y cómo se comparan los mercados recomendados.
-
-## Configuración
-
-- **Lenguaje de la Aplicación**: Español
-- **Estructura de la Aplicación**: Basada en Streamlit
-- **Formato de Entrada**: Archivos CSV para los datos de afinidad y mercados
-
-## Instalación
-
-Si deseas instalar y ejecutar esta herramienta localmente, puedes seguir los siguientes pasos:
-
-1. Clona este repositorio.
-2. Instala las dependencias necesarias:
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3. Ejecuta la aplicación:
-
-    ```bash
-    streamlit run app.py
-    ```
-
-## Contacto
-
-Si tienes preguntas o comentarios, no dudes en ponerte en contacto con nosotros a través de [correo electrónico o enlaces de contacto].
-""", unsafe_allow_html=True)
-
-# Selección de producto
-producto = st.selectbox("Selecciona tu producto", afinidad_df['Producto'].unique())
-
-# Recomendación principal
-if st.button("Obtener recomendaciones"):
-    afinidad_producto = afinidad_df[afinidad_df['Producto'] == producto]
-    df_recomendado, fundamentos = recomendar_mercados(afinidad_producto, mercados_df)
-
-    st.subheader("🌟 Mercados recomendados (con prioridad LATAM)")
-    for i, (mercado, fundamento) in enumerate(zip(df_recomendado['País'], fundamentos)):
-        st.markdown(f"**{i+1}. {mercado}**")
+# Botón para obtener recomendaciones
+if st.button("Obtener Recomendaciones de Mercados"):
+    afinidad_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
+    recomendacion, fundamentos = recomendar_mercados(afinidad_producto, mercados_df)
+    
+    st.write("### Mercados Recomendados:")
+    st.dataframe(recomendacion)
+    
+    st.write("### Fundamentos para la recomendación:")
+    for fundamento in fundamentos:
         st.markdown(fundamento)
         st.markdown("---")
     
