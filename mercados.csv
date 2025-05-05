@@ -33,3 +33,21 @@ Nigeria,55,60,55,55
 Sudáfrica,70,75,60,80
 Corea del Sur,85,80,85,80
 Vietnam,75,90,65,65
+import pandas as pd
+
+# Leer el CSV con codificación segura
+df = pd.read_csv('mercados.csv', encoding='ISO-8859-1')
+
+# Limpiar nombres de columnas: elimina espacios, convierte a minúsculas y reemplaza caracteres especiales
+df.columns = df.columns.str.strip().str.lower().str.normalize('NFKD').str.encode('ascii', errors='ignore').str.decode('utf-8')
+
+# Revisar nombres exactos de columnas
+print("Columnas detectadas:", df.columns.tolist())
+
+# Definir los nombres originales esperados, normalizados igual que el DataFrame
+required_columns = ['facilidad para hacer negocios', 'demanda esperada', 'beneficios arancelarios', 'estabilidad politica']
+
+missing_columns = [col for col in required_columns if col not in df.columns]
+
+if missing_columns:
+    raise ValueError(f"Faltan las siguientes columnas en el archivo CSV (normalizadas): {missing_columns}")
