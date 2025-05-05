@@ -1,5 +1,32 @@
 import streamlit as st
 import pandas as pd
+
+def load_csv_file(uploaded_file):
+    try:
+        # Intentamos con utf-8
+        return pd.read_csv(uploaded_file, encoding='utf-8')
+    except UnicodeDecodeError:
+        try:
+            # Intentamos con ISO-8859-1
+            return pd.read_csv(uploaded_file, encoding='ISO-8859-1')
+        except UnicodeDecodeError:
+            # Intentamos con latin1
+            return pd.read_csv(uploaded_file, encoding='latin1')
+
+# Subir los archivos CSV desde la interfaz de Streamlit
+uploaded_afinidad = st.file_uploader("Sube el archivo 'afinidad_producto_país.csv'", type=["csv"])
+uploaded_mercados = st.file_uploader("Sube el archivo 'mercados.csv'", type=["csv"])
+
+# Verifica si los archivos han sido subidos
+if uploaded_afinidad is not None:
+    afinidad_df = load_csv_file(uploaded_afinidad)
+    st.write("Datos de 'afinidad_producto_país.csv':")
+    st.write(afinidad_df)
+
+if uploaded_mercados is not None:
+    mercados_df = load_csv_file(uploaded_mercados)
+    st.write("Datos de 'mercados.csv':")
+    st.write(mercados_df)
 import matplotlib.pyplot as plt
 import seaborn as sns
 
