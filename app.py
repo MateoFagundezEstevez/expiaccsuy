@@ -18,8 +18,7 @@ latinoamerica = [
 def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
     mercados_df['Región'] = mercados_df['País'].apply(lambda x: 'Latinoamérica' if x in latinoamerica else 'Resto del Mundo')
     df_completo = pd.merge(afinidad_producto[['País', 'Afinidad']], mercados_df, on='País', how='inner')
-
-  def calcular_puntaje(row):
+def calcular_puntaje(row):
     # Calcular puntaje con las columnas disponibles en tu archivo
     return (
         0.3 * row['Facilidad Negocios (WB 2019)'] +  # Ajusta pesos según lo que consideres relevante
