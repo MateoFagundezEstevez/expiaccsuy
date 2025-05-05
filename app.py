@@ -3,10 +3,15 @@ import pandas as pd
 import numpy as np
 import pydeck as pdk
 
-# Cargar los datos
+# Cargar los datos localmente
 afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
 mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
 acuerdos_df = pd.read_csv("acuerdos_comerciales.csv", encoding="ISO-8859-1")
+
+# Fusionar datos de acuerdos al dataframe de mercados
+acuerdos_cols = ['País', 'Beneficios arancelarios', 'Tipo de acuerdo', 'Vigencia', 'Enlace al acuerdo']
+acuerdos_info = acuerdos_df[acuerdos_cols].drop_duplicates()
+mercados_df = pd.merge(mercados_df, acuerdos_info, on='País', how='left')
 
 # Lista de países de Latinoamérica
 latinoamerica = [
@@ -19,12 +24,6 @@ latinoamerica = [
 # Función para recomendar mercados
 def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
     mercados_df['Región'] = mercados_df['País'].apply(lambda x: 'Latinoamérica' if x in latinoamerica else 'Resto del Mundo')
-
-    # Unir con beneficios arancelarios desde acuerdos_df
-    beneficios = acuerdos_df[['País', 'Beneficios arancelarios']].drop_duplicates()
-    mercados_df = pd.merge(mercados_df, beneficios, on='País', how='left')
-
-    # Unir con la afinidad del producto
     df_completo = pd.merge(afinidad_producto[['País', 'Afinidad']], mercados_df, on='País', how='inner')
 
     def calcular_puntaje(row):
@@ -42,7 +41,7 @@ def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
                 0.2 * row['Facilidad para hacer negocios'] +
                 0.15 * row['Estabilidad política']
             )
-
+    
     df_completo['Puntaje'] = df_completo.apply(calcular_puntaje, axis=1)
 
     top_latam = df_completo[df_completo['Región'] == 'Latinoamérica'].sort_values(by='Puntaje', ascending=False).head(3)
@@ -52,20 +51,29 @@ def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
 
     recomendaciones = []
     for index, row in df_recomendado.iterrows():
+        acuerdo = row.get('Tipo de acuerdo', 'No disponible')
+        vigencia = row.get('Vigencia', 'No disponible')
+        beneficio = row.get('Beneficios arancelarios', 'No disponible')
+        link = row.get('Enlace al acuerdo', '')
+        link_texto = f"[Ver acuerdo]({link})" if pd.notnull(link) and link.strip() != "" else "No disponible"
+
         fundamento = (
             f"**🌍 Mercado recomendado: {row['País']} ({row['Región']})**\n\n"
             f"- **Afinidad del producto**: {row['Afinidad']}\n"
             f"- **Demanda esperada**: {row['Demanda esperada']}\n"
             f"- **Facilidad para hacer negocios**: {row['Facilidad para hacer negocios']}\n"
-            f"- **Beneficios arancelarios**: {row.get('Beneficios arancelarios', 'No disponible')}\n"
+            f"- **Beneficios arancelarios**: {beneficio}\n"
+            f"- **Tipo de acuerdo comercial**: {acuerdo}\n"
+            f"- **Vigencia del acuerdo**: {vigencia}\n"
+            f"- **Enlace al acuerdo**: {link_texto}\n"
             f"- **Estabilidad política**: {row['Estabilidad política']}\n\n"
-            "✅ Este mercado presenta condiciones favorables para exportar tu producto, considerando su afinidad, demanda y entorno económico y político."
+            "✅ Este mercado presenta condiciones favorables para exportar tu producto, considerando su afinidad, demanda, beneficios comerciales y entorno político-económico."
         )
         recomendaciones.append(fundamento)
     
     return df_recomendado[['País', 'Región', 'Puntaje', 'Latitud', 'Longitud']], recomendaciones
 
-# Interfaz
+# Configuración de la app
 st.set_page_config(page_title="Recomendador de Mercados", page_icon="🌎")
 st.image("logo_ccsuy.png", use_container_width=True)
 
@@ -100,19 +108,21 @@ if st.button("Obtener recomendaciones"):
     st.subheader("📊 Tabla de puntajes")
     st.dataframe(df_recomendado)
 
-    # Mapa
+    # Mapa interactivo con pydeck
     st.subheader("🗺️ Mapa de mercados recomendados")
+
     df_mapa = df_recomendado.dropna(subset=["Latitud", "Longitud"]).copy()
 
+    # Escalar puntaje a color RGB: más puntaje = más verde
     def puntaje_a_color(puntaje):
         if puntaje >= 85:
-            return [0, 200, 0, 160]
+            return [0, 200, 0, 160]    # Verde intenso
         elif puntaje >= 70:
-            return [100, 200, 0, 160]
+            return [100, 200, 0, 160]  # Verde-lima
         elif puntaje >= 60:
-            return [200, 200, 0, 160]
+            return [200, 200, 0, 160]  # Amarillo
         else:
-            return [200, 100, 0, 160]
+            return [200, 100, 0, 160]  # Naranja
 
     df_mapa["color"] = df_mapa["Puntaje"].apply(puntaje_a_color)
 
@@ -150,16 +160,4 @@ if st.button("Obtener recomendaciones"):
     with st.expander("🔍 Ver más mercados del Resto del Mundo (opcional)"):
         extra_count = st.slider("¿Cuántos mercados adicionales del mundo quieres ver?", min_value=1, max_value=10, value=3)
         df_ext, fundamentos_ext = recomendar_mercados(afinidad_producto, mercados_df, extra_global=extra_count)
-        nuevos_globales = df_ext[~df_ext['País'].isin(df_recomendado['País']) & (df_ext['Región'] == "Resto del Mundo")]
-
-        for i, row in nuevos_globales.iterrows():
-            st.markdown(f"**🌐 {row['País']}** - Puntaje: {round(row['Puntaje'], 2)}")
-        st.dataframe(nuevos_globales)
-
-# Estilos
-st.markdown(""" 
-    <style> 
-        .stButton > button { background-color: #3E8E41; color: white; font-size: 16px; } 
-        .stButton > button:hover { background-color: #45a049; } 
-    </style> 
-""", unsafe_allow_html=True)
+        nuevos_globales = df_ext[~df_ext['Pa]()_]()
