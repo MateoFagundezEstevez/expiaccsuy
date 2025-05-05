@@ -1,13 +1,21 @@
 import streamlit as st
 import pandas as pd
+import chardet
 
 st.set_page_config(page_title="Recomendador de Mercados", layout="centered")
 st.title("🌍 Recomendador de Mercados para Exportadores Uruguayos")
 
 @st.cache_data
+def detectar_encoding(file_path):
+    with open(file_path, 'rb') as f:
+        result = chardet.detect(f.read(10000))
+    return result['encoding']
+
+@st.cache_data
 def cargar_datos():
+    encoding_afinidad = detectar_encoding("afinidad_producto_país.csv")
     mercados = pd.read_csv("mercados.csv")
-    afinidad = pd.read_csv("afinidad_producto_país.csv", encoding="latin1")  # <= Cambio clave aquí
+    afinidad = pd.read_csv("afinidad_producto_país.csv", encoding=encoding_afinidad)
     return mercados, afinidad
 
 mercados_df, afinidad_df = cargar_datos()
@@ -36,4 +44,9 @@ if producto:
         st.dataframe(
             datos_ordenados[[
                 "País", "Puntaje Total", "Afinidad", "Demanda esperada",
-                "Facilidad para hacer negocios",
+                "Facilidad para hacer negocios", "Beneficios arancelarios", "Estabilidad política"
+            ]].reset_index(drop=True)
+        )
+else:
+    st.info("Ingrese un producto para ver recomendaciones.")
+
