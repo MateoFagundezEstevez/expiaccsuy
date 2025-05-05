@@ -4,21 +4,16 @@ import streamlit as st
 # Leer el archivo CSV (con la codificación detectada)
 df = pd.read_csv('mercados.csv', encoding='ISO-8859-1')
 
-# Verificar las columnas del DataFrame para depurar posibles problemas de nombres
-st.write("Columnas disponibles en el DataFrame:", df.columns)
-
 # Limpiar los nombres de las columnas para eliminar espacios extras
 df.columns = df.columns.str.strip()
 
-# Verificar si las columnas necesarias están presentes
+# Verificar que las columnas necesarias están presentes
 required_columns = ['Facilidad para hacer negocios', 'Demanda esperada', 'Beneficios arancelarios', 'Estabilidad política']
 missing_columns = [col for col in required_columns if col not in df.columns]
 
 if missing_columns:
     st.error(f"Faltan las siguientes columnas en el archivo CSV: {', '.join(missing_columns)}")
 else:
-    # Si las columnas están presentes, proceder con el cálculo
-
     # Solicitar al usuario los pesos para los indicadores
     facilidades_peso = st.slider('Peso para Facilidad para hacer negocios', 0, 100, 25)
     demanda_peso = st.slider('Peso para Demanda esperada', 0, 100, 25)
@@ -58,4 +53,3 @@ else:
 
     # Mostrar un gráfico de barras con los puntajes
     st.bar_chart(df_sorted[['Puntaje']])
-
