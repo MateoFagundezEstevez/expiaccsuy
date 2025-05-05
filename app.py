@@ -184,7 +184,3 @@ st.markdown("""
 Gracias por usar nuestro **Bot de Recomendación de Mercados de Exportación**. 
 ¡Esperamos que esta herramienta te ayude a tomar decisiones informadas sobre tus exportaciones! 🌍
 """)
-
-Gracias por usar nuestro **Bot de Recomendación de Mercados de Exportación**. 
-¡Esperamos que esta herramienta te ayude a tomar decisiones informadas sobre tus exportaciones! 🌍
-""")
