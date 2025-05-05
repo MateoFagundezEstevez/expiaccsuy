@@ -19,23 +19,34 @@ def load_csv_file(file_path):
 afinidad_df = load_csv_file(afinidad_file_path)
 mercados_df = load_csv_file(mercados_file_path)
 
-# Verificación de la carga de datos
-if afinidad_df is not None:
-    st.write("### Datos de 'afinidad_producto_país.csv':")
-    st.write(afinidad_df)
+# Cargar y mostrar el logo de la Cámara de Comercio y Servicios del Uruguay
+logo_url = "camara_comercio_uruguay_logo.png"  # Asegúrate de tener el archivo de logo en el directorio correcto
+st.image(logo_url, width=200)  # Ajusta el tamaño según sea necesario
+st.markdown("<h1 style='text-align: center; color: #007bff;'>🌍 ¡Descubre los Mejores Mercados para tu Producto! 🚀</h1>", unsafe_allow_html=True)
+st.markdown("**Bienvenido!** Utiliza esta herramienta para encontrar los mercados internacionales más prometedores para exportar tu producto. 🌟")
 
-if mercados_df is not None:
-    st.write("### Datos de 'mercados.csv':")
-    st.write(mercados_df)
+# Botón para mostrar/ocultar los datos de los CSV
+if st.button("Mostrar Datos de los Archivos CSV 📊"):
+    if afinidad_df is not None:
+        st.write("### Datos de 'afinidad_producto_país.csv' 🔍")
+        st.write(afinidad_df)
 
-# Interfaz para seleccionar el producto
-producto_seleccionado = st.selectbox('Selecciona un Producto:', afinidad_df['Producto'].unique())
+    if mercados_df is not None:
+        st.write("### Datos de 'mercados.csv' 🌐")
+        st.write(mercados_df)
+
+# Interfaz para seleccionar el producto con un título atractivo
+producto_seleccionado = st.selectbox(
+    '✨ Selecciona un Producto:',
+    afinidad_df['Producto'].unique(),
+    index=0, # Primer producto como predeterminado
+)
 
 # Filtrar los datos de afinidad por el producto seleccionado
 afinidad_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
 
-# Mostrar la afinidad del producto en diferentes países
-st.write(f"### Afinidad del Producto '{producto_seleccionado}' en los países:")
+# Mostrar la afinidad del producto en diferentes países con colores y emoji
+st.write(f"📊 **Afinidad del Producto '{producto_seleccionado}' en los países**:")
 st.write(afinidad_producto[['País', 'Afinidad']])
 
 # Función para recomendar los mejores mercados
@@ -58,7 +69,7 @@ def recomendar_mercados(afinidad_producto, mercados_df):
     recomendaciones = []
     for index, row in df_recomendado.iterrows():
         fundamento = (
-            f"**Mercado recomendado: {row['País']}**\n\n"
+            f"**Mercado recomendado: {row['País']}** 🌟\n\n"
             f"- **Afinidad del producto con el mercado**: {row['Afinidad']}\n"
             f"- **Demanda esperada**: {row['Demanda esperada']}\n"
             f"- **Facilidad para hacer negocios**: {row['Facilidad para hacer negocios']}\n"
@@ -66,7 +77,7 @@ def recomendar_mercados(afinidad_producto, mercados_df):
             f"- **Estabilidad política**: {row['Estabilidad política']}\n\n"
             "En base a estos indicadores, se recomienda este mercado debido a su alto nivel de afinidad con el producto seleccionado, su "
             "alta demanda esperada, y sus condiciones favorables para hacer negocios. Además, ofrece beneficios arancelarios competitivos "
-            "y una estabilidad política que lo convierte en una opción segura para la exportación."
+            "y una estabilidad política que lo convierte en una opción segura para la exportación. 🚀"
         )
         recomendaciones.append(fundamento)
     
@@ -75,13 +86,21 @@ def recomendar_mercados(afinidad_producto, mercados_df):
 # Llamar a la función para obtener las recomendaciones
 mercados_recomendados, fundamentos = recomendar_mercados(afinidad_producto, mercados_df)
 
-# Mostrar las recomendaciones de los mejores mercados
-st.write(f"### Los 5 mejores mercados de exportación para el Producto '{producto_seleccionado}':")
+# Títulos de las recomendaciones
+st.write(f"🎯 **Los 5 mejores mercados de exportación para el Producto '{producto_seleccionado}'**:")
 st.write(mercados_recomendados)
 
-# Mostrar los fundamentos para cada recomendación
-st.write(f"### Fundamentos de la recomendación:")
+# Mostrar los fundamentos para cada recomendación con un toque visual
+st.write(f"📝 **Fundamentos de la recomendación**:")
 for i, fundamento in enumerate(fundamentos):
-    st.write(f"**{i+1}. {mercados_recomendados.iloc[i]['País']}**")
+    st.write(f"**{i+1}. {mercados_recomendados.iloc[i]['País']}** 🌍")
     st.write(fundamento)
+    st.write("---")  # Línea separadora para mejorar la visualización
 
+# Opcional: Visualización de la distribución de puntajes
+if st.checkbox('Mostrar Distribución de Puntajes 📈'):
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.barplot(x='País', y='Puntaje', data=mercados_recomendados, palette='viridis')
+    plt.title(f'Distribución de Puntajes para el Producto {producto_seleccionado}')
+    plt.xticks(rotation=45, ha='right')
+    st.pyplot(fig)
