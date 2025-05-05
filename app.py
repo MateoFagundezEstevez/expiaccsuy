@@ -8,10 +8,8 @@ afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
 mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
 acuerdos_df = pd.read_csv("acuerdos_comerciales.csv", encoding="ISO-8859-1")
 
-# Fusionar datos de acuerdos al dataframe de mercados
-acuerdos_cols = ['País', 'Beneficios arancelarios', 'Tipo de acuerdo', 'Vigencia', 'Enlace al acuerdo']
-acuerdos_info = acuerdos_df[acuerdos_cols].drop_duplicates()
-mercados_df = pd.merge(mercados_df, acuerdos_info, on='País', how='left')
+# Limpiar espacios en nombres de columnas
+acuerdos_df.columns = acuerdos_df.columns.str.strip()
 
 # Lista de países de Latinoamérica
 latinoamerica = [
@@ -49,25 +47,26 @@ def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
 
     df_recomendado = pd.concat([top_latam, top_global])
 
+    # Agregar info de acuerdos comerciales
+    df_recomendado = pd.merge(df_recomendado, acuerdos_df[['País', 'Acuerdo Comercial', 'Vigencia', 'Enlace', 'Descripción']], on='País', how='left')
+
     recomendaciones = []
     for index, row in df_recomendado.iterrows():
-        acuerdo = row.get('Tipo de acuerdo', 'No disponible')
-        vigencia = row.get('Vigencia', 'No disponible')
-        beneficio = row.get('Beneficios arancelarios', 'No disponible')
-        link = row.get('Enlace al acuerdo', '')
-        link_texto = f"[Ver acuerdo]({link})" if pd.notnull(link) and link.strip() != "" else "No disponible"
+        acuerdo = (
+            f"- **Acuerdo comercial vigente**: {row['Acuerdo Comercial']} ({row['Vigencia']})\n"
+            f"- **Descripción**: {row['Descripción']}\n"
+            f"- **🔗 Enlace**: [Ver acuerdo]({row['Enlace']})\n" if pd.notnull(row['Acuerdo Comercial']) else
+            "- ❌ Sin acuerdo comercial registrado."
+        )
 
         fundamento = (
             f"**🌍 Mercado recomendado: {row['País']} ({row['Región']})**\n\n"
             f"- **Afinidad del producto**: {row['Afinidad']}\n"
             f"- **Demanda esperada**: {row['Demanda esperada']}\n"
             f"- **Facilidad para hacer negocios**: {row['Facilidad para hacer negocios']}\n"
-            f"- **Beneficios arancelarios**: {beneficio}\n"
-            f"- **Tipo de acuerdo comercial**: {acuerdo}\n"
-            f"- **Vigencia del acuerdo**: {vigencia}\n"
-            f"- **Enlace al acuerdo**: {link_texto}\n"
             f"- **Estabilidad política**: {row['Estabilidad política']}\n\n"
-            "✅ Este mercado presenta condiciones favorables para exportar tu producto, considerando su afinidad, demanda, beneficios comerciales y entorno político-económico."
+            f"{acuerdo}\n\n"
+            "✅ Este mercado presenta condiciones favorables para exportar tu producto, considerando su afinidad, demanda y entorno económico y político."
         )
         recomendaciones.append(fundamento)
     
@@ -87,8 +86,8 @@ with st.expander("ℹ️ ¿Cómo funciona esta herramienta?"):
     - **Afinidad** del producto con cada país.
     - **Demanda esperada**.
     - **Facilidad para hacer negocios**.
-    - **Beneficios arancelarios**.
     - **Estabilidad política**.
+    - **Acuerdos comerciales**.
 
     👇 Elegí tu producto y explorá las recomendaciones.
     """)
@@ -108,21 +107,20 @@ if st.button("Obtener recomendaciones"):
     st.subheader("📊 Tabla de puntajes")
     st.dataframe(df_recomendado)
 
-    # Mapa interactivo con pydeck
+    # Mapa interactivo
     st.subheader("🗺️ Mapa de mercados recomendados")
 
     df_mapa = df_recomendado.dropna(subset=["Latitud", "Longitud"]).copy()
 
-    # Escalar puntaje a color RGB: más puntaje = más verde
     def puntaje_a_color(puntaje):
         if puntaje >= 85:
-            return [0, 200, 0, 160]    # Verde intenso
+            return [0, 200, 0, 160]
         elif puntaje >= 70:
-            return [100, 200, 0, 160]  # Verde-lima
+            return [100, 200, 0, 160]
         elif puntaje >= 60:
-            return [200, 200, 0, 160]  # Amarillo
+            return [200, 200, 0, 160]
         else:
-            return [200, 100, 0, 160]  # Naranja
+            return [200, 100, 0, 160]
 
     df_mapa["color"] = df_mapa["Puntaje"].apply(puntaje_a_color)
 
