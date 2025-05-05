@@ -102,7 +102,7 @@ df_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
 # Usar un formulario para manejar la interacción
 with st.form(key='mercados_form'):
     st.markdown('<div class="section-title">🌎 Mercados recomendados para {}</div>'.format(producto_seleccionado), unsafe_allow_html=True)
-    st.dataframe(df_producto[['País', 'Afinidad']])
+st.dataframe(df_producto[['País', 'Afinidad']].reset_index(drop=True))
 
     # Mostrar un gráfico interactivo de los mercados recomendados
     fig = px.bar(df_producto, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
