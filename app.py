@@ -1,29 +1,18 @@
 import streamlit as st
 import pandas as pd
-import chardet
 
 st.set_page_config(page_title="Recomendador de Mercados", layout="centered")
-
 st.title("🌍 Recomendador de Mercados para Exportadores Uruguayos")
 
-# Función para detectar codificación
-def detectar_codificacion(filepath):
-    with open(filepath, 'rb') as f:
-        resultado = chardet.detect(f.read())
-    return resultado['encoding']
-
-# Cargar archivos
 @st.cache_data
 def cargar_datos():
-    encoding_afinidad = detectar_codificacion("afinidad_producto_país.csv")
     mercados = pd.read_csv("mercados.csv")
-    afinidad = pd.read_csv("afinidad_producto_país.csv", encoding=encoding_afinidad)
+    afinidad = pd.read_csv("afinidad_producto_país.csv", encoding="latin1")  # <= Cambio clave aquí
     return mercados, afinidad
 
 mercados_df, afinidad_df = cargar_datos()
 
-# Interfaz
-producto = st.text_input("Ingrese el nombre del producto que desea exportar:", "")
+producto = st.text_input("Ingrese el nombre del producto que desea exportar:")
 
 if producto:
     producto_filtrado = afinidad_df[afinidad_df['Producto'].str.lower() == producto.lower()]
@@ -47,8 +36,4 @@ if producto:
         st.dataframe(
             datos_ordenados[[
                 "País", "Puntaje Total", "Afinidad", "Demanda esperada",
-                "Facilidad para hacer negocios", "Beneficios arancelarios", "Estabilidad política"
-            ]].reset_index(drop=True)
-        )
-else:
-    st.info("Ingrese un producto para ver recomendaciones.")
+                "Facilidad para hacer negocios",
