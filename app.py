@@ -1,63 +1,86 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import plotly.express as px
 from sklearn.preprocessing import MinMaxScaler
-import pydeck as pdk
 
-st.set_page_config(page_title="Explorador de Mercados", layout="wide")
+# Cargar archivos
+mercados_df = pd.read_csv('mercados.csv')
+afinidad_df = pd.read_csv('afinidad_producto_país.csv')
 
-# Cargar archivo de mercados
-mercados_df = pd.read_csv("mercados.csv")
+# Variables seleccionadas de mercados.csv para el cálculo de la afinidad
+indicadores = [
+    'Tamaño del Mercado Total (Millones USD)', 
+    'Crecimiento Anual PIB (%)', 
+    'Crecimiento Importaciones (%)', 
+    'Facilidad Negocios (WB 2019)', 
+    'Logística (LPI 2023)', 
+    'Distancia a Uruguay (km)'
+]
 
-# Variables a usar con su dirección (1: mejor más alto, -1: mejor más bajo)
-variables = {
-    'Facilidad Negocios (WB 2019)': 1,
-    'PIB per cápita (USD)': 1,
-    'Crecimiento Anual PIB (%)': 1,
-    'Tamaño del Mercado Total (Millones USD)': 1,
-    'Población (Millones)': 1,
-    'Logística (LPI 2023)': 1,
-    'Infraestructura Portuaria (LPI 2023)': 1,
-    'Sofisticación Exportaciones (Score)': 1,
-    'Distancia a Uruguay (km)': -1
+# Ponderaciones de los indicadores
+pesos = {
+    'Tamaño del Mercado Total (Millones USD)': 0.30,
+    'Crecimiento Anual PIB (%)': 0.15,
+    'Crecimiento Importaciones (%)': 0.15,
+    'Facilidad Negocios (WB 2019)': 0.15,
+    'Logística (LPI 2023)': 0.15,
+    'Distancia a Uruguay (km)': 0.10
 }
 
-# Normalización y cálculo de puntaje
+# Normalizar los indicadores
 scaler = MinMaxScaler()
 df = mercados_df.copy()
 
-for col, direction in variables.items():
-    norm = scaler.fit_transform(df[[col]])
-    df[col + "_norm"] = norm * direction
+for col in indicadores:
+    if col == 'Distancia a Uruguay (km)':
+        # Normalización inversa para la distancia (menos distancia mejor)
+        df[col + '_norm'] = 1 - scaler.fit_transform(df[[col]])
+    else:
+        df[col + '_norm'] = scaler.fit_transform(df[[col]])
 
-df["Puntaje Oportunidad"] = df[[col + "_norm" for col in variables]].sum(axis=1)
+# Calcular la afinidad
+df['Afinidad_base'] = sum(df[ind + '_norm'] * pesos[ind] for ind in indicadores)
 
-# Ordenar por puntaje
-df_sorted = df.sort_values(by="Puntaje Oportunidad", ascending=False)
+# Añadir una variación aleatoria a la afinidad (entre -5 y 5)
+np.random.seed(42)  # Para reproducibilidad
+df['Afinidad'] = df['Afinidad_base'] + np.random.uniform(-5, 5, len(df))
 
-# Título
-st.title("🌎 Recomendador de Mercados de Exportación")
-st.markdown("Este análisis se basa exclusivamente en variables estructurales de cada país.")
+# Escalar la afinidad entre 0 y 100
+df['Afinidad'] = df['Afinidad'].clip(0, 100)
 
-# Mostrar tabla
-st.subheader("🔝 Top 10 Mercados Recomendados")
-st.dataframe(df_sorted[['País', 'Puntaje Oportunidad'] + list(variables.keys())].head(10), use_container_width=True)
+# Unir los datos de afinidad calculada con el dataset original de afinidad por producto
+df_final = pd.merge(afinidad_df, df[['País', 'Afinidad']], on='País', how='left')
 
-# Mapa interactivo
-st.subheader("🗺️ Mapa de Oportunidad de Mercado")
-st.pydeck_chart(pdk.Deck(
-    initial_view_state=pdk.ViewState(
-        latitude=-15, longitude=-60, zoom=2, pitch=0
-    ),
-    layers=[
-        pdk.Layer(
-            'ScatterplotLayer',
-            data=df_sorted,
-            get_position='[Longitud, Latitud]',
-            get_color='[255, 140, 0, 160]',
-            get_radius='Puntaje Oportunidad * 30000',
-            pickable=True,
-        )
-    ],
-    tooltip={"text": "{País}\nPuntaje: {Puntaje Oportunidad}"}
-))
+# Interfaz de usuario con Streamlit
+st.title("Recomendador de Mercado de Exportación")
+st.sidebar.header("Selecciona un Producto")
+
+# Selección del Producto
+producto_seleccionado = st.sidebar.selectbox('Selecciona un Producto', afinidad_df['Producto'].unique())
+
+# Filtrar los datos por el producto seleccionado
+df_producto = df_final[df_final['Producto'] == producto_seleccionado]
+
+# Mostrar tabla con afinidad calculada para el producto
+st.write(f"**Afinidad para el producto '{producto_seleccionado}'**")
+st.dataframe(df_producto[['País', 'Afinidad']])
+
+# Crear el mapa interactivo usando Plotly
+fig = px.choropleth(
+    df_producto,
+    locations="País",
+    locationmode="country names",
+    color="Afinidad",
+    color_continuous_scale=px.colors.sequential.Plasma,
+    labels={"Afinidad": "Afinidad Calculada"},
+    title=f"Afinidad de Mercado para el Producto '{producto_seleccionado}'"
+)
+
+# Mostrar el mapa interactivo
+st.plotly_chart(fig)
+
+# Mostrar los resultados más relevantes
+st.sidebar.header("Resultados Relevantes")
+top_resultados = df_producto.sort_values(by='Afinidad', ascending=False).head(10)
+st.sidebar.write(top_resultados[['País', 'Afinidad']])
