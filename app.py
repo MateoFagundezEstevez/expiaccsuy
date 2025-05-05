@@ -1,104 +1,109 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.preprocessing import MinMaxScaler
 import folium
-from folium.plugins import MarkerCluster
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+from geopy.distance import geodesic
+import matplotlib.pyplot as plt
+import plotly.express as px
 
-# Cargar los archivos CSV
-mercados_df = pd.read_csv('mercados.csv')
-afinidad_df = pd.read_csv('afinidad_producto_país.csv')
+# Cargar los archivos CSV con codificación 'ISO-8859-1' para evitar errores de codificación
+mercados_df = pd.read_csv('mercados.csv', encoding='ISO-8859-1')
+afinidad_df = pd.read_csv('afinidad_producto_país.csv', encoding='ISO-8859-1')
 
-# Escalado de las variables numéricas
-scaler = MinMaxScaler()
-mercados_df[['Facilidad Negocios (WB 2019)', 'PIB per cápita (USD)', 'Crecimiento Anual PIB (%)', 
-             'Tamaño del Mercado Total (Millones USD)', 'Población (Millones)', 'Logística (LPI 2023)', 
-             'Crecimiento Importaciones (%)', 'Sofisticación Exportaciones (Score)', 
-             'Población Urbana (%)', 'Infraestructura Portuaria (LPI 2023)', 'Penetración Internet (%)', 
-             'Distancia a Uruguay (km)']] = scaler.fit_transform(mercados_df[['Facilidad Negocios (WB 2019)', 'PIB per cápita (USD)', 'Crecimiento Anual PIB (%)', 
-             'Tamaño del Mercado Total (Millones USD)', 'Población (Millones)', 'Logística (LPI 2023)', 
-             'Crecimiento Importaciones (%)', 'Sofisticación Exportaciones (Score)', 
-             'Población Urbana (%)', 'Infraestructura Portuaria (LPI 2023)', 'Penetración Internet (%)', 
-             'Distancia a Uruguay (km)']])
+# Mapeo de las métricas en los archivos CSV
+mercados_df['Facilidad Negocios'] = mercados_df['Facilidad Negocios (WB 2019)']
+mercados_df['PIB per cápita'] = mercados_df['PIB per cápita (USD)']
+mercados_df['Crecimiento Anual PIB'] = mercados_df['Crecimiento Anual PIB (%)']
+mercados_df['Tamaño del Mercado'] = mercados_df['Tamaño del Mercado Total (Millones USD)']
+mercados_df['Población'] = mercados_df['Población (Millones)']
+mercados_df['Logística'] = mercados_df['Logística (LPI 2023)']
+mercados_df['Crecimiento Importaciones'] = mercados_df['Crecimiento Importaciones (%)']
+mercados_df['Sofisticación Exportaciones'] = mercados_df['Sofisticación Exportaciones (Score)']
+mercados_df['Población Urbana'] = mercados_df['Población Urbana (%)']
+mercados_df['Infraestructura Portuaria'] = mercados_df['Infraestructura Portuaria (LPI 2023)']
+mercados_df['Distancia a Uruguay'] = mercados_df['Distancia a Uruguay (km)']
+
+# Función para calcular la afinidad de un producto en un mercado
+def calcular_afinidad(producto, mercado):
+    # Combinar los datos de afinidad y mercados
+    afinidad_producto = afinidad_df[afinidad_df['Producto'] == producto]
+    mercado_datos = mercados_df[mercados_df['País'] == mercado].iloc[0]
+    
+    if afinidad_producto.empty:
+        return 0
+    
+    afinidad = afinidad_producto[mercado].values[0]
+    
+    # Normalizar y ponderar los valores
+    scaler = MinMaxScaler()
+    scaler.fit(mercados_df[['Facilidad Negocios', 'PIB per cápita', 'Crecimiento Anual PIB', 
+                            'Tamaño del Mercado', 'Población', 'Logística', 'Crecimiento Importaciones', 
+                            'Sofisticación Exportaciones', 'Población Urbana', 'Infraestructura Portuaria']])
+    mercado_normalizado = scaler.transform(mercado_datos[['Facilidad Negocios', 'PIB per cápita', 'Crecimiento Anual PIB', 
+                                                         'Tamaño del Mercado', 'Población', 'Logística', 'Crecimiento Importaciones', 
+                                                         'Sofisticación Exportaciones', 'Población Urbana', 'Infraestructura Portuaria']].values.reshape(1, -1))
+    
+    # Ponderación de afinidad
+    peso_afinidad = 0.3
+    peso_mercado = 0.7
+    
+    afinidad_ponderada = afinidad * peso_afinidad
+    mercado_ponderado = np.dot(mercado_normalizado, np.array([peso_mercado]))
+    
+    return afinidad_ponderada + mercado_ponderado[0]
+
+# Función para calcular la distancia geográfica a Uruguay
+def calcular_distancia(lat, lon):
+    uruguay_coords = (-32.5228, -55.7652)  # Coordenadas de Uruguay
+    return geodesic(uruguay_coords, (lat, lon)).kilometers
+
+# Función para crear un mapa interactivo de los mercados
+def crear_mapa():
+    # Centro del mapa (aproximadamente en el centro de América Latina)
+    m = folium.Map(location=[-15.7942, -47.9292], zoom_start=3)
+    
+    # Agregar marcadores para cada mercado
+    for index, row in mercados_df.iterrows():
+        folium.Marker([row['Latitud'], row['Longitud']], popup=row['País']).add_to(m)
+    
+    return m
 
 # Interfaz de usuario
-st.title("Recomendador de Mercados para Exportación")
+st.title("Recomendación de Mercados de Exportación")
+st.write("Explora los mercados más atractivos para exportar productos desde Uruguay.")
 
-# Selección del producto
-producto = st.selectbox("Selecciona un Producto", afinidad_df['Producto'].unique())
+# Selección de producto
+producto = st.selectbox("Selecciona un producto:", afinidad_df['Producto'].unique())
 
-# Filtrar los datos de afinidad por producto seleccionado
-afinidad_producto = afinidad_df[afinidad_df['Producto'] == producto]
+# Cálculo de afinidad para todos los mercados
+mercados_df['Afinidad'] = mercados_df['País'].apply(lambda x: calcular_afinidad(producto, x))
 
-# Merge de datos para obtener afinidad con las variables de mercados
-mercados_con_afinidad = pd.merge(mercados_df, afinidad_producto, on="País", how="inner")
-mercados_con_afinidad['Puntaje Afinidad'] = mercados_con_afinidad['Afinidad']  # Usar el puntaje de afinidad
+# Selección de mercado recomendado
+mercado_recomendado = mercados_df.loc[mercados_df['Afinidad'].idxmax()]
 
-# Ordenar por afinidad
-mercados_con_afinidad = mercados_con_afinidad.sort_values(by='Puntaje Afinidad', ascending=False)
+# Mostrar la recomendación
+st.subheader(f"Mercado recomendado: {mercado_recomendado['País']}")
+st.write(f"Afinidad estimada: {mercado_recomendado['Afinidad']:.2f}")
+st.write(f"Distancia a Uruguay: {mercado_recomendado['Distancia a Uruguay']:.2f} km")
 
-# Mostrar recomendaciones
-st.write("### Mercados recomendados según afinidad:")
-st.dataframe(mercados_con_afinidad[['País', 'Puntaje Afinidad', 'Facilidad Negocios (WB 2019)', 'PIB per cápita (USD)', 'Crecimiento Anual PIB (%)']])
+# Mostrar mapa interactivo
+st.subheader("Mapa de Mercados")
+mapa = crear_mapa()
+st.write(mapa)
 
-# Visualización del puntaje de afinidad en un gráfico de barras
+# Mostrar gráficos de análisis
+st.subheader("Análisis de Mercados")
+
+# Gráfico de barras de afinidad por mercado
 fig, ax = plt.subplots(figsize=(10, 6))
-sns.barplot(x='Puntaje Afinidad', y='País', data=mercados_con_afinidad.head(10), ax=ax)
-ax.set_title(f"Top 10 países recomendados para la exportación de {producto}")
+mercados_df.plot(kind='bar', x='País', y='Afinidad', ax=ax)
+ax.set_title('Afinidad de Mercados por Producto')
+ax.set_ylabel('Afinidad')
+ax.set_xlabel('Mercado')
 st.pyplot(fig)
 
-# Crear un mapa interactivo con los países recomendados
-st.write("### Mapa interactivo de los países recomendados")
-
-# Crear un mapa base centrado en Uruguay
-m = folium.Map(location=[-32.5, -55.5], zoom_start=2)
-
-# Crear un MarkerCluster para los países recomendados
-marker_cluster = MarkerCluster().add_to(m)
-
-# Añadir los países recomendados al mapa
-for index, row in mercados_con_afinidad.head(10).iterrows():
-    folium.Marker(
-        location=[row['Latitud'], row['Longitud']],
-        popup=f"{row['País']}: Afinidad {row['Puntaje Afinidad']:.2f}",
-    ).add_to(marker_cluster)
-
-# Mostrar el mapa
-st.write("Mapa interactivo de los países recomendados:")
-st.dataframe(m)
-
-# Mostrar información adicional
-st.write("""
-    La aplicación ha calculado el puntaje de afinidad basado en múltiples factores económicos y logísticos, 
-    y recomienda los países con mayor potencial para exportar tu producto.
-""")
-
-# Gráfico de dispersión para visualizar la relación entre el PIB per cápita y la facilidad de negocios
-fig, ax = plt.subplots(figsize=(10, 6))
-sns.scatterplot(x='PIB per cápita (USD)', y='Facilidad Negocios (WB 2019)', data=mercados_con_afinidad, hue='Puntaje Afinidad', palette="viridis", ax=ax)
-ax.set_title(f"Relación entre PIB per cápita y Facilidad de Negocios para la exportación de {producto}")
-st.pyplot(fig)
-
-# Calcular y mostrar la recomendación de países más cercanos en términos de distancia
-mercados_con_afinidad['Distancia Relativa'] = mercados_con_afinidad['Distancia a Uruguay (km)'].apply(lambda x: 1 - (x / mercados_con_afinidad['Distancia a Uruguay (km)'].max()))
-mercados_con_afinidad['Puntaje Final'] = mercados_con_afinidad['Puntaje Afinidad'] + mercados_con_afinidad['Distancia Relativa']
-mercados_con_afinidad = mercados_con_afinidad.sort_values(by='Puntaje Final', ascending=False)
-
-# Mostrar los mercados con el puntaje final más alto
-st.write("### Mercados recomendados considerando afinidad y proximidad a Uruguay:")
-st.dataframe(mercados_con_afinidad[['País', 'Puntaje Final', 'Puntaje Afinidad', 'Distancia a Uruguay (km)']])
-
-# Mostrar el mapa actualizado
-m = folium.Map(location=[-32.5, -55.5], zoom_start=2)
-marker_cluster = MarkerCluster().add_to(m)
-for index, row in mercados_con_afinidad.head(10).iterrows():
-    folium.Marker(
-        location=[row['Latitud'], row['Longitud']],
-        popup=f"{row['País']}: Puntaje Final {row['Puntaje Final']:.2f}",
-    ).add_to(marker_cluster)
-
-st.write("### Mapa interactivo de los países con mayor puntaje final:")
-st.dataframe(m)
-
+# Gráfico de dispersión de PIB vs Población
+fig2 = px.scatter(mercados_df, x='PIB per cápita', y='Población', color='País', 
+                  title='PIB per cápita vs Población por Mercado')
+st.plotly_chart(fig2)
