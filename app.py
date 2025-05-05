@@ -78,6 +78,36 @@ with st.form(key='mercados_form'):
     st.write(f"🛍️ Mercados con afinidad mayor a {slider}:")
     st.dataframe(mercados_filtrados[['País', 'Afinidad']])
 
+# Mostrar todas las columnas de mercados.csv
+st.subheader("📝 Información completa sobre los mercados")
+st.write("""
+A continuación se muestra la información detallada sobre todos los mercados disponibles:
+""")
+
+# Hacer que la tabla de 'mercados_df' sea más interactiva
+st.dataframe(mercados_df)
+
+# Opción de filtrar la tabla
+st.subheader("🔍 Filtrar y ordenar los mercados")
+columnas = st.multiselect(
+    "Selecciona las columnas que deseas ver",
+    mercados_df.columns.tolist(),
+    default=mercados_df.columns.tolist()
+)
+
+# Mostrar solo las columnas seleccionadas
+st.dataframe(mercados_df[columnas])
+
+# Ordenar la tabla según la columna seleccionada
+columna_orden = st.selectbox("Selecciona la columna para ordenar", mercados_df.columns.tolist())
+orden = st.radio("¿Orden ascendente o descendente?", ('Ascendente', 'Descendente'))
+
+# Aplicar el orden
+if orden == 'Ascendente':
+    st.dataframe(mercados_df.sort_values(by=columna_orden, ascending=True))
+else:
+    st.dataframe(mercados_df.sort_values(by=columna_orden, ascending=False))
+
 # Mensaje final
 st.markdown("""
 Gracias por usar nuestro **Bot de Recomendación de Mercados de Exportación**. 
