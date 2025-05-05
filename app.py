@@ -159,5 +159,6 @@ A continuación se muestra la información detallada sobre todos los mercados di
 st.dataframe(mercados_df)
 
 # Opción de filtrar la tabla
-st.subheader("🔍
+st.subheader("🔍 Filtrar y ordenar los mercados")
+
 
