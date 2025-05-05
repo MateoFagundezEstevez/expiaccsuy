@@ -66,9 +66,8 @@ def recomendar_mercados(afinidad_producto, mercados_df):
 # Interfaz de usuario
 st.set_page_config(page_title="Recomendador de Mercados de Exportación", page_icon="🌍")
 
-# Cargar el logo de la Cámara de Comercio y Servicios del Uruguay
-logo_url = "https://www.ccsuy.org.uy/wp-content/uploads/2020/09/camara-comercio-servicios-uruguay-logo.png"
-st.image(logo_url, use_container_width=True)
+# Cargar el logo de la Cámara de Comercio y Servicios del Uruguay desde el archivo local
+st.image("logo_ccsuy.png", use_container_width=True)
 
 # Título principal
 st.markdown("<h1 style='color: #3E8E41;'>Bienvenido al Recomendador de Mercados de Exportación 🌎</h1>", unsafe_allow_html=True)
