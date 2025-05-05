@@ -14,9 +14,8 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)  # Logo de la Cámara de Comercio y Servicios
 
-# Botón para mostrar el archivo README.md al principio
-if st.button("📄 Ver Instrucciones"):
-    # Cargar y mostrar el contenido de un archivo README.md
+# Opción para desplegar/ocultar las instrucciones
+with st.expander("📄 Ver Instrucciones", expanded=False):
     try:
         with open("README.md", "r", encoding="utf-8") as file:
             readme_content = file.read()
