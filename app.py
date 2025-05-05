@@ -169,8 +169,6 @@ Si deseas instalar y ejecutar esta herramienta localmente, puedes seguir los sig
 Si tienes preguntas o comentarios, no dudes en ponerte en contacto con nosotros a través de [correo electrónico o enlaces de contacto].
 """, unsafe_allow_html=True)
 
-
-)
 # Selección de producto
 producto = st.selectbox("Selecciona tu producto", afinidad_df['Producto'].unique())
 
