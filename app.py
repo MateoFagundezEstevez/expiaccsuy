@@ -1,87 +1,78 @@
-import streamlit as st
 import pandas as pd
-import numpy as np
 import plotly.express as px
-from sklearn.preprocessing import MinMaxScaler
+import streamlit as st
 
-# Cargar archivos
-mercados_df = pd.read_csv('mercados.csv')
-afinidad_df = pd.read_csv('afinidad_producto_país.csv')
+# Título de la aplicación
+st.title("Recomendación de Mercados de Exportación")
 
-# Variables seleccionadas de mercados.csv para el cálculo de la afinidad
-indicadores = [
-    'Tamaño del Mercado Total (Millones USD)', 
-    'Crecimiento Anual PIB (%)', 
-    'Crecimiento Importaciones (%)', 
-    'Facilidad Negocios (WB 2019)', 
-    'Logística (LPI 2023)', 
-    'Distancia a Uruguay (km)'
-]
+# Cargar los archivos CSV de mercados y afinidad
+try:
+    mercados_df = pd.read_csv('mercados.csv', encoding='utf-8')
+    afinidad_df = pd.read_csv('afinidad_producto_país.csv', encoding='utf-8')
+except Exception as e:
+    st.error(f"Error al cargar los archivos CSV: {e}")
 
-# Ponderaciones de los indicadores
-pesos = {
-    'Tamaño del Mercado Total (Millones USD)': 0.30,
-    'Crecimiento Anual PIB (%)': 0.15,
-    'Crecimiento Importaciones (%)': 0.15,
-    'Facilidad Negocios (WB 2019)': 0.15,
-    'Logística (LPI 2023)': 0.15,
-    'Distancia a Uruguay (km)': 0.10
-}
+# Limpiar los nombres de las columnas (espacios adicionales, mayúsculas/minúsculas inconsistentes)
+mercados_df.columns = mercados_df.columns.str.strip()
+afinidad_df.columns = afinidad_df.columns.str.strip()
 
-# Normalizar los indicadores
-scaler = MinMaxScaler()
-df = mercados_df.copy()
+# Verificar que los archivos tengan las columnas necesarias
+required_mercados_columns = ['País', 'Tamaño del Mercado Total (Millones USD)', 'Facilidad Negocios (WB 2019)', 
+                             'Latitud', 'Longitud', 'PIB per cápita (USD)', 'Crecimiento Anual PIB (%)', 
+                             'Logística (LPI 2023)', 'Crecimiento Importaciones (%)', 'Sofisticación Exportaciones (Score)', 
+                             'Población Urbana (%)', 'Infraestructura Portuaria (LPI 2023)', 'Distancia a Uruguay (km)']
 
-# Normalización de los indicadores
-for col in indicadores:
-    if col == 'Distancia a Uruguay (km)':
-        # Normalización inversa para la distancia (menor distancia mejor)
-        df[col + '_norm'] = 1 - scaler.fit_transform(df[[col]])
+required_afinidad_columns = ['Producto', 'País', 'Afinidad']
+
+# Verificar que los DataFrames contengan las columnas necesarias
+if all(col in mercados_df.columns for col in required_mercados_columns):
+    st.write("Datos de mercados cargados correctamente.")
+else:
+    st.error(f"Faltan columnas necesarias en 'mercados.csv'. Asegúrate de tener las siguientes columnas: {required_mercados_columns}")
+
+if all(col in afinidad_df.columns for col in required_afinidad_columns):
+    st.write("Datos de afinidad cargados correctamente.")
+else:
+    st.error(f"Faltan columnas necesarias en 'afinidad_producto_país.csv'. Asegúrate de tener las siguientes columnas: {required_afinidad_columns}")
+
+# Crear el selectbox para elegir el producto
+producto_seleccionado = st.selectbox('Selecciona un producto', afinidad_df['Producto'].unique())
+
+if producto_seleccionado:
+    df_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
+    
+    # Verificar si el producto seleccionado tiene los datos necesarios
+    if 'País' in df_producto.columns and 'Afinidad' in df_producto.columns:
+        st.write(f"Recomendaciones de mercados para {producto_seleccionado}:")
+        st.dataframe(df_producto[['País', 'Afinidad']])
     else:
-        df[col + '_norm'] = scaler.fit_transform(df[[col]])
+        st.write(f"Las columnas 'País' y 'Afinidad' no están presentes para el producto {producto_seleccionado}.")
+else:
+    st.write("Por favor, selecciona un producto para ver los mercados recomendados.")
 
-# Calcular la afinidad base
-df['Afinidad_base'] = sum(df[ind + '_norm'] * pesos[ind] for ind in indicadores)
+# Crear un mapa interactivo con Plotly
+fig = px.scatter_geo(mercados_df,
+                     locations='País',
+                     locationmode='country names',
+                     size='Tamaño del Mercado Total (Millones USD)',
+                     color='Facilidad Negocios (WB 2019)',
+                     hover_name='País',
+                     size_max=100,
+                     template='plotly',
+                     title='Mapa de Mercados Internacionales')
 
-# Añadir variación aleatoria a la afinidad
-np.random.seed(42)  # Para reproducibilidad
-df['Afinidad'] = df['Afinidad_base'] + np.random.uniform(-5, 5, len(df))
-
-# Escalar la afinidad entre 0 y 100
-df['Afinidad'] = df['Afinidad'].clip(0, 100)
-
-# Unir los datos de afinidad calculada con el dataset original de afinidad por producto
-df_final = pd.merge(afinidad_df, df[['País', 'Afinidad']], on='País', how='left')
-
-# Interfaz de usuario con Streamlit
-st.title("Recomendador de Mercado de Exportación")
-st.sidebar.header("Selecciona un Producto")
-
-# Selección del Producto
-producto_seleccionado = st.sidebar.selectbox('Selecciona un Producto', afinidad_df['Producto'].unique())
-
-# Filtrar los datos por el producto seleccionado
-df_producto = df_final[df_final['Producto'] == producto_seleccionado]
-
-# Mostrar tabla con afinidad calculada para el producto seleccionado
-st.write(f"**Afinidad para el producto '{producto_seleccionado}'**")
-st.dataframe(df_producto[['País', 'Afinidad']])
-
-# Crear el mapa interactivo usando Plotly
-fig = px.choropleth(
-    df_producto,
-    locations="País",
-    locationmode="country names",
-    color="Afinidad",
-    color_continuous_scale=px.colors.sequential.Plasma,
-    labels={"Afinidad": "Afinidad Calculada"},
-    title=f"Afinidad de Mercado para el Producto '{producto_seleccionado}'"
-)
-
-# Mostrar el mapa interactivo
 st.plotly_chart(fig)
 
-# Mostrar los resultados más relevantes en la barra lateral
-st.sidebar.header("Mercados Recomendados")
-top_resultados = df_producto.sort_values(by='Afinidad', ascending=False).head(10)
-st.sidebar.write(top_resultados[['País', 'Afinidad']])
+# Opción para ver la tabla completa de mercados
+if st.checkbox("Ver datos completos de mercados"):
+    st.dataframe(mercados_df)
+
+# Funcionalidad extra: Visualización de un gráfico de los 10 países con mayor tamaño de mercado
+top_10_mercados = mercados_df.nlargest(10, 'Tamaño del Mercado Total (Millones USD)')
+
+fig_top_10 = px.bar(top_10_mercados, 
+                    x='País', 
+                    y='Tamaño del Mercado Total (Millones USD)', 
+                    title='Top 10 de Mercados por Tamaño de Mercado Total',
+                    labels={'Tamaño del Mercado Total (Millones USD)': 'Tamaño del Mercado (Millones USD)', 'País': 'País'})
+st.plotly_chart(fig_top_10)
