@@ -1,5 +1,8 @@
 import pandas as pd
 import streamlit as st
+import folium
+from folium.plugins import MarkerCluster
+from geopy.distance import geodesic
 
 # Cargar los archivos CSV
 mercados_df = pd.read_csv("mercados.csv", encoding="latin1")
@@ -7,7 +10,6 @@ acuerdos_df = pd.read_csv("acuerdos_comerciales.csv", encoding="latin1")
 
 # Función para calcular el puntaje de cada país
 def calcular_puntaje(row):
-    # Puedes ajustar los pesos según lo que consideres relevante para la recomendación
     return (
         0.3 * row['Facilidad Negocios (WB 2019)'] +
         0.2 * row['PIB per cápita (USD)'] + 
@@ -68,6 +70,25 @@ acuerdos_cols = ['País', 'Acuerdo Comercial', 'Descripción', 'Vigencia', 'Enla
 acuerdos_info = acuerdos_df[acuerdos_cols].drop_duplicates()
 st.write("Acuerdos comerciales vigentes:")
 st.dataframe(acuerdos_info)
+
+# Mostrar el mapa interactivo con los países recomendados
+st.write("Mapa interactivo de los mercados recomendados:")
+
+# Crear un mapa de Folium
+mapa = folium.Map(location=[-32.5228, -55.7658], zoom_start=3)  # Coordenadas de Uruguay
+
+# Agregar un marcador por cada país recomendado
+marker_cluster = MarkerCluster().add_to(mapa)
+for _, row in df_recomendado.iterrows():
+    # Añadir un marcador para cada país recomendado
+    folium.Marker(
+        location=[row['Latitud'], row['Longitud']],
+        popup=f"{row['País']}<br>Puntaje: {row['Puntaje']}",
+        icon=folium.Icon(color='blue')
+    ).add_to(marker_cluster)
+
+# Mostrar el mapa en la app
+st.components.v1.html(mapa._repr_html_(), height=500)
 
 # Si el usuario selecciona un país, mostrar más detalles
 pais_seleccionado = st.selectbox('Seleccionar un país para más detalles:', df_recomendado['País'])
