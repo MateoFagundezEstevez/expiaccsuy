@@ -1,6 +1,13 @@
  import streamlit as st
 import pandas as pd
 import numpy as np
+import chardet
+
+with open('afinidad_producto_país.csv', 'rb') as f:
+    result = chardet.detect(f.read())
+    encoding = result['encoding']
+
+afinidad_df = pd.read_csv('afinidad_producto_país.csv', encoding=encoding)
 
 # Cargar los datos localmente
 afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
