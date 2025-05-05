@@ -1,31 +1,10 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import pydeck as pdk
 
-# Intentar cargar los datos con distintas codificaciones y delimitadores
-try:
-    # Intentar cargar con codificación UTF-8 y delimitador por defecto (coma)
-    mercados_df = pd.read_csv("mercados.csv", encoding="utf-8")
-except UnicodeDecodeError:
-    # Si hay error de codificación, intentar con Latin1
-    mercados_df = pd.read_csv("mercados.csv", encoding="latin1")
-except Exception as e:
-    st.error(f"Error al cargar el archivo mercados.csv: {e}")
-
-# Si el archivo no tiene el delimitador por coma, intentar con punto y coma
-if mercados_df.empty:
-    try:
-        mercados_df = pd.read_csv("mercados.csv", encoding="utf-8", sep=";")
-    except Exception as e:
-        st.error(f"Error al cargar el archivo mercados.csv con punto y coma: {e}")
-
-# Verificar si el DataFrame tiene contenido
-if mercados_df.empty:
-    st.error("El archivo mercados.csv está vacío o tiene un formato incorrecto.")
-
-# Mostrar una muestra de los datos cargados para verificar
-st.write(mercados_df.head())
+# Cargar los datos localmente
+afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
+mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
 
 # Lista de países de Latinoamérica
 latinoamerica = [
@@ -170,12 +149,3 @@ if st.button("Obtener recomendaciones"):
         for i, row in nuevos_globales.iterrows():
             st.markdown(f"**🌐 {row['País']}** - Puntaje: {round(row['Puntaje'], 2)}")
         st.dataframe(nuevos_globales)
-
-# Estilos
-st.markdown(""" 
-    <style> 
-        .stButton > button { background-color: #3E8E41; color: white; font-size: 16px; } 
-        .stButton > button:hover { background-color: #45a049; } 
-    </style> 
-""", unsafe_allow_html=True)
-
