@@ -61,4 +61,3 @@ st.pydeck_chart(pdk.Deck(
     ],
     tooltip={"text": "{País}\nPuntaje: {Puntaje Oportunidad}"}
 ))
-
