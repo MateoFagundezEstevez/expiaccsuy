@@ -1,4 +1,3 @@
-# app.py
 import streamlit as st
 import pandas as pd
 import chardet
@@ -7,7 +6,7 @@ st.set_page_config(page_title="Recomendador de Mercados", layout="centered")
 
 st.title("🌍 Recomendador de Mercados para Exportadores Uruguayos")
 
-# Función para detectar codificación de un archivo
+# Función para detectar codificación
 def detectar_codificacion(filepath):
     with open(filepath, 'rb') as f:
         resultado = chardet.detect(f.read())
@@ -16,17 +15,14 @@ def detectar_codificacion(filepath):
 # Cargar archivos
 @st.cache_data
 def cargar_datos():
-    # Detectar codificación del archivo afinidad
-    encoding_afinidad = detectar_codificacion("/mnt/data/afinidad_producto_país.csv")
-
-    mercados = pd.read_csv("/mnt/data/mercados.csv")  # Asumimos UTF-8 correcto
-    afinidad = pd.read_csv("/mnt/data/afinidad_producto_país.csv", encoding=encoding_afinidad)
-    
+    encoding_afinidad = detectar_codificacion("afinidad_producto_país.csv")
+    mercados = pd.read_csv("mercados.csv")
+    afinidad = pd.read_csv("afinidad_producto_país.csv", encoding=encoding_afinidad)
     return mercados, afinidad
 
 mercados_df, afinidad_df = cargar_datos()
 
-# Interfaz para ingresar producto
+# Interfaz
 producto = st.text_input("Ingrese el nombre del producto que desea exportar:", "")
 
 if producto:
@@ -35,10 +31,8 @@ if producto:
     if producto_filtrado.empty:
         st.warning("⚠️ No se encontró afinidad para ese producto.")
     else:
-        # Unir afinidad con datos de mercado
         datos_combinados = pd.merge(producto_filtrado, mercados_df, on="País", how="inner")
 
-        # Crear una puntuación compuesta (puedes ajustar los pesos)
         datos_combinados["Puntaje Total"] = (
             datos_combinados["Afinidad"] * 0.4 +
             datos_combinados["Demanda esperada"] * 0.3 +
@@ -58,4 +52,3 @@ if producto:
         )
 else:
     st.info("Ingrese un producto para ver recomendaciones.")
-
