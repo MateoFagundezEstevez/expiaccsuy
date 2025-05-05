@@ -5,7 +5,6 @@ import numpy as np
 # Cargar los datos de los CSV (ya están subidos en Streamlit Cloud)
 afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
 mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
-
 # Función para recomendar los mejores mercados
 def recomendar_mercados(afinidad_producto, mercados_df):
     # Crear una columna adicional para identificar la región
