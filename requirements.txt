@@ -1,4 +1,6 @@
-matplotlib
-seaborn
-pandas
 streamlit
+pandas
+numpy
+# Si quieres que la detección de países con NER funcione (requiere más recursos):
+# transformers
+# torch # or tensorflow, depending on transformers backend (torch recommended)
