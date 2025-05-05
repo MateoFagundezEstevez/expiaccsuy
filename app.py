@@ -73,26 +73,102 @@ st.markdown("<h1 style='color: #3E8E41;'>Bienvenido al Recomendador de Mercados 
 st.markdown("🚀 Selecciona tu producto y descubre los mejores mercados para exportarlo. Priorizamos Latinoamérica, pero puedes explorar también el resto del mundo.")
 with st.expander("ℹ️ ¿Cómo funciona esta herramienta?"):
     st.markdown("""
-    Esta aplicación te ayuda a identificar los mejores mercados para exportar productos uruguayos.  
-    Se basa en indicadores como:
+  # Recomendador de Mercados de Exportación 🌎
 
-    - **Afinidad** del producto con cada país (según comercio histórico).
-    - **Tamaño del Mercado Total** (en millones de USD).
-    - **Facilidad para hacer negocios** (índices globales como el Doing Business).
-    - **Crecimiento Anual del PIB** (proyección de crecimiento económico).
+## Descripción
 
-    Los mercados se priorizan primero en **Latinoamérica** (mayor cercanía y afinidad cultural), y luego se muestran las mejores opciones del **resto del mundo**.
+Este es un **Recomendador de Mercados de Exportación** diseñado para ayudar a los exportadores uruguayos a identificar los mejores mercados para sus productos. La herramienta está basada en indicadores clave que incluyen la **afinidad del producto**, el **tamaño del mercado**, la **facilidad para hacer negocios** y el **crecimiento económico** de los países. 
 
-    Los datos fueron extraídos y consolidados desde fuentes como:
-    - Banco Mundial
-    - Banco Interamericano de Desarrollo (BID)
-    - OMC
-    - Trademap (ITC)
-    - Cámara de Comercio y Servicios del Uruguay
+La recomendación de mercados se prioriza primero para **Latinoamérica** (debido a la cercanía geográfica y la afinidad cultural), seguida de las mejores opciones del **resto del mundo**.
 
-    👇 Elegí tu producto y explorá las recomendaciones.
-    """)
+## ¿Cómo Funciona?
 
+### Cálculo de Afinidad por Producto
+
+El cálculo de afinidad por producto se basa en datos históricos de comercio entre Uruguay y los países. Esto permite determinar qué tan bien un producto uruguayo se adapta a las necesidades de un mercado específico, lo cual es clave para identificar mercados potencialmente rentables.
+
+Para cada producto, se utiliza un puntaje de afinidad que se combina con otros indicadores para determinar qué mercados son los más adecuados para exportar.
+
+### Indicadores Utilizados
+
+La recomendación de mercados se realiza tomando en cuenta los siguientes indicadores:
+
+- **Afinidad del Producto**: Puntaje que refleja la afinidad histórica entre el producto y el mercado.
+- **Demanda Esperada**: Proyección de la demanda o consumo del producto en el mercado destino.
+- **Facilidad para Hacer Negocios**: Índice global que mide cuán fácil es hacer negocios en un país (según el Banco Mundial).
+- **Beneficios Arancelarios**: Preferencias arancelarias entre Uruguay y el país destino, que facilitan el comercio.
+- **Estabilidad Política**: Indicador de la estabilidad política en cada país (según fuentes como el Banco Mundial o Economist Intelligence Unit).
+- **Tamaño del Mercado Total**: Estimación del tamaño del mercado para productos similares en millones de USD.
+- **Crecimiento Anual del PIB**: Proyección de crecimiento económico del país en el corto y mediano plazo.
+
+### Lógica de Recomendación
+
+1. **Cálculo de Puntajes**: Los puntajes se calculan a partir de una combinación ponderada de estos indicadores. Los países de Latinoamérica tienen un mayor peso en la afinidad, mientras que los mercados fuera de Latinoamérica se priorizan en otros indicadores como el tamaño del mercado y el crecimiento económico.
+   
+2. **Selección de Mercados**: Se seleccionan los mejores mercados dentro de Latinoamérica y el resto del mundo en función del puntaje final. Los mercados se ordenan de mayor a menor puntaje, y se muestran los mejores según la cantidad seleccionada por el usuario.
+
+3. **Personalización de Resultados**: El usuario puede ver más mercados globales adicionales ajustando un control deslizante, lo que permite explorar más opciones fuera de Latinoamérica.
+
+### Fuentes de Información
+
+Los datos utilizados en esta herramienta provienen de diversas fuentes confiables y actualizadas, que incluyen:
+
+- **Banco Mundial**: Información sobre facilidad para hacer negocios, estabilidad política, etc.
+- **Banco Interamericano de Desarrollo (BID)**: Datos sobre el crecimiento económico y otros indicadores clave.
+- **OMC (Organización Mundial del Comercio)**: Información sobre comercio internacional y acuerdos preferenciales.
+- **Trademap (ITC - Centro de Comercio Internacional)**: Datos sobre el comercio internacional y exportaciones.
+- **Cámara de Comercio y Servicios del Uruguay**: Información consolidada sobre acuerdos comerciales y relaciones internacionales.
+
+### Recomendaciones
+
+Al obtener las recomendaciones, los usuarios verán los mercados sugeridos junto con una descripción detallada de los indicadores que contribuyeron a la recomendación. Estos fundamentos proporcionan un análisis completo de las razones por las que un mercado fue seleccionado.
+
+## Uso de la Herramienta
+
+### 1. Selección de Producto
+
+El primer paso es elegir el producto que deseas exportar desde un listado disponible. Esto determinará el cálculo de afinidad para ese producto en particular.
+
+### 2. Obtener Recomendaciones
+
+Haz clic en el botón **"Obtener recomendaciones"** para que la herramienta te muestre los mercados recomendados. Los mercados se clasificarán primero por los mejores puntajes en **Latinoamérica**, seguidos de los mercados globales con mejor puntaje.
+
+### 3. Más Mercados Globales
+
+Si deseas explorar más mercados fuera de Latinoamérica, puedes usar el control deslizante para ajustar cuántos mercados adicionales del resto del mundo deseas ver.
+
+### 4. Tabla de Puntajes
+
+En la sección **"Tabla de Puntajes"**, podrás ver los puntajes calculados para cada país y cómo se comparan los mercados recomendados.
+
+## Configuración
+
+- **Lenguaje de la Aplicación**: Español
+- **Estructura de la Aplicación**: Basada en Streamlit
+- **Formato de Entrada**: Archivos CSV para los datos de afinidad y mercados
+
+## Instalación
+
+Si deseas instalar y ejecutar esta herramienta localmente, puedes seguir los siguientes pasos:
+
+1. Clona este repositorio.
+2. Instala las dependencias necesarias:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. Ejecuta la aplicación:
+
+    ```bash
+    streamlit run app.py
+    ```
+
+## Contacto
+
+Si tienes preguntas o comentarios, no dudes en ponerte en contacto con nosotros a través de [correo electrónico o enlaces de contacto].
+
+)
 # Selección de producto
 producto = st.selectbox("Selecciona tu producto", afinidad_df['Producto'].unique())
 
