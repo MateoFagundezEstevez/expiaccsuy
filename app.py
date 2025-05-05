@@ -34,24 +34,9 @@ st.dataframe(df_producto[['País', 'Afinidad']])
 fig = px.bar(df_producto, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
 st.plotly_chart(fig)
 
-# Mostrar un mapa interactivo de los países recomendados basado en la facilidad para hacer negocios
-st.subheader("📍 Mapa Interactivo de Facilidad para Hacer Negocios")
-# Merge para juntar la facilidad para hacer negocios con los datos de afinidad
-df_producto_map = pd.merge(df_producto, mercados_df[['País', 'Facilidad Negocios (WB 2019)']], on='País', how='left')
-
-# Crear el mapa interactivo
-fig_map = px.scatter_geo(df_producto_map, 
-                         locations="País", 
-                         size="Facilidad Negocios (WB 2019)",  # Usar la facilidad para hacer negocios como tamaño
-                         hover_name="País", 
-                         size_max=100, 
-                         title=f"Facilidad para hacer negocios en los mercados para {producto_seleccionado}",
-                         color="Facilidad Negocios (WB 2019)", 
-                         color_continuous_scale="Viridis",
-                         template="plotly",
-                         projection="natural earth")
-
-# Mostrar el mapa interactivo
+# Mostrar un mapa interactivo de los países recomendados
+st.subheader("📍 Mapa Interactivo de los Mercados")
+fig_map = px.scatter_geo(df_producto, locations="País", size="Afinidad", hover_name="País", size_max=100, title=f"Mercados recomendados para {producto_seleccionado}")
 st.plotly_chart(fig_map)
 
 # Botón de recomendación
