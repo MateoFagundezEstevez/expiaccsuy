@@ -1,59 +1,98 @@
-import pandas as pd
 import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Leer el archivo CSV (con la codificación detectada)
-df = pd.read_csv('mercados.csv', encoding='ISO-8859-1')
+# Cargar los archivos CSV
+afinidad_df = pd.read_csv("afinidad_producto_país.csv")
+mercados_df = pd.read_csv("mercados.csv")
 
-# Limpiar los nombres de las columnas para eliminar espacios extras
-df.columns = df.columns.str.strip()
+# Función para calcular el puntaje final para cada país basado en los criterios
+def calcular_puntaje(df_afinidad, df_mercado, producto):
+    # Obtener la afinidad del producto con cada país
+    afinidad = df_afinidad[df_afinidad['Producto'] == producto]
+    
+    # Si no se encuentra el producto, retornar un mensaje
+    if afinidad.empty:
+        return "Producto no encontrado"
+    
+    # Merge entre los dataframes de afinidad y mercados
+    df_merge = pd.merge(afinidad, df_mercado, on="País", how="left")
+    
+    # Normalización de las columnas para facilitar el cálculo del puntaje
+    df_merge['Puntaje Afinidad'] = df_merge['Afinidad'] * 0.2
+    df_merge['Puntaje Facilidad'] = df_merge['Facilidad para hacer negocios'] * 0.2
+    df_merge['Puntaje Demanda'] = df_merge['Demanda esperada'] * 0.2
+    df_merge['Puntaje Aranceles'] = df_merge['Beneficios arancelarios'] * 0.2
+    df_merge['Puntaje Estabilidad'] = df_merge['Estabilidad política'] * 0.2
+    
+    # Calcular el puntaje total
+    df_merge['Puntaje Total'] = (df_merge['Puntaje Afinidad'] + 
+                                 df_merge['Puntaje Facilidad'] + 
+                                 df_merge['Puntaje Demanda'] + 
+                                 df_merge['Puntaje Aranceles'] + 
+                                 df_merge['Puntaje Estabilidad'])
+    
+    # Ordenar los países por puntaje
+    df_merge_sorted = df_merge.sort_values(by="Puntaje Total", ascending=False)
+    
+    return df_merge_sorted[['País', 'Puntaje Total', 'Puntaje Afinidad', 'Puntaje Facilidad', 'Puntaje Demanda', 'Puntaje Aranceles', 'Puntaje Estabilidad']].head(10)
 
-# Verificar que las columnas necesarias están presentes
-required_columns = ['Facilidad para hacer negocios', 'Demanda esperada', 'Beneficios arancelarios', 'Estabilidad política']
-missing_columns = [col for col in required_columns if col not in df.columns]
+# Interfaz de Streamlit
+st.title('Recomendación de mercado para exportadores')
+st.markdown("""
+    Esta aplicación ayuda a los exportadores a encontrar los mejores mercados según la afinidad de su producto con diferentes países y criterios clave como:
+    - Facilidad para hacer negocios
+    - Demanda esperada
+    - Beneficios arancelarios
+    - Estabilidad política
+    Elija un producto y obtenga los países recomendados.
+""")
 
-if missing_columns:
-    st.error(f"Faltan las siguientes columnas en el archivo CSV: {', '.join(missing_columns)}")
-else:
-    # Mostrar las columnas que se leyeron
-    st.write(f"Columnas del archivo CSV: {df.columns.tolist()}")
+# Selector de producto con descripción
+producto = st.selectbox(
+    "Seleccione un producto", 
+    afinidad_df['Producto'].unique(),
+    help="Seleccione el producto que desea exportar para ver los países más recomendados."
+)
 
-    # Solicitar al usuario los pesos para los indicadores
-    facilidades_peso = st.slider('Peso para Facilidad para hacer negocios', 0, 100, 25)
-    demanda_peso = st.slider('Peso para Demanda esperada', 0, 100, 25)
-    aranceles_peso = st.slider('Peso para Beneficios arancelarios', 0, 100, 25)
-    estabilidad_peso = st.slider('Peso para Estabilidad política', 0, 100, 25)
+# Botón para generar la recomendación
+if st.button("Generar recomendación"):
+    recomendacion = calcular_puntaje(afinidad_df, mercados_df, producto)
+    
+    if isinstance(recomendacion, str):  # En caso de que no se encuentre el producto
+        st.error(recomendacion)
+    else:
+        st.subheader(f"Los mejores mercados recomendados para el producto '{producto}'")
+        
+        # Mostrar tabla de recomendación
+        st.dataframe(recomendacion)
+        
+        # Gráfico de puntajes
+        st.subheader('Visualización de puntajes por país')
+        
+        # Crear un gráfico de barras para los puntajes totales
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.barplot(x='Puntaje Total', y='País', data=recomendacion, palette='viridis', ax=ax)
+        ax.set_title('Puntaje Total de los países recomendados', fontsize=16)
+        ax.set_xlabel('Puntaje Total', fontsize=12)
+        ax.set_ylabel('País', fontsize=12)
+        st.pyplot(fig)
 
-    # Asegurarse de que los pesos sumen 100
-    total_weight = facilidades_peso + demanda_peso + aranceles_peso + estabilidad_peso
-    if total_weight != 100:
-        st.warning("La suma de los pesos no es 100. Los valores ajustados para asegurar la suma a 100.")
-
-        # Normalizar los pesos para que sumen 100
-        total = facilidades_peso + demanda_peso + aranceles_peso + estabilidad_peso
-        facilidades_peso = facilidades_peso / total * 100
-        demanda_peso = demanda_peso / total * 100
-        aranceles_peso = aranceles_peso / total * 100
-        estabilidad_peso = estabilidad_peso / total * 100
-
-    # Calcular los puntajes ponderados para cada país
-    df['Puntaje'] = (
-        (df['Facilidad para hacer negocios'] * facilidades_peso / 100) +
-        (df['Demanda esperada'] * demanda_peso / 100) +
-        (df['Beneficios arancelarios'] * aranceles_peso / 100) +
-        (df['Estabilidad política'] * estabilidad_peso / 100)
-    )
-
-    # Ordenar los países según el puntaje
-    df_sorted = df.sort_values(by='Puntaje', ascending=False)
-
-    # Mostrar los 5 mejores mercados
-    st.write("Los mejores mercados según la evaluación son:")
-    st.write(df_sorted.head(5))
-
-    # Mostrar el ranking completo
-    st.write("Ranking completo de mercados:")
-    st.write(df_sorted)
-
-    # Mostrar un gráfico de barras con los puntajes
-    st.bar_chart(df_sorted[['Puntaje']])
+        # Gráfico de desgloses por criterios
+        st.subheader('Desglose de puntajes por criterio')
+        
+        # Crear un gráfico de barras para cada criterio
+        fig, ax = plt.subplots(figsize=(10, 6))
+        recomendacion.set_index('País').drop(columns='Puntaje Total').plot(kind='barh', stacked=True, ax=ax, colormap='Set3')
+        ax.set_title(f'Desglose de puntajes para el producto {producto}', fontsize=16)
+        ax.set_xlabel('Puntaje', fontsize=12)
+        ax.set_ylabel('País', fontsize=12)
+        st.pyplot(fig)
+        
+        st.markdown("""
+            **Interpretación:**
+            - Los países con mayor puntaje total son los más recomendados.
+            - Los gráficos muestran cómo cada país se desempeña en los distintos criterios evaluados.
+        """)
 
