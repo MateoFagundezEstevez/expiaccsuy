@@ -4,3 +4,4 @@ numpy
 folium
 streamlit_folium
 geopy
+scikit-learn
