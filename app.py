@@ -7,30 +7,89 @@ import numpy as np
 mercados_df = pd.read_csv('mercados.csv')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
 
-# Título e imagen (logo centrado y más grande)
+# Estilo CSS para personalizar el logo y las secciones
 st.markdown("""
-    <div style="text-align: center;">
-        <img src="logo_ccsuy.png" width="400">
+    <style>
+        /* Centrar el logo y hacerlo más grande */
+        .logo-container {
+            text-align: center;
+        }
+        .logo-container img {
+            width: 400px;  /* Aproximadamente 10 cm */
+        }
+
+        /* Colores personalizados para las secciones */
+        .section-title {
+            color: #003B5C;  /* Un color oscuro azul, por ejemplo */
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .section-description {
+            color: #9E2A2F;  /* Color rojo oscuro */
+            font-size: 16px;
+        }
+
+        .section {
+            background-color: #E8F4F9;  /* Fondo de sección en azul claro */
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .expander-title {
+            font-size: 20px;
+            color: #003B5C;
+        }
+
+        .expander-content {
+            font-size: 14px;
+            color: #4A4A4A;
+        }
+
+        .button {
+            background-color: #9E2A2F;  /* Rojo oscuro */
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #C84B53;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Logo centrado y grande
+st.markdown("""
+    <div class="logo-container">
+        <img src="logo_ccsuy.png">
     </div>
-""", unsafe_allow_html=True)  # Logo de la Cámara de Comercio y Servicios
+""", unsafe_allow_html=True)
+
+# Título de la aplicación
+st.title("🌍 Bot de Recomendación de Mercados de Exportación")
 
 # Opción para desplegar/ocultar las instrucciones
 with st.expander("📄 Ver Instrucciones", expanded=False):
     try:
         with open("README.md", "r", encoding="utf-8") as file:
             readme_content = file.read()
-        st.markdown(readme_content)
+        st.markdown(f'<div class="expander-content">{readme_content}</div>', unsafe_allow_html=True)
     except FileNotFoundError:
         st.error("El archivo README.md no se encuentra disponible.")
 
-st.title("🌍 Bot de Recomendación de Mercados de Exportación")
-
-# Descripción
+# Descripción de la herramienta
 st.markdown("""
-Bienvenido al **Bot de Recomendación de Mercados de Exportación**. 
-Este bot le ayudará a encontrar los mercados más adecuados para exportar sus productos, basándose en una serie de indicadores clave de cada país. 
-Seleccione un producto y vea los mercados recomendados. 🚀
-""")
+<div class="section">
+    <p class="section-description">
+        Bienvenido al **Bot de Recomendación de Mercados de Exportación**. 
+        Este bot le ayudará a encontrar los mercados más adecuados para exportar sus productos, basándose en una serie de indicadores clave de cada país. 
+        Seleccione un producto y vea los mercados recomendados. 🚀
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 # Selección de Producto
 productos = afinidad_df['Producto'].unique()
@@ -41,8 +100,7 @@ df_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
 
 # Usar un formulario para manejar la interacción
 with st.form(key='mercados_form'):
-    # Mostrar la tabla con los mercados recomendados
-    st.subheader(f"🌎 Mercados recomendados para {producto_seleccionado}")
+    st.markdown('<div class="section-title">🌎 Mercados recomendados para {}</div>'.format(producto_seleccionado), unsafe_allow_html=True)
     st.dataframe(df_producto[['País', 'Afinidad']])
 
     # Mostrar un gráfico interactivo de los mercados recomendados
@@ -92,7 +150,7 @@ with st.form(key='mercados_form'):
     st.dataframe(mercados_filtrados[['País', 'Afinidad']])
 
 # Mostrar todas las columnas de mercados.csv
-st.subheader("📝 Información completa sobre los mercados")
+st.markdown('<div class="section-title">📝 Información completa sobre los mercados</div>', unsafe_allow_html=True)
 st.write("""
 A continuación se muestra la información detallada sobre todos los mercados disponibles:
 """)
@@ -123,6 +181,10 @@ else:
 
 # Mensaje final
 st.markdown("""
+Gracias por usar nuestro **Bot de Recomendación de Mercados de Exportación**. 
+¡Esperamos que esta herramienta te ayude a tomar decisiones informadas sobre tus exportaciones! 🌍
+""")
+
 Gracias por usar nuestro **Bot de Recomendación de Mercados de Exportación**. 
 ¡Esperamos que esta herramienta te ayude a tomar decisiones informadas sobre tus exportaciones! 🌍
 """)
