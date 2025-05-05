@@ -6,7 +6,7 @@ afinidad_df = pd.read_csv("afinidad_producto_país.csv")
 mercados_df = pd.read_csv("mercados.csv")
 
 # Mostrar el logo de la Cámara de Comercio y Servicios de Uruguay
-st.image("logo_ccsuy.png", width=200)
+st.image("logo_ccsuy.png", use_container_width=True)
 
 # Título de la aplicación
 st.title("Sistema de Recomendación de Mercados de Exportación")
@@ -34,15 +34,11 @@ for idx, row in top_5_paises.iterrows():
     st.write(f"**{row['País']}** - Afinidad: {row['Afinidad']}")
 
 # Sugerencia opcional para ver la información del archivo CSV
-st.checkbox("Ver detalles del CSV de afinidad", key="mostrar_csv_afinidad")
-
-if st.session_state.mostrar_csv_afinidad:
+if st.checkbox("Ver detalles del CSV de afinidad"):
     st.write(afinidad_df)
 
 # Lógica para mostrar la información de los mercados (opcional)
-st.checkbox("Ver detalles de los mercados", key="mostrar_csv_mercados")
-
-if st.session_state.mostrar_csv_mercados:
+if st.checkbox("Ver detalles de los mercados"):
     st.write(mercados_df)
 
 # Mostrar los 5 mejores mercados según los índices de los CSV de mercados
@@ -55,3 +51,4 @@ top_5_mercados = mercados_df.head(5)
 # Mostrar los 5 mejores mercados
 for idx, row in top_5_mercados.iterrows():
     st.write(f"**{row['País']}** - Facilidad para hacer negocios: {row['Facilidad para hacer negocios']}, Demanda esperada: {row['Demanda esperada']}, Beneficios arancelarios: {row['Beneficios arancelarios']}, Estabilidad política: {row['Estabilidad política']}")
+
