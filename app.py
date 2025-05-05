@@ -4,7 +4,7 @@ import numpy as np
 import pydeck as pdk
 
 # Cargar los datos
-afinidad_df = pd.read_csv('afinidad_producto_país.csv', encoding='ISO-8859-1')
+afinidad_df = pd.read_csv('afinidad_producto_país.csv', encoding='latin1')
 mercados_df = pd.read_csv('mercados.csv', encoding='ISO-8859-1')
 
 # Función para recomendar los mejores mercados
