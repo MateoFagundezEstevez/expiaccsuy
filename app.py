@@ -1,177 +1,104 @@
+import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.preprocessing import MinMaxScaler
-import streamlit as st
-import pydeck as pdk
+import folium
+from folium.plugins import MarkerCluster
 
-# Cargar los datos desde los archivos
-afinidad_df = pd.read_csv('afinidad_producto_país.csv')
+# Cargar los archivos CSV
 mercados_df = pd.read_csv('mercados.csv')
+afinidad_df = pd.read_csv('afinidad_producto_país.csv')
 
-# Función para calcular la afinidad del producto con los mercados
-def calcular_afinidad(row, mercados_df, ponderaciones):
-    # Normalizar las métricas del país
-    scaler = MinMaxScaler()
-    mercados_df[['Facilidad Negocios (WB 2019)', 'PIB per cápita (USD)', 'Crecimiento Anual PIB (%)',
-                 'Tamaño del Mercado Total (Millones USD)', 'Población (Millones)', 'Logística (LPI 2023)',
-                 'Crecimiento Importaciones (%)', 'Sofisticación Exportaciones (Score)', 'Población Urbana (%)',
-                 'Infraestructura Portuaria (LPI 2023)', 'Penetración Internet (%)']] = scaler.fit_transform(
-        mercados_df[['Facilidad Negocios (WB 2019)', 'PIB per cápita (USD)', 'Crecimiento Anual PIB (%)',
-                     'Tamaño del Mercado Total (Millones USD)', 'Población (Millones)', 'Logística (LPI 2023)',
-                     'Crecimiento Importaciones (%)', 'Sofisticación Exportaciones (Score)', 'Población Urbana (%)',
-                     'Infraestructura Portuaria (LPI 2023)', 'Penetración Internet (%)']])
+# Escalado de las variables numéricas
+scaler = MinMaxScaler()
+mercados_df[['Facilidad Negocios (WB 2019)', 'PIB per cápita (USD)', 'Crecimiento Anual PIB (%)', 
+             'Tamaño del Mercado Total (Millones USD)', 'Población (Millones)', 'Logística (LPI 2023)', 
+             'Crecimiento Importaciones (%)', 'Sofisticación Exportaciones (Score)', 
+             'Población Urbana (%)', 'Infraestructura Portuaria (LPI 2023)', 'Penetración Internet (%)', 
+             'Distancia a Uruguay (km)']] = scaler.fit_transform(mercados_df[['Facilidad Negocios (WB 2019)', 'PIB per cápita (USD)', 'Crecimiento Anual PIB (%)', 
+             'Tamaño del Mercado Total (Millones USD)', 'Población (Millones)', 'Logística (LPI 2023)', 
+             'Crecimiento Importaciones (%)', 'Sofisticación Exportaciones (Score)', 
+             'Población Urbana (%)', 'Infraestructura Portuaria (LPI 2023)', 'Penetración Internet (%)', 
+             'Distancia a Uruguay (km)']])
 
-    # Calcular el puntaje de afinidad para cada país
-    afinidad = []
-    for idx, mercado in mercados_df.iterrows():
-        puntaje = 0
-        for col, peso in ponderaciones.items():
-            puntaje += mercado[col] * peso
-        afinidad.append(puntaje)
-    
-    mercados_df['Puntaje'] = afinidad
-    return mercados_df
+# Interfaz de usuario
+st.title("Recomendador de Mercados para Exportación")
 
-# Función para recomendar los mejores mercados
-def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
-    # Obtener las ponderaciones del producto seleccionado
-    ponderaciones = {
-        'Facilidad Negocios (WB 2019)': 0.2,
-        'PIB per cápita (USD)': 0.1,
-        'Crecimiento Anual PIB (%)': 0.1,
-        'Tamaño del Mercado Total (Millones USD)': 0.15,
-        'Población (Millones)': 0.05,
-        'Logística (LPI 2023)': 0.1,
-        'Crecimiento Importaciones (%)': 0.05,
-        'Sofisticación Exportaciones (Score)': 0.05,
-        'Población Urbana (%)': 0.05,
-        'Infraestructura Portuaria (LPI 2023)': 0.05,
-        'Penetración Internet (%)': 0.1
-    }
+# Selección del producto
+producto = st.selectbox("Selecciona un Producto", afinidad_df['Producto'].unique())
 
-    # Filtrar los datos por producto
-    afinidad_producto = afinidad_producto[afinidad_producto['Producto'] == afinidad_producto['Producto'].iloc[0]]
-    
-    # Aplicar la función para calcular afinidad
-    mercados_df = calcular_afinidad(afinidad_producto, mercados_df, ponderaciones)
+# Filtrar los datos de afinidad por producto seleccionado
+afinidad_producto = afinidad_df[afinidad_df['Producto'] == producto]
 
-    # Ordenar los países por el puntaje de afinidad
-    df_recomendado = mercados_df.sort_values(by='Puntaje', ascending=False)
+# Merge de datos para obtener afinidad con las variables de mercados
+mercados_con_afinidad = pd.merge(mercados_df, afinidad_producto, on="País", how="inner")
+mercados_con_afinidad['Puntaje Afinidad'] = mercados_con_afinidad['Afinidad']  # Usar el puntaje de afinidad
 
-    # Seleccionar los primeros mercados de Latinoamérica
-    df_latam = df_recomendado[df_recomendado['País'].isin(['Argentina', 'Brasil', 'México', 'Chile', 'Perú', 'Colombia', 'Ecuador', 'Venezuela', 'Bolivia', 'Paraguay', 'Cuba'])]
-    
-    # Si se desea incluir mercados globales
-    if extra_global > 0:
-        df_global = df_recomendado[~df_recomendado['País'].isin(df_latam['País'])]
-        df_global = df_global.head(extra_global)
-        df_recomendado = pd.concat([df_latam, df_global])
+# Ordenar por afinidad
+mercados_con_afinidad = mercados_con_afinidad.sort_values(by='Puntaje Afinidad', ascending=False)
 
-    # Obtener los fundamentos
-    fundamentos = []
-    for idx, row in df_recomendado.iterrows():
-        fundamento = f"**{row['País']}**: Puntaje de afinidad: {round(row['Puntaje'], 2)}. "
-        fundamentos.append(fundamento)
-    
-    return df_recomendado, fundamentos
+# Mostrar recomendaciones
+st.write("### Mercados recomendados según afinidad:")
+st.dataframe(mercados_con_afinidad[['País', 'Puntaje Afinidad', 'Facilidad Negocios (WB 2019)', 'PIB per cápita (USD)', 'Crecimiento Anual PIB (%)']])
 
-# Configuración de la app
-st.set_page_config(page_title="Recomendador de Mercados", page_icon="🌎")
-st.image("logo_ccsuy.png", use_container_width=True)
+# Visualización del puntaje de afinidad en un gráfico de barras
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.barplot(x='Puntaje Afinidad', y='País', data=mercados_con_afinidad.head(10), ax=ax)
+ax.set_title(f"Top 10 países recomendados para la exportación de {producto}")
+st.pyplot(fig)
 
-st.markdown("<h1 style='color: #3E8E41;'>Bienvenido al Recomendador de Mercados de Exportación 🌎</h1>", unsafe_allow_html=True)
-st.markdown("🚀 Selecciona tu producto y descubre los mejores mercados para exportarlo. Priorizamos Latinoamérica, pero puedes explorar también el resto del mundo.")
-with st.expander("ℹ️ ¿Cómo funciona esta herramienta?"):
-    st.markdown("""
-    Esta aplicación te ayuda a identificar los mejores mercados para exportar productos uruguayos.  
-    Se basa en indicadores como:
+# Crear un mapa interactivo con los países recomendados
+st.write("### Mapa interactivo de los países recomendados")
 
-    - **Afinidad** del producto con cada país.
-    - **Demanda esperada**.
-    - **Facilidad para hacer negocios**.
-    - **Beneficios arancelarios**.
-    - **Estabilidad política**.
+# Crear un mapa base centrado en Uruguay
+m = folium.Map(location=[-32.5, -55.5], zoom_start=2)
 
-    👇 Elegí tu producto y explorá las recomendaciones.
-    """)
+# Crear un MarkerCluster para los países recomendados
+marker_cluster = MarkerCluster().add_to(m)
 
-producto = st.selectbox("Selecciona tu producto", afinidad_df['Producto'].unique())
+# Añadir los países recomendados al mapa
+for index, row in mercados_con_afinidad.head(10).iterrows():
+    folium.Marker(
+        location=[row['Latitud'], row['Longitud']],
+        popup=f"{row['País']}: Afinidad {row['Puntaje Afinidad']:.2f}",
+    ).add_to(marker_cluster)
 
-if st.button("Obtener recomendaciones"):
-    afinidad_producto = afinidad_df[afinidad_df['Producto'] == producto]
-    df_recomendado, fundamentos = recomendar_mercados(afinidad_producto, mercados_df)
+# Mostrar el mapa
+st.write("Mapa interactivo de los países recomendados:")
+st.dataframe(m)
 
-    st.subheader("🌟 Mercados recomendados")
-    for i, (mercado, fundamento) in enumerate(zip(df_recomendado['País'], fundamentos)):
-        st.markdown(f"**{i+1}. {mercado}**")
-        st.markdown(fundamento)
-        st.markdown("---")
-    
-    st.subheader("📊 Tabla de puntajes")
-    st.dataframe(df_recomendado)
+# Mostrar información adicional
+st.write("""
+    La aplicación ha calculado el puntaje de afinidad basado en múltiples factores económicos y logísticos, 
+    y recomienda los países con mayor potencial para exportar tu producto.
+""")
 
-    # Mapa interactivo con pydeck
-    st.subheader("🗺️ Mapa de mercados recomendados")
+# Gráfico de dispersión para visualizar la relación entre el PIB per cápita y la facilidad de negocios
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.scatterplot(x='PIB per cápita (USD)', y='Facilidad Negocios (WB 2019)', data=mercados_con_afinidad, hue='Puntaje Afinidad', palette="viridis", ax=ax)
+ax.set_title(f"Relación entre PIB per cápita y Facilidad de Negocios para la exportación de {producto}")
+st.pyplot(fig)
 
-    df_mapa = df_recomendado.dropna(subset=["Latitud", "Longitud"]).copy()
+# Calcular y mostrar la recomendación de países más cercanos en términos de distancia
+mercados_con_afinidad['Distancia Relativa'] = mercados_con_afinidad['Distancia a Uruguay (km)'].apply(lambda x: 1 - (x / mercados_con_afinidad['Distancia a Uruguay (km)'].max()))
+mercados_con_afinidad['Puntaje Final'] = mercados_con_afinidad['Puntaje Afinidad'] + mercados_con_afinidad['Distancia Relativa']
+mercados_con_afinidad = mercados_con_afinidad.sort_values(by='Puntaje Final', ascending=False)
 
-    # Escalar puntaje a color RGB: más puntaje = más verde
-    def puntaje_a_color(puntaje):
-        if puntaje >= 85:
-            return [0, 200, 0, 160]    # Verde intenso
-        elif puntaje >= 70:
-            return [100, 200, 0, 160]  # Verde-lima
-        elif puntaje >= 60:
-            return [200, 200, 0, 160]  # Amarillo
-        else:
-            return [200, 100, 0, 160]  # Naranja
+# Mostrar los mercados con el puntaje final más alto
+st.write("### Mercados recomendados considerando afinidad y proximidad a Uruguay:")
+st.dataframe(mercados_con_afinidad[['País', 'Puntaje Final', 'Puntaje Afinidad', 'Distancia a Uruguay (km)']])
 
-    df_mapa["color"] = df_mapa["Puntaje"].apply(puntaje_a_color)
+# Mostrar el mapa actualizado
+m = folium.Map(location=[-32.5, -55.5], zoom_start=2)
+marker_cluster = MarkerCluster().add_to(m)
+for index, row in mercados_con_afinidad.head(10).iterrows():
+    folium.Marker(
+        location=[row['Latitud'], row['Longitud']],
+        popup=f"{row['País']}: Puntaje Final {row['Puntaje Final']:.2f}",
+    ).add_to(marker_cluster)
 
-    mapa = pdk.Deck(
-        map_style="mapbox://styles/mapbox/light-v9",
-        initial_view_state=pdk.ViewState(
-            latitude=df_mapa["Latitud"].mean(),
-            longitude=df_mapa["Longitud"].mean(),
-            zoom=1.5,
-            pitch=0,
-        ),
-        layers=[
-            pdk.Layer(
-                "ScatterplotLayer",
-                data=df_mapa,
-                get_position='[Longitud, Latitud]',
-                get_color='color',
-                get_radius=80000,
-                pickable=True,
-            ),
-            pdk.Layer(
-                "TextLayer",
-                data=df_mapa,
-                get_position='[Longitud, Latitud]',
-                get_text='País',
-                get_size=12,
-                get_color=[0, 0, 0],
-                get_alignment_baseline="'bottom'"
-            )
-        ],
-    )
+st.write("### Mapa interactivo de los países con mayor puntaje final:")
+st.dataframe(m)
 
-    st.pydeck_chart(mapa)
-
-    with st.expander("🔍 Ver más mercados del Resto del Mundo (opcional)"):
-        extra_count = st.slider("¿Cuántos mercados adicionales del mundo quieres ver?", min_value=1, max_value=10, value=3)
-        df_ext, fundamentos_ext = recomendar_mercados(afinidad_producto, mercados_df, extra_global=extra_count)
-        nuevos_globales = df_ext[~df_ext['País'].isin(df_recomendado['País']) & (df_ext['Región'] == "Resto del Mundo")]
-
-        for i, row in nuevos_globales.iterrows():
-            st.markdown(f"**🌐 {row['País']}** - Puntaje: {round(row['Puntaje'], 2)}")
-        st.dataframe(nuevos_globales)
-
-# Estilos
-st.markdown(""" 
-    <style> 
-        .stButton > button { background-color: #3E8E41; color: white; font-size: 16px; } 
-        .stButton > button:hover { background-color: #45a049; } 
-    </style> 
-""", unsafe_allow_html=True)
