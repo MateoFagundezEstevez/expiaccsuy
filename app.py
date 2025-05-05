@@ -1,52 +1,79 @@
 import streamlit as st
 import pandas as pd
-import chardet
+import plotly.express as px
+import numpy as np
 
-st.set_page_config(page_title="Recomendador de Mercados", layout="centered")
-st.title("🌍 Recomendador de Mercados para Exportadores Uruguayos")
-
-@st.cache_data
-def detectar_encoding(file_path):
-    with open(file_path, 'rb') as f:
-        result = chardet.detect(f.read(10000))
-    return result['encoding']
-
-@st.cache_data
+# Cargar archivos CSV
+@st.cache
 def cargar_datos():
-    encoding_afinidad = detectar_encoding("afinidad_producto_país.csv")
-    mercados = pd.read_csv("mercados.csv")
-    afinidad = pd.read_csv("afinidad_producto_país.csv", encoding=encoding_afinidad)
-    return mercados, afinidad
+    mercados_df = pd.read_csv('mercados.csv')
+    afinidad_df = pd.read_csv('afinidad_producto_país.csv')
+    return mercados_df, afinidad_df
 
 mercados_df, afinidad_df = cargar_datos()
 
-producto = st.text_input("Ingrese el nombre del producto que desea exportar:")
+# Interfaz de usuario para seleccionar el producto
+st.title("Recomendador de Mercados de Exportación")
+producto = st.selectbox("Selecciona un producto para exportar", afinidad_df['Producto'].unique())
 
-if producto:
-    producto_filtrado = afinidad_df[afinidad_df['Producto'].str.lower() == producto.lower()]
+# Función para calcular afinidad
+def calcular_afinidad(producto, mercados_df, afinidad_df):
+    afinidad_producto = afinidad_df[afinidad_df['Producto'] == producto]
+    mercados_afinidad = pd.merge(mercados_df, afinidad_producto, on="País", how="left")
+    
+    # Calcular afinidad ponderada (simplificado)
+    mercados_afinidad['Afinidad'] = (
+        0.2 * mercados_afinidad['PIB per cápita (USD)'] +
+        0.2 * mercados_afinidad['Tamaño del Mercado Total (Millones USD)'] +
+        0.2 * mercados_afinidad['Logística (LPI 2023)'] +
+        0.2 * mercados_afinidad['Crecimiento Importaciones (%)'] +
+        0.1 * mercados_afinidad['Distancia a Uruguay (km)']
+    )
+    
+    # Ordenar por afinidad
+    mercados_afinidad = mercados_afinidad.sort_values(by='Afinidad', ascending=False)
+    return mercados_afinidad
 
-    if producto_filtrado.empty:
-        st.warning("⚠️ No se encontró afinidad para ese producto.")
-    else:
-        datos_combinados = pd.merge(producto_filtrado, mercados_df, on="País", how="inner")
+# Calcular mercados recomendados
+mercados_recomendados = calcular_afinidad(producto, mercados_df, afinidad_df)
 
-        datos_combinados["Puntaje Total"] = (
-            datos_combinados["Afinidad"] * 0.4 +
-            datos_combinados["Demanda esperada"] * 0.3 +
-            datos_combinados["Facilidad para hacer negocios"] * 0.2 +
-            datos_combinados["Beneficios arancelarios"] * 0.05 +
-            datos_combinados["Estabilidad política"] * 0.05
-        )
+# Mostrar los mercados recomendados
+st.subheader("Mercados recomendados")
+st.dataframe(mercados_recomendados[['País', 'Afinidad', 'PIB per cápita (USD)', 'Tamaño del Mercado Total (Millones USD)', 'Logística (LPI 2023)', 'Crecimiento Importaciones (%)']])
 
-        datos_ordenados = datos_combinados.sort_values(by="Puntaje Total", ascending=False)
+# Visualización en mapa interactivo con Plotly
+st.subheader("Mapa interactivo de mercados recomendados")
+fig = px.scatter_geo(mercados_recomendados,
+                     locations="País",
+                     size="Afinidad",
+                     hover_name="País",
+                     size_max=100,
+                     template="plotly", 
+                     projection="natural earth",
+                     title=f"Mercados recomendados para el producto: {producto}")
 
-        st.success(f"🌟 Ranking de países recomendados para exportar '{producto}':")
-        st.dataframe(
-            datos_ordenados[[
-                "País", "Puntaje Total", "Afinidad", "Demanda esperada",
-                "Facilidad para hacer negocios", "Beneficios arancelarios", "Estabilidad política"
-            ]].reset_index(drop=True)
-        )
-else:
-    st.info("Ingrese un producto para ver recomendaciones.")
+st.plotly_chart(fig)
+
+# Filtros adicionales
+st.sidebar.header("Filtros adicionales")
+poblacion_min = st.sidebar.slider("Población mínima (millones)", min_value=0, max_value=mercados_df['Población'].max(), value=0)
+mercados_recomendados_filtrados = mercados_recomendados[mercados_recomendados['Población'] >= poblacion_min]
+
+# Mostrar los mercados filtrados
+st.subheader(f"Mercados recomendados (Población >= {poblacion_min} millones)")
+st.dataframe(mercados_recomendados_filtrados[['País', 'Afinidad', 'PIB per cápita (USD)', 'Población', 'Tamaño del Mercado Total (Millones USD)', 'Logística (LPI 2023)']])
+
+# Generación de un reporte descargable
+@st.cache
+def generar_reporte(mercados_recomendados):
+    # Selección de las columnas relevantes para el reporte
+    reporte = mercados_recomendados[['País', 'Afinidad', 'PIB per cápita (USD)', 'Tamaño del Mercado Total (Millones USD)', 'Logística (LPI 2023)', 'Crecimiento Importaciones (%)']]
+    return reporte
+
+reporte = generar_reporte(mercados_recomendados_filtrados)
+
+# Botón para descargar el reporte
+st.subheader("Generar reporte descargable")
+csv = reporte.to_csv(index=False)
+st.download_button("Descargar reporte", csv, "reporte_mercados_recomendados.csv", "text/csv")
 
