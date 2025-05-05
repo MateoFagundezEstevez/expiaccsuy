@@ -13,6 +13,17 @@ st.markdown("""
         <img src="logo_ccsuy.png" width="400">
     </div>
 """, unsafe_allow_html=True)  # Logo de la Cámara de Comercio y Servicios
+
+# Botón para mostrar el archivo read.md al principio
+if st.button("📄 Ver Instrucciones"):
+    # Cargar y mostrar el contenido de un archivo read.md
+    try:
+        with open("read.md", "r", encoding="utf-8") as file:
+            readme_content = file.read()
+        st.markdown(readme_content)
+    except FileNotFoundError:
+        st.error("El archivo read.md no se encuentra disponible.")
+
 st.title("🌍 Bot de Recomendación de Mercados de Exportación")
 
 # Descripción
@@ -110,13 +121,6 @@ if orden == 'Ascendente':
     st.dataframe(mercados_df.sort_values(by=columna_orden, ascending=True))
 else:
     st.dataframe(mercados_df.sort_values(by=columna_orden, ascending=False))
-
-# Botón para mostrar el archivo read.md
-if st.button("📄 Ver Instrucciones"):
-    # Cargar y mostrar el contenido de un archivo read.md
-    with open("read.md", "r", encoding="utf-8") as file:
-        readme_content = file.read()
-    st.markdown(readme_content)
 
 # Mensaje final
 st.markdown("""
