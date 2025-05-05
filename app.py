@@ -2,17 +2,13 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pydeck as pdk
-import os
+from sklearn.preprocessing import MinMaxScaler
 
-# --- Cargar los datos localmente con manejo de error ---
-try:
-    afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
-    mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
-except FileNotFoundError as e:
-    st.error("❌ No se encontraron uno o más archivos necesarios para ejecutar la app.")
-    st.stop()  # Detiene la ejecución de Streamlit para evitar más errores
+# Cargar los datos localmente
+afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
+mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
 
-# --- Lista de países de Latinoamérica ---
+# Lista de países de Latinoamérica
 latinoamerica = [
     "Argentina", "Brasil", "Paraguay", "Chile", "Bolivia", "Perú", "Colombia", "Ecuador", 
     "México", "Panamá", "Costa Rica", "República Dominicana", "Guatemala", "El Salvador", 
@@ -20,50 +16,80 @@ latinoamerica = [
     "Jamaica", "Trinidad y Tobago", "Barbados", "Guyana", "Surinam"
 ]
 
-# --- Función para recomendar mercados ---
+# Función para normalizar las variables
+def normalizar_variables(df):
+    scaler = MinMaxScaler()
+    variables = ['Facilidad Negocios (WB 2019)', 'Tamaño del Mercado Total (Millones USD)', 
+                 'Crecimiento Anual PIB (%)', 'Crecimiento Importaciones (%)', 'Logística (LPI 2023)', 
+                 'Distancia a Uruguay (km)']
+    df[variables] = scaler.fit_transform(df[variables])
+    return df
+
+# Función para recomendar mercados
 def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
+    # Normalizar las variables
+    mercados_df = normalizar_variables(mercados_df)
+
+    # Añadir la región (Latinoamérica o Resto del Mundo)
     mercados_df['Región'] = mercados_df['País'].apply(lambda x: 'Latinoamérica' if x in latinoamerica else 'Resto del Mundo')
+    
+    # Fusionar los datos de afinidad con los de mercados
     df_completo = pd.merge(afinidad_producto[['País', 'Afinidad']], mercados_df, on='País', how='inner')
 
+    # Función para calcular el puntaje ponderado
     def calcular_puntaje(row):
+        # Ponderación para Latinoamérica y Resto del Mundo
         if row['Región'] == 'Latinoamérica':
-            return (
-                0.6 * row['Afinidad'] +
-                0.15 * row['Demanda esperada'] +
-                0.1 * row['Facilidad para hacer negocios'] +
-                0.15 * row['Estabilidad política']
+            puntaje = (
+                0.15 * row['Afinidad'] +
+                0.25 * row['Facilidad Negocios (WB 2019)'] +
+                0.25 * row['Tamaño del Mercado Total (Millones USD)'] +
+                0.15 * row['Crecimiento Anual PIB (%)'] +
+                0.1 * row['Crecimiento Importaciones (%)'] +
+                0.05 * row['Logística (LPI 2023)'] +
+                0.05 * (1 - row['Distancia a Uruguay (km)'])  # Invertir distancia (menor distancia, mayor puntaje)
             )
         else:
-            return (
-                0.4 * row['Afinidad'] +
-                0.25 * row['Demanda esperada'] +
-                0.2 * row['Facilidad para hacer negocios'] +
-                0.15 * row['Estabilidad política']
+            puntaje = (
+                0.1 * row['Afinidad'] +
+                0.2 * row['Facilidad Negocios (WB 2019)'] +
+                0.3 * row['Tamaño del Mercado Total (Millones USD)'] +
+                0.2 * row['Crecimiento Anual PIB (%)'] +
+                0.1 * row['Crecimiento Importaciones (%)'] +
+                0.05 * row['Logística (LPI 2023)'] +
+                0.05 * (1 - row['Distancia a Uruguay (km)'])  # Invertir distancia (menor distancia, mayor puntaje)
             )
+        return puntaje
     
+    # Calcular el puntaje para cada mercado
     df_completo['Puntaje'] = df_completo.apply(calcular_puntaje, axis=1)
 
+    # Ordenar por puntaje y seleccionar los mejores mercados
     top_latam = df_completo[df_completo['Región'] == 'Latinoamérica'].sort_values(by='Puntaje', ascending=False).head(3)
     top_global = df_completo[df_completo['Región'] == 'Resto del Mundo'].sort_values(by='Puntaje', ascending=False).head(2 + extra_global)
 
+    # Concatenar los mejores mercados
     df_recomendado = pd.concat([top_latam, top_global])
 
+    # Generar las recomendaciones
     recomendaciones = []
     for index, row in df_recomendado.iterrows():
         fundamento = (
             f"**🌍 Mercado recomendado: {row['País']} ({row['Región']})**\n\n"
             f"- **Afinidad del producto**: {row['Afinidad']}\n"
-            f"- **Demanda esperada**: {row['Demanda esperada']}\n"
-            f"- **Facilidad para hacer negocios**: {row['Facilidad para hacer negocios']}\n"
-            f"- **Beneficios arancelarios**: {row['Beneficios arancelarios']}\n"
-            f"- **Estabilidad política**: {row['Estabilidad política']}\n\n"
-            "✅ Este mercado presenta condiciones favorables para exportar tu producto, considerando su afinidad, demanda y entorno económico y político."
+            f"- **Facilidad para hacer negocios**: {row['Facilidad Negocios (WB 2019)']}\n"
+            f"- **Tamaño del mercado (PIB)**: {row['Tamaño del Mercado Total (Millones USD)']}\n"
+            f"- **Crecimiento PIB**: {row['Crecimiento Anual PIB (%)']}%\n"
+            f"- **Crecimiento Importaciones**: {row['Crecimiento Importaciones (%)']}%\n"
+            f"- **Logística (LPI 2023)**: {row['Logística (LPI 2023)']}\n"
+            f"- **Distancia a Uruguay**: {round(row['Distancia a Uruguay (km)'], 2)} km\n\n"
+            f"✅ Este mercado presenta condiciones favorables para exportar tu producto, considerando su afinidad, demanda y entorno económico y político."
         )
         recomendaciones.append(fundamento)
-    
-    return df_recomendado[['País', 'Región', 'Puntaje', 'Latitud', 'Longitud']], recomendaciones
 
-# --- Configuración de la app ---
+    return df_recomendado[['País', 'Región', 'Puntaje']], recomendaciones
+
+# Configuración de la app
 st.set_page_config(page_title="Recomendador de Mercados", page_icon="🌎")
 st.image("logo_ccsuy.png", use_container_width=True)
 
@@ -146,20 +172,3 @@ if st.button("Obtener recomendaciones"):
     )
 
     st.pydeck_chart(mapa)
-
-    with st.expander("🔍 Ver más mercados del Resto del Mundo (opcional)"):
-        extra_count = st.slider("¿Cuántos mercados adicionales del mundo quieres ver?", min_value=1, max_value=10, value=3)
-        df_ext, fundamentos_ext = recomendar_mercados(afinidad_producto, mercados_df, extra_global=extra_count)
-        nuevos_globales = df_ext[~df_ext['País'].isin(df_recomendado['País']) & (df_ext['Región'] == "Resto del Mundo")]
-
-        for i, row in nuevos_globales.iterrows():
-            st.markdown(f"**🌐 {row['País']}** - Puntaje: {round(row['Puntaje'], 2)}")
-        st.dataframe(nuevos_globales)
-
-# --- Estilos personalizados ---
-st.markdown(""" 
-    <style> 
-        .stButton > button { background-color: #3E8E41; color: white; font-size: 16px; } 
-        .stButton > button:hover { background-color: #45a049; } 
-    </style> 
-""", unsafe_allow_html=True)
