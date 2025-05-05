@@ -20,13 +20,18 @@ def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
     df_completo = pd.merge(afinidad_producto[['País', 'Afinidad']], mercados_df, on='País', how='inner')
 
     def calcular_puntaje(row):
-        if row['Región'] == 'Latinoamérica':
-            return (
-                0.6 * row['Afinidad'] +
-                0.15 * row['Demanda esperada'] +
-                0.1 * row['Facilidad para hacer negocios'] +
-                0.15 * row['Estabilidad política']
-            )
+    # Calcular puntaje con las columnas disponibles en tu archivo
+    return (
+        0.3 * row['Facilidad Negocios (WB 2019)'] +  # Ajusta pesos según lo que consideres relevante
+        0.2 * row['PIB per cápita (USD)'] + 
+        0.1 * row['Crecimiento Anual PIB (%)'] +
+        0.15 * row['Tamaño del Mercado Total (Millones USD)'] +
+        0.1 * row['Logística (LPI 2023)'] +
+        0.05 * row['Crecimiento Importaciones (%)'] +
+        0.05 * row['Sofisticación Exportaciones (Score)'] +
+        0.05 * row['Infraestructura Portuaria (LPI 2023)'] +
+        0.05 * row['Distancia a Uruguay (km)']
+        
         else:
             return (
                 0.4 * row['Afinidad'] +
