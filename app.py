@@ -1,114 +1,117 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import pydeck as pdk
 
-# Cargar los datos de los CSV (ya están subidos en Streamlit Cloud)
+# Cargar los datos
 afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
 mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
+
 # Función para recomendar los mejores mercados
 def recomendar_mercados(afinidad_producto, mercados_df):
-    # Crear una columna adicional para identificar la región
     latinoamerica = [
         "Argentina", "Brasil", "Paraguay", "Chile", "Bolivia", "Perú", "Colombia", "Ecuador", 
         "México", "Panamá", "Costa Rica", "República Dominicana", "Guatemala", "El Salvador", 
         "Honduras", "Nicaragua", "Venezuela", "Uruguay", "Cuba", "Haití", "Puerto Rico", "Belice", 
         "Jamaica", "Trinidad y Tobago", "Barbados", "Guyana", "Surinam"
     ]
-    
-    # Agregar columna de región
     mercados_df['Región'] = mercados_df['País'].apply(lambda x: 'Latinoamérica' if x in latinoamerica else 'Global')
 
-    # Merge para combinar los datos de afinidad y mercado
+    # Combinar los datos de afinidad con los del mercado
     df_completo = pd.merge(afinidad_producto[['País', 'Afinidad']], mercados_df, on='País', how='inner')
 
-    # Ajustar las ponderaciones según la región
+    # Calcular puntaje ponderado (puedes ajustar los pesos)
     def calcular_puntaje(row):
-        if row['Región'] == 'Latinoamérica':
-            return (
-                0.6 * row['Afinidad'] +  # Mayor peso a la afinidad para Latinoamérica
-                0.15 * row['Demanda esperada'] +
-                0.1 * row['Facilidad para hacer negocios'] +
-                0.15 * row['Estabilidad política']
-            )
-        else:
-            return (
-                0.4 * row['Afinidad'] +  # Menor peso a la afinidad para mercados globales
-                0.25 * row['Demanda esperada'] +
-                0.2 * row['Facilidad para hacer negocios'] +
-                0.15 * row['Estabilidad política']
-            )
+        return (
+            0.25 * row["Afinidad"] +
+            0.10 * row["Facilidad Negocios (WB 2019)"] +
+            0.10 * row["PIB per cápita (USD)"] +
+            0.10 * row["Crecimiento Anual PIB (%)"] +
+            0.10 * row["Tamaño del Mercado Total (Millones USD)"] +
+            0.10 * row["Crecimiento Importaciones (%)"] +
+            0.10 * row["Logística (LPI 2023)"] +
+            0.05 * row["Sofisticación Exportaciones (Score)"] +
+            0.05 * row["Infraestructura Portuaria (LPI 2023)"] +
+            0.05 * row["Población Urbana (%)"] -
+            0.10 * row["Distancia a Uruguay (km)"]
+        )
     
-    # Aplicar la función de puntaje
     df_completo['Puntaje'] = df_completo.apply(calcular_puntaje, axis=1)
-
-    # Ordenar los mercados por puntaje y seleccionar los 5 mejores
     df_recomendado = df_completo.sort_values(by='Puntaje', ascending=False).head(5)
 
-    # Generar los fundamentos
     recomendaciones = []
-    for index, row in df_recomendado.iterrows():
+    for _, row in df_recomendado.iterrows():
         fundamento = (
             f"**Mercado recomendado: {row['País']}** 🌟\n\n"
             f"- **Afinidad del producto con el mercado**: {row['Afinidad']}\n"
-            f"- **Demanda esperada**: {row['Demanda esperada']}\n"
-            f"- **Facilidad para hacer negocios**: {row['Facilidad para hacer negocios']}\n"
-            f"- **Beneficios arancelarios**: {row['Beneficios arancelarios']}\n"
-            f"- **Estabilidad política**: {row['Estabilidad política']}\n\n"
-            "En base a estos indicadores, se recomienda este mercado debido a su alto nivel de afinidad con el producto seleccionado, su "
-            "alta demanda esperada, y sus condiciones favorables para hacer negocios. Además, ofrece beneficios arancelarios competitivos "
-            "y una estabilidad política que lo convierte en una opción segura para la exportación. 🚀"
+            f"- **PIB per cápita**: {row['PIB per cápita (USD)']} USD\n"
+            f"- **Crecimiento del PIB**: {row['Crecimiento Anual PIB (%)']}%\n"
+            f"- **Crecimiento de importaciones**: {row['Crecimiento Importaciones (%)']}%\n"
+            f"- **Facilidad para hacer negocios (WB 2019)**: {row['Facilidad Negocios (WB 2019)']}\n"
+            f"- **Logística (LPI 2023)**: {row['Logística (LPI 2023)']}\n"
+            f"- **Sofisticación exportadora**: {row['Sofisticación Exportaciones (Score)']}\n"
+            f"- **Distancia a Uruguay**: {row['Distancia a Uruguay (km)']} km\n\n"
+            "🔎 Este mercado muestra condiciones altamente favorables para la exportación de este producto."
         )
         recomendaciones.append(fundamento)
     
-    return df_recomendado[['País', 'Puntaje']], recomendaciones
+    return df_recomendado, recomendaciones
 
-# Interfaz de usuario
+# Interfaz
 st.set_page_config(page_title="Recomendador de Mercados de Exportación", page_icon="🌍")
-
-# Cargar el logo de la Cámara de Comercio y Servicios del Uruguay
 logo_url = "https://www.ccsuy.org.uy/wp-content/uploads/2020/09/camara-comercio-servicios-uruguay-logo.png"
 st.image(logo_url, use_column_width=True)
 
-# Título principal
 st.markdown("<h1 style='color: #3E8E41;'>Bienvenido al Recomendador de Mercados de Exportación 🌎</h1>", unsafe_allow_html=True)
+st.markdown("🚀 **Elige tu producto y descubre los mejores mercados para exportarlo.**")
 
-# Subtítulo con instrucciones
-st.markdown(
-    """
-    🚀 **Elige tu producto y descubre los mejores mercados para exportarlo.** 
-    En esta herramienta, te recomendaremos los 5 mercados con mayor potencial de exportación para tu producto, basándonos en diversos indicadores.
-    """
-)
-
-# Selección de producto
+# Selección
 categoria = st.selectbox("Selecciona la categoría de tu producto", afinidad_df['Categoria'].unique())
-
-# Filtrar por categoría
 producto_filtrado = afinidad_df[afinidad_df['Categoria'] == categoria]
 producto = st.selectbox("Selecciona tu producto", producto_filtrado['Producto'].unique())
 
-# Botón para obtener la recomendación
+# Resultado
 if st.button("Obtener recomendaciones"):
-    # Filtrar datos del producto
     afinidad_producto = producto_filtrado[producto_filtrado['Producto'] == producto]
-    
-    # Obtener las recomendaciones de mercado
     df_recomendado, fundamentos = recomendar_mercados(afinidad_producto, mercados_df)
-    
-    # Mostrar resultados
+
     st.subheader("Top 5 Mercados recomendados para tu producto:")
-    
     for i, (mercado, fundamento) in enumerate(zip(df_recomendado['País'], fundamentos)):
-        # Añadir colores y formato
         st.markdown(f"**{i+1}. {mercado}**")
         st.markdown(fundamento)
         st.markdown("---")
 
-    # Mostrar los resultados en formato tabla
     st.subheader("Detalles de los mercados recomendados")
-    st.dataframe(df_recomendado)
+    st.dataframe(df_recomendado[[
+        "País", "Puntaje", "Afinidad", "PIB per cápita (USD)", "Crecimiento Anual PIB (%)",
+        "Crecimiento Importaciones (%)", "Facilidad Negocios (WB 2019)", "Logística (LPI 2023)",
+        "Sofisticación Exportaciones (Score)", "Distancia a Uruguay (km)"
+    ]])
 
-# Estilo con colores y emojis para la interfaz
+    # Mapa interactivo
+    st.subheader("Mapa interactivo de los 5 principales mercados")
+    layer = pdk.Layer(
+        "ScatterplotLayer",
+        data=df_recomendado,
+        get_position='[Longitud, Latitud]',
+        get_radius=500000,
+        get_color=[0, 128, 255],
+        pickable=True,
+    )
+    view_state = pdk.ViewState(
+        latitude=df_recomendado["Latitud"].mean(),
+        longitude=df_recomendado["Longitud"].mean(),
+        zoom=2,
+        pitch=0,
+    )
+    st.pydeck_chart(pdk.Deck(
+        map_style="mapbox://styles/mapbox/light-v9",
+        initial_view_state=view_state,
+        layers=[layer],
+        tooltip={"text": "{País}\nPuntaje: {Puntaje}"}
+    ))
+
+# Estilo
 st.markdown("""
     <style>
         .stButton > button {
