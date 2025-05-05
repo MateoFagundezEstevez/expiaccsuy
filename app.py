@@ -5,6 +5,10 @@ import streamlit as st
 # Título de la aplicación
 st.title("Recomendación de Mercados de Exportación")
 
+# Agregar el logo de la Cámara de Comercio y Servicios
+# Si la imagen está en la misma carpeta que el script, solo debes poner el nombre del archivo.
+st.image("logo_ccsuy.png", use_column_width=True)
+
 # Cargar los archivos CSV de mercados y afinidad
 try:
     mercados_df = pd.read_csv('mercados.csv', encoding='utf-8')
