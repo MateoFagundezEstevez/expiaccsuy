@@ -2,6 +2,15 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pydeck as pdk
+import chardet
+
+def detectar_encoding(path):
+    with open(path, 'rb') as f:
+        resultado = chardet.detect(f.read())
+    return resultado['encoding']
+
+encoding_archivo = detectar_encoding('afinidad_producto_país.csv')
+afinidad_df = pd.read_csv('afinidad_producto_país.csv', encoding=encoding_archivo)
 
 # Cargar los datos
 afinidad_df = pd.read_csv('afinidad_producto_país.csv', encoding='cp1252')
