@@ -14,6 +14,9 @@ missing_columns = [col for col in required_columns if col not in df.columns]
 if missing_columns:
     st.error(f"Faltan las siguientes columnas en el archivo CSV: {', '.join(missing_columns)}")
 else:
+    # Mostrar las columnas que se leyeron
+    st.write(f"Columnas del archivo CSV: {df.columns.tolist()}")
+
     # Solicitar al usuario los pesos para los indicadores
     facilidades_peso = st.slider('Peso para Facilidad para hacer negocios', 0, 100, 25)
     demanda_peso = st.slider('Peso para Demanda esperada', 0, 100, 25)
@@ -53,3 +56,4 @@ else:
 
     # Mostrar un gráfico de barras con los puntajes
     st.bar_chart(df_sorted[['Puntaje']])
+
