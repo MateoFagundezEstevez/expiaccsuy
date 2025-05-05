@@ -1,9 +1,9 @@
-Producto,PaÌs,Afinidad
+Producto,Pa√≠s,Afinidad
 Carne Bovina,Argentina,58
 Carne Bovina,Brasil,64
-Carne Bovina,MÈxico,77
+Carne Bovina,M√©xico,77
 Carne Bovina,Chile,69
-Carne Bovina,Per˙,55
+Carne Bovina,Per√∫,55
 Carne Bovina,Colombia,59
 Carne Bovina,Ecuador,50
 Carne Bovina,Venezuela,23
@@ -11,32 +11,32 @@ Carne Bovina,Bolivia,38
 Carne Bovina,Paraguay,53
 Carne Bovina,Cuba,27
 Carne Bovina,Costa Rica,57
-Carne Bovina,Rep˙blica Dominicana,50
+Carne Bovina,Rep√∫blica Dominicana,50
 Carne Bovina,Guatemala,44
 Carne Bovina,Honduras,40
 Carne Bovina,El Salvador,45
 Carne Bovina,Nicaragua,35
-Carne Bovina,Panam·,65
+Carne Bovina,Panam√°,65
 Carne Bovina,Estados Unidos,88
-Carne Bovina,Canad·,79
-Carne Bovina,PaÌses Bajos,82
+Carne Bovina,Canad√°,79
+Carne Bovina,Pa√≠ses Bajos,82
 Carne Bovina,Alemania,80
-Carne Bovina,EspaÒa,72
+Carne Bovina,Espa√±a,72
 Carne Bovina,Italia,70
 Carne Bovina,Francia,74
-Carne Bovina,BÈlgica,73
+Carne Bovina,B√©lgica,73
 Carne Bovina,Reino Unido,76
 Carne Bovina,Suiza,78
 Carne Bovina,Portugal,69
 Carne Bovina,Polonia,55
 Carne Bovina,China,78
-Carne Bovina,JapÛn,77
+Carne Bovina,Jap√≥n,77
 Carne Bovina,Corea del Sur,79
 Carne Bovina,India,67
 Carne Bovina,Singapur,81
 Carne Bovina,Hong Kong,79
-Carne Bovina,Emiratos ¡rabes Unidos,70
-Carne Bovina,Sud·frica,56
+Carne Bovina,Emiratos √Årabes Unidos,70
+Carne Bovina,Sud√°frica,56
 Carne Bovina,Nigeria,30
 Carne Bovina,Egipto,38
 Carne Bovina,Argelia,34
@@ -44,9 +44,9 @@ Carne Bovina,Australia,75
 Carne Bovina,Nueva Zelanda,74
 Soja,Argentina,57
 Soja,Brasil,65
-Soja,MÈxico,78
+Soja,M√©xico,78
 Soja,Chile,70
-Soja,Per˙,56
+Soja,Per√∫,56
 Soja,Colombia,60
 Soja,Ecuador,51
 Soja,Venezuela,24
@@ -54,32 +54,32 @@ Soja,Bolivia,39
 Soja,Paraguay,54
 Soja,Cuba,28
 Soja,Costa Rica,58
-Soja,Rep˙blica Dominicana,51
+Soja,Rep√∫blica Dominicana,51
 Soja,Guatemala,45
 Soja,Honduras,41
 Soja,El Salvador,46
 Soja,Nicaragua,36
-Soja,Panam·,66
+Soja,Panam√°,66
 Soja,Estados Unidos,89
-Soja,Canad·,80
-Soja,PaÌses Bajos,83
+Soja,Canad√°,80
+Soja,Pa√≠ses Bajos,83
 Soja,Alemania,81
-Soja,EspaÒa,73
+Soja,Espa√±a,73
 Soja,Italia,71
 Soja,Francia,75
-Soja,BÈlgica,74
+Soja,B√©lgica,74
 Soja,Reino Unido,77
 Soja,Suiza,79
 Soja,Portugal,70
 Soja,Polonia,56
 Soja,China,79
-Soja,JapÛn,78
+Soja,Jap√≥n,78
 Soja,Corea del Sur,80
 Soja,India,68
 Soja,Singapur,82
 Soja,Hong Kong,80
-Soja,Emiratos ¡rabes Unidos,71
-Soja,Sud·frica,57
+Soja,Emiratos √Årabes Unidos,71
+Soja,Sud√°frica,57
 Soja,Nigeria,31
 Soja,Egipto,39
 Soja,Argelia,35
@@ -87,9 +87,9 @@ Soja,Australia,76
 Soja,Nueva Zelanda,75
 Celulosa,Argentina,59
 Celulosa,Brasil,66
-Celulosa,MÈxico,79
+Celulosa,M√©xico,79
 Celulosa,Chile,71
-Celulosa,Per˙,57
+Celulosa,Per√∫,57
 Celulosa,Colombia,61
 Celulosa,Ecuador,52
 Celulosa,Venezuela,25
@@ -97,128 +97,128 @@ Celulosa,Bolivia,40
 Celulosa,Paraguay,55
 Celulosa,Cuba,29
 Celulosa,Costa Rica,59
-Celulosa,Rep˙blica Dominicana,52
+Celulosa,Rep√∫blica Dominicana,52
 Celulosa,Guatemala,46
 Celulosa,Honduras,42
 Celulosa,El Salvador,47
 Celulosa,Nicaragua,37
-Celulosa,Panam·,67
+Celulosa,Panam√°,67
 Celulosa,Estados Unidos,90
-Celulosa,Canad·,81
-Celulosa,PaÌses Bajos,84
+Celulosa,Canad√°,81
+Celulosa,Pa√≠ses Bajos,84
 Celulosa,Alemania,82
-Celulosa,EspaÒa,74
+Celulosa,Espa√±a,74
 Celulosa,Italia,72
 Celulosa,Francia,76
-Celulosa,BÈlgica,75
+Celulosa,B√©lgica,75
 Celulosa,Reino Unido,78
 Celulosa,Suiza,80
 Celulosa,Portugal,71
 Celulosa,Polonia,57
 Celulosa,China,80
-Celulosa,JapÛn,79
+Celulosa,Jap√≥n,79
 Celulosa,Corea del Sur,81
 Celulosa,India,69
 Celulosa,Singapur,83
 Celulosa,Hong Kong,81
-Celulosa,Emiratos ¡rabes Unidos,72
-Celulosa,Sud·frica,58
+Celulosa,Emiratos √Årabes Unidos,72
+Celulosa,Sud√°frica,58
 Celulosa,Nigeria,32
 Celulosa,Egipto,40
 Celulosa,Argelia,36
 Celulosa,Australia,77
 Celulosa,Nueva Zelanda,76
-Productos L·cteos,Argentina,58
-Productos L·cteos,Brasil,64
-Productos L·cteos,MÈxico,77
-Productos L·cteos,Chile,69
-Productos L·cteos,Per˙,55
-Productos L·cteos,Colombia,59
-Productos L·cteos,Ecuador,50
-Productos L·cteos,Venezuela,23
-Productos L·cteos,Bolivia,38
-Productos L·cteos,Paraguay,53
-Productos L·cteos,Cuba,27
-Productos L·cteos,Costa Rica,57
-Productos L·cteos,Rep˙blica Dominicana,50
-Productos L·cteos,Guatemala,44
-Productos L·cteos,Honduras,40
-Productos L·cteos,El Salvador,45
-Productos L·cteos,Nicaragua,35
-Productos L·cteos,Panam·,65
-Productos L·cteos,Estados Unidos,88
-Productos L·cteos,Canad·,79
-Productos L·cteos,PaÌses Bajos,82
-Productos L·cteos,Alemania,80
-Productos L·cteos,EspaÒa,72
-Productos L·cteos,Italia,70
-Productos L·cteos,Francia,74
-Productos L·cteos,BÈlgica,73
-Productos L·cteos,Reino Unido,76
-Productos L·cteos,Suiza,78
-Productos L·cteos,Portugal,69
-Productos L·cteos,Polonia,55
-Productos L·cteos,China,78
-Productos L·cteos,JapÛn,77
-Productos L·cteos,Corea del Sur,79
-Productos L·cteos,India,67
-Productos L·cteos,Singapur,81
-Productos L·cteos,Hong Kong,79
-Productos L·cteos,Emiratos ¡rabes Unidos,70
-Productos L·cteos,Sud·frica,56
-Productos L·cteos,Nigeria,30
-Productos L·cteos,Egipto,38
-Productos L·cteos,Argelia,34
-Productos L·cteos,Australia,75
-Productos L·cteos,Nueva Zelanda,74
-VehÌculos,Argentina,57
-VehÌculos,Brasil,65
-VehÌculos,MÈxico,78
-VehÌculos,Chile,70
-VehÌculos,Per˙,56
-VehÌculos,Colombia,60
-VehÌculos,Ecuador,51
-VehÌculos,Venezuela,24
-VehÌculos,Bolivia,39
-VehÌculos,Paraguay,54
-VehÌculos,Cuba,28
-VehÌculos,Costa Rica,58
-VehÌculos,Rep˙blica Dominicana,51
-VehÌculos,Guatemala,45
-VehÌculos,Honduras,41
-VehÌculos,El Salvador,46
-VehÌculos,Nicaragua,36
-VehÌculos,Panam·,66
-VehÌculos,Estados Unidos,89
-VehÌculos,Canad·,80
-VehÌculos,PaÌses Bajos,83
-VehÌculos,Alemania,81
-VehÌculos,EspaÒa,73
-VehÌculos,Italia,71
-VehÌculos,Francia,75
-VehÌculos,BÈlgica,74
-VehÌculos,Reino Unido,77
-VehÌculos,Suiza,79
-VehÌculos,Portugal,70
-VehÌculos,Polonia,56
-VehÌculos,China,79
-VehÌculos,JapÛn,78
-VehÌculos,Corea del Sur,80
-VehÌculos,India,68
-VehÌculos,Singapur,82
-VehÌculos,Hong Kong,80
-VehÌculos,Emiratos ¡rabes Unidos,71
-VehÌculos,Sud·frica,57
-VehÌculos,Nigeria,31
-VehÌculos,Egipto,39
-VehÌculos,Argelia,35
-VehÌculos,Australia,76
-VehÌculos,Nueva Zelanda,75
+Productos L√°cteos,Argentina,58
+Productos L√°cteos,Brasil,64
+Productos L√°cteos,M√©xico,77
+Productos L√°cteos,Chile,69
+Productos L√°cteos,Per√∫,55
+Productos L√°cteos,Colombia,59
+Productos L√°cteos,Ecuador,50
+Productos L√°cteos,Venezuela,23
+Productos L√°cteos,Bolivia,38
+Productos L√°cteos,Paraguay,53
+Productos L√°cteos,Cuba,27
+Productos L√°cteos,Costa Rica,57
+Productos L√°cteos,Rep√∫blica Dominicana,50
+Productos L√°cteos,Guatemala,44
+Productos L√°cteos,Honduras,40
+Productos L√°cteos,El Salvador,45
+Productos L√°cteos,Nicaragua,35
+Productos L√°cteos,Panam√°,65
+Productos L√°cteos,Estados Unidos,88
+Productos L√°cteos,Canad√°,79
+Productos L√°cteos,Pa√≠ses Bajos,82
+Productos L√°cteos,Alemania,80
+Productos L√°cteos,Espa√±a,72
+Productos L√°cteos,Italia,70
+Productos L√°cteos,Francia,74
+Productos L√°cteos,B√©lgica,73
+Productos L√°cteos,Reino Unido,76
+Productos L√°cteos,Suiza,78
+Productos L√°cteos,Portugal,69
+Productos L√°cteos,Polonia,55
+Productos L√°cteos,China,78
+Productos L√°cteos,Jap√≥n,77
+Productos L√°cteos,Corea del Sur,79
+Productos L√°cteos,India,67
+Productos L√°cteos,Singapur,81
+Productos L√°cteos,Hong Kong,79
+Productos L√°cteos,Emiratos √Årabes Unidos,70
+Productos L√°cteos,Sud√°frica,56
+Productos L√°cteos,Nigeria,30
+Productos L√°cteos,Egipto,38
+Productos L√°cteos,Argelia,34
+Productos L√°cteos,Australia,75
+Productos L√°cteos,Nueva Zelanda,74
+Veh√≠culos,Argentina,57
+Veh√≠culos,Brasil,65
+Veh√≠culos,M√©xico,78
+Veh√≠culos,Chile,70
+Veh√≠culos,Per√∫,56
+Veh√≠culos,Colombia,60
+Veh√≠culos,Ecuador,51
+Veh√≠culos,Venezuela,24
+Veh√≠culos,Bolivia,39
+Veh√≠culos,Paraguay,54
+Veh√≠culos,Cuba,28
+Veh√≠culos,Costa Rica,58
+Veh√≠culos,Rep√∫blica Dominicana,51
+Veh√≠culos,Guatemala,45
+Veh√≠culos,Honduras,41
+Veh√≠culos,El Salvador,46
+Veh√≠culos,Nicaragua,36
+Veh√≠culos,Panam√°,66
+Veh√≠culos,Estados Unidos,89
+Veh√≠culos,Canad√°,80
+Veh√≠culos,Pa√≠ses Bajos,83
+Veh√≠culos,Alemania,81
+Veh√≠culos,Espa√±a,73
+Veh√≠culos,Italia,71
+Veh√≠culos,Francia,75
+Veh√≠culos,B√©lgica,74
+Veh√≠culos,Reino Unido,77
+Veh√≠culos,Suiza,79
+Veh√≠culos,Portugal,70
+Veh√≠culos,Polonia,56
+Veh√≠culos,China,79
+Veh√≠culos,Jap√≥n,78
+Veh√≠culos,Corea del Sur,80
+Veh√≠culos,India,68
+Veh√≠culos,Singapur,82
+Veh√≠culos,Hong Kong,80
+Veh√≠culos,Emiratos √Årabes Unidos,71
+Veh√≠culos,Sud√°frica,57
+Veh√≠culos,Nigeria,31
+Veh√≠culos,Egipto,39
+Veh√≠culos,Argelia,35
+Veh√≠culos,Australia,76
+Veh√≠culos,Nueva Zelanda,75
 Arroz,Argentina,59
 Arroz,Brasil,66
-Arroz,MÈxico,79
+Arroz,M√©xico,79
 Arroz,Chile,71
-Arroz,Per˙,57
+Arroz,Per√∫,57
 Arroz,Colombia,61
 Arroz,Ecuador,52
 Arroz,Venezuela,25
@@ -226,32 +226,32 @@ Arroz,Bolivia,40
 Arroz,Paraguay,55
 Arroz,Cuba,29
 Arroz,Costa Rica,59
-Arroz,Rep˙blica Dominicana,52
+Arroz,Rep√∫blica Dominicana,52
 Arroz,Guatemala,46
 Arroz,Honduras,42
 Arroz,El Salvador,47
 Arroz,Nicaragua,37
-Arroz,Panam·,67
+Arroz,Panam√°,67
 Arroz,Estados Unidos,90
-Arroz,Canad·,81
-Arroz,PaÌses Bajos,84
+Arroz,Canad√°,81
+Arroz,Pa√≠ses Bajos,84
 Arroz,Alemania,82
-Arroz,EspaÒa,74
+Arroz,Espa√±a,74
 Arroz,Italia,72
 Arroz,Francia,76
-Arroz,BÈlgica,75
+Arroz,B√©lgica,75
 Arroz,Reino Unido,78
 Arroz,Suiza,80
 Arroz,Portugal,71
 Arroz,Polonia,57
 Arroz,China,80
-Arroz,JapÛn,79
+Arroz,Jap√≥n,79
 Arroz,Corea del Sur,81
 Arroz,India,69
 Arroz,Singapur,83
 Arroz,Hong Kong,81
-Arroz,Emiratos ¡rabes Unidos,72
-Arroz,Sud·frica,58
+Arroz,Emiratos √Årabes Unidos,72
+Arroz,Sud√°frica,58
 Arroz,Nigeria,32
 Arroz,Egipto,40
 Arroz,Argelia,36
@@ -259,9 +259,9 @@ Arroz,Australia,77
 Arroz,Nueva Zelanda,76
 Productos de Madera,Argentina,58
 Productos de Madera,Brasil,64
-Productos de Madera,MÈxico,77
+Productos de Madera,M√©xico,77
 Productos de Madera,Chile,69
-Productos de Madera,Per˙,55
+Productos de Madera,Per√∫,55
 Productos de Madera,Colombia,59
 Productos de Madera,Ecuador,50
 Productos de Madera,Venezuela,23
@@ -269,32 +269,32 @@ Productos de Madera,Bolivia,38
 Productos de Madera,Paraguay,53
 Productos de Madera,Cuba,27
 Productos de Madera,Costa Rica,57
-Productos de Madera,Rep˙blica Dominicana,50
+Productos de Madera,Rep√∫blica Dominicana,50
 Productos de Madera,Guatemala,44
 Productos de Madera,Honduras,40
 Productos de Madera,El Salvador,45
 Productos de Madera,Nicaragua,35
-Productos de Madera,Panam·,65
+Productos de Madera,Panam√°,65
 Productos de Madera,Estados Unidos,88
-Productos de Madera,Canad·,79
-Productos de Madera,PaÌses Bajos,82
+Productos de Madera,Canad√°,79
+Productos de Madera,Pa√≠ses Bajos,82
 Productos de Madera,Alemania,80
-Productos de Madera,EspaÒa,72
+Productos de Madera,Espa√±a,72
 Productos de Madera,Italia,70
 Productos de Madera,Francia,74
-Productos de Madera,BÈlgica,73
+Productos de Madera,B√©lgica,73
 Productos de Madera,Reino Unido,76
 Productos de Madera,Suiza,78
 Productos de Madera,Portugal,69
 Productos de Madera,Polonia,55
 Productos de Madera,China,78
-Productos de Madera,JapÛn,77
+Productos de Madera,Jap√≥n,77
 Productos de Madera,Corea del Sur,79
 Productos de Madera,India,67
 Productos de Madera,Singapur,81
 Productos de Madera,Hong Kong,79
-Productos de Madera,Emiratos ¡rabes Unidos,70
-Productos de Madera,Sud·frica,56
+Productos de Madera,Emiratos √Årabes Unidos,70
+Productos de Madera,Sud√°frica,56
 Productos de Madera,Nigeria,30
 Productos de Madera,Egipto,38
 Productos de Madera,Argelia,34
@@ -302,9 +302,9 @@ Productos de Madera,Australia,75
 Productos de Madera,Nueva Zelanda,74
 Concentrados para bebidas,Argentina,57
 Concentrados para bebidas,Brasil,65
-Concentrados para bebidas,MÈxico,78
+Concentrados para bebidas,M√©xico,78
 Concentrados para bebidas,Chile,70
-Concentrados para bebidas,Per˙,56
+Concentrados para bebidas,Per√∫,56
 Concentrados para bebidas,Colombia,60
 Concentrados para bebidas,Ecuador,51
 Concentrados para bebidas,Venezuela,24
@@ -312,32 +312,32 @@ Concentrados para bebidas,Bolivia,39
 Concentrados para bebidas,Paraguay,54
 Concentrados para bebidas,Cuba,28
 Concentrados para bebidas,Costa Rica,58
-Concentrados para bebidas,Rep˙blica Dominicana,51
+Concentrados para bebidas,Rep√∫blica Dominicana,51
 Concentrados para bebidas,Guatemala,45
 Concentrados para bebidas,Honduras,41
 Concentrados para bebidas,El Salvador,46
 Concentrados para bebidas,Nicaragua,36
-Concentrados para bebidas,Panam·,66
+Concentrados para bebidas,Panam√°,66
 Concentrados para bebidas,Estados Unidos,89
-Concentrados para bebidas,Canad·,80
-Concentrados para bebidas,PaÌses Bajos,83
+Concentrados para bebidas,Canad√°,80
+Concentrados para bebidas,Pa√≠ses Bajos,83
 Concentrados para bebidas,Alemania,81
-Concentrados para bebidas,EspaÒa,73
+Concentrados para bebidas,Espa√±a,73
 Concentrados para bebidas,Italia,71
 Concentrados para bebidas,Francia,75
-Concentrados para bebidas,BÈlgica,74
+Concentrados para bebidas,B√©lgica,74
 Concentrados para bebidas,Reino Unido,77
 Concentrados para bebidas,Suiza,79
 Concentrados para bebidas,Portugal,70
 Concentrados para bebidas,Polonia,56
 Concentrados para bebidas,China,79
-Concentrados para bebidas,JapÛn,78
+Concentrados para bebidas,Jap√≥n,78
 Concentrados para bebidas,Corea del Sur,80
 Concentrados para bebidas,India,68
 Concentrados para bebidas,Singapur,82
 Concentrados para bebidas,Hong Kong,80
-Concentrados para bebidas,Emiratos ¡rabes Unidos,71
-Concentrados para bebidas,Sud·frica,57
+Concentrados para bebidas,Emiratos √Årabes Unidos,71
+Concentrados para bebidas,Sud√°frica,57
 Concentrados para bebidas,Nigeria,31
 Concentrados para bebidas,Egipto,39
 Concentrados para bebidas,Argelia,35
@@ -345,9 +345,9 @@ Concentrados para bebidas,Australia,76
 Concentrados para bebidas,Nueva Zelanda,75
 Cereales,Argentina,59
 Cereales,Brasil,66
-Cereales,MÈxico,79
+Cereales,M√©xico,79
 Cereales,Chile,71
-Cereales,Per˙,57
+Cereales,Per√∫,57
 Cereales,Colombia,61
 Cereales,Ecuador,52
 Cereales,Venezuela,25
@@ -355,32 +355,32 @@ Cereales,Bolivia,40
 Cereales,Paraguay,55
 Cereales,Cuba,29
 Cereales,Costa Rica,59
-Cereales,Rep˙blica Dominicana,52
+Cereales,Rep√∫blica Dominicana,52
 Cereales,Guatemala,46
 Cereales,Honduras,42
 Cereales,El Salvador,47
 Cereales,Nicaragua,37
-Cereales,Panam·,67
+Cereales,Panam√°,67
 Cereales,Estados Unidos,90
-Cereales,Canad·,81
-Cereales,PaÌses Bajos,84
+Cereales,Canad√°,81
+Cereales,Pa√≠ses Bajos,84
 Cereales,Alemania,82
-Cereales,EspaÒa,74
+Cereales,Espa√±a,74
 Cereales,Italia,72
 Cereales,Francia,76
-Cereales,BÈlgica,75
+Cereales,B√©lgica,75
 Cereales,Reino Unido,78
 Cereales,Suiza,80
 Cereales,Portugal,71
 Cereales,Polonia,57
 Cereales,China,80
-Cereales,JapÛn,79
+Cereales,Jap√≥n,79
 Cereales,Corea del Sur,81
 Cereales,India,69
 Cereales,Singapur,83
 Cereales,Hong Kong,81
-Cereales,Emiratos ¡rabes Unidos,72
-Cereales,Sud·frica,58
+Cereales,Emiratos √Årabes Unidos,72
+Cereales,Sud√°frica,58
 Cereales,Nigeria,32
 Cereales,Egipto,40
 Cereales,Argelia,36
@@ -388,9 +388,9 @@ Cereales,Australia,77
 Cereales,Nueva Zelanda,76
 Pescados y productos de la pesca,Argentina,58
 Pescados y productos de la pesca,Brasil,64
-Pescados y productos de la pesca,MÈxico,77
+Pescados y productos de la pesca,M√©xico,77
 Pescados y productos de la pesca,Chile,69
-Pescados y productos de la pesca,Per˙,55
+Pescados y productos de la pesca,Per√∫,55
 Pescados y productos de la pesca,Colombia,59
 Pescados y productos de la pesca,Ecuador,50
 Pescados y productos de la pesca,Venezuela,23
@@ -398,32 +398,32 @@ Pescados y productos de la pesca,Bolivia,38
 Pescados y productos de la pesca,Paraguay,53
 Pescados y productos de la pesca,Cuba,27
 Pescados y productos de la pesca,Costa Rica,57
-Pescados y productos de la pesca,Rep˙blica Dominicana,50
+Pescados y productos de la pesca,Rep√∫blica Dominicana,50
 Pescados y productos de la pesca,Guatemala,44
 Pescados y productos de la pesca,Honduras,40
 Pescados y productos de la pesca,El Salvador,45
 Pescados y productos de la pesca,Nicaragua,35
-Pescados y productos de la pesca,Panam·,65
+Pescados y productos de la pesca,Panam√°,65
 Pescados y productos de la pesca,Estados Unidos,88
-Pescados y productos de la pesca,Canad·,79
-Pescados y productos de la pesca,PaÌses Bajos,82
+Pescados y productos de la pesca,Canad√°,79
+Pescados y productos de la pesca,Pa√≠ses Bajos,82
 Pescados y productos de la pesca,Alemania,80
-Pescados y productos de la pesca,EspaÒa,72
+Pescados y productos de la pesca,Espa√±a,72
 Pescados y productos de la pesca,Italia,70
 Pescados y productos de la pesca,Francia,74
-Pescados y productos de la pesca,BÈlgica,73
+Pescados y productos de la pesca,B√©lgica,73
 Pescados y productos de la pesca,Reino Unido,76
 Pescados y productos de la pesca,Suiza,78
 Pescados y productos de la pesca,Portugal,69
 Pescados y productos de la pesca,Polonia,55
 Pescados y productos de la pesca,China,78
-Pescados y productos de la pesca,JapÛn,77
+Pescados y productos de la pesca,Jap√≥n,77
 Pescados y productos de la pesca,Corea del Sur,79
 Pescados y productos de la pesca,India,67
 Pescados y productos de la pesca,Singapur,81
 Pescados y productos de la pesca,Hong Kong,79
-Pescados y productos de la pesca,Emiratos ¡rabes Unidos,70
-Pescados y productos de la pesca,Sud·frica,56
+Pescados y productos de la pesca,Emiratos √Årabes Unidos,70
+Pescados y productos de la pesca,Sud√°frica,56
 Pescados y productos de la pesca,Nigeria,30
 Pescados y productos de la pesca,Egipto,38
 Pescados y productos de la pesca,Argelia,34
@@ -431,9 +431,9 @@ Pescados y productos de la pesca,Australia,75
 Pescados y productos de la pesca,Nueva Zelanda,74
 Pieles y Cueros,Argentina,57
 Pieles y Cueros,Brasil,65
-Pieles y Cueros,MÈxico,78
+Pieles y Cueros,M√©xico,78
 Pieles y Cueros,Chile,70
-Pieles y Cueros,Per˙,56
+Pieles y Cueros,Per√∫,56
 Pieles y Cueros,Colombia,60
 Pieles y Cueros,Ecuador,51
 Pieles y Cueros,Venezuela,24
@@ -441,32 +441,32 @@ Pieles y Cueros,Bolivia,39
 Pieles y Cueros,Paraguay,54
 Pieles y Cueros,Cuba,28
 Pieles y Cueros,Costa Rica,58
-Pieles y Cueros,Rep˙blica Dominicana,51
+Pieles y Cueros,Rep√∫blica Dominicana,51
 Pieles y Cueros,Guatemala,45
 Pieles y Cueros,Honduras,41
 Pieles y Cueros,El Salvador,46
 Pieles y Cueros,Nicaragua,36
-Pieles y Cueros,Panam·,66
+Pieles y Cueros,Panam√°,66
 Pieles y Cueros,Estados Unidos,89
-Pieles y Cueros,Canad·,80
-Pieles y Cueros,PaÌses Bajos,83
+Pieles y Cueros,Canad√°,80
+Pieles y Cueros,Pa√≠ses Bajos,83
 Pieles y Cueros,Alemania,81
-Pieles y Cueros,EspaÒa,73
+Pieles y Cueros,Espa√±a,73
 Pieles y Cueros,Italia,71
 Pieles y Cueros,Francia,75
-Pieles y Cueros,BÈlgica,74
+Pieles y Cueros,B√©lgica,74
 Pieles y Cueros,Reino Unido,77
 Pieles y Cueros,Suiza,79
 Pieles y Cueros,Portugal,70
 Pieles y Cueros,Polonia,56
 Pieles y Cueros,China,79
-Pieles y Cueros,JapÛn,78
+Pieles y Cueros,Jap√≥n,78
 Pieles y Cueros,Corea del Sur,80
 Pieles y Cueros,India,68
 Pieles y Cueros,Singapur,82
 Pieles y Cueros,Hong Kong,80
-Pieles y Cueros,Emiratos ¡rabes Unidos,71
-Pieles y Cueros,Sud·frica,57
+Pieles y Cueros,Emiratos √Årabes Unidos,71
+Pieles y Cueros,Sud√°frica,57
 Pieles y Cueros,Nigeria,31
 Pieles y Cueros,Egipto,39
 Pieles y Cueros,Argelia,35
@@ -474,9 +474,9 @@ Pieles y Cueros,Australia,76
 Pieles y Cueros,Nueva Zelanda,75
 Lana y productos de lana,Argentina,59
 Lana y productos de lana,Brasil,66
-Lana y productos de lana,MÈxico,79
+Lana y productos de lana,M√©xico,79
 Lana y productos de lana,Chile,71
-Lana y productos de lana,Per˙,57
+Lana y productos de lana,Per√∫,57
 Lana y productos de lana,Colombia,61
 Lana y productos de lana,Ecuador,52
 Lana y productos de lana,Venezuela,25
@@ -484,32 +484,32 @@ Lana y productos de lana,Bolivia,40
 Lana y productos de lana,Paraguay,55
 Lana y productos de lana,Cuba,29
 Lana y productos de lana,Costa Rica,59
-Lana y productos de lana,Rep˙blica Dominicana,52
+Lana y productos de lana,Rep√∫blica Dominicana,52
 Lana y productos de lana,Guatemala,46
 Lana y productos de lana,Honduras,42
 Lana y productos de lana,El Salvador,47
 Lana y productos de lana,Nicaragua,37
-Lana y productos de lana,Panam·,67
+Lana y productos de lana,Panam√°,67
 Lana y productos de lana,Estados Unidos,90
-Lana y productos de lana,Canad·,81
-Lana y productos de lana,PaÌses Bajos,84
+Lana y productos de lana,Canad√°,81
+Lana y productos de lana,Pa√≠ses Bajos,84
 Lana y productos de lana,Alemania,82
-Lana y productos de lana,EspaÒa,74
+Lana y productos de lana,Espa√±a,74
 Lana y productos de lana,Italia,72
 Lana y productos de lana,Francia,76
-Lana y productos de lana,BÈlgica,75
+Lana y productos de lana,B√©lgica,75
 Lana y productos de lana,Reino Unido,78
 Lana y productos de lana,Suiza,80
 Lana y productos de lana,Portugal,71
 Lana y productos de lana,Polonia,57
 Lana y productos de lana,China,80
-Lana y productos de lana,JapÛn,79
+Lana y productos de lana,Jap√≥n,79
 Lana y productos de lana,Corea del Sur,81
 Lana y productos de lana,India,69
 Lana y productos de lana,Singapur,83
 Lana y productos de lana,Hong Kong,81
-Lana y productos de lana,Emiratos ¡rabes Unidos,72
-Lana y productos de lana,Sud·frica,58
+Lana y productos de lana,Emiratos √Årabes Unidos,72
+Lana y productos de lana,Sud√°frica,58
 Lana y productos de lana,Nigeria,32
 Lana y productos de lana,Egipto,40
 Lana y productos de lana,Argelia,36
@@ -517,9 +517,9 @@ Lana y productos de lana,Australia,77
 Lana y productos de lana,Nueva Zelanda,76
 Malta,Argentina,58
 Malta,Brasil,64
-Malta,MÈxico,77
+Malta,M√©xico,77
 Malta,Chile,69
-Malta,Per˙,55
+Malta,Per√∫,55
 Malta,Colombia,59
 Malta,Ecuador,50
 Malta,Venezuela,23
@@ -527,128 +527,128 @@ Malta,Bolivia,38
 Malta,Paraguay,53
 Malta,Cuba,27
 Malta,Costa Rica,57
-Malta,Rep˙blica Dominicana,50
+Malta,Rep√∫blica Dominicana,50
 Malta,Guatemala,44
 Malta,Honduras,40
 Malta,El Salvador,45
 Malta,Nicaragua,35
-Malta,Panam·,65
+Malta,Panam√°,65
 Malta,Estados Unidos,88
-Malta,Canad·,79
-Malta,PaÌses Bajos,82
+Malta,Canad√°,79
+Malta,Pa√≠ses Bajos,82
 Malta,Alemania,80
-Malta,EspaÒa,72
+Malta,Espa√±a,72
 Malta,Italia,70
 Malta,Francia,74
-Malta,BÈlgica,73
+Malta,B√©lgica,73
 Malta,Reino Unido,76
 Malta,Suiza,78
 Malta,Portugal,69
 Malta,Polonia,55
 Malta,China,78
-Malta,JapÛn,77
+Malta,Jap√≥n,77
 Malta,Corea del Sur,79
 Malta,India,67
 Malta,Singapur,81
 Malta,Hong Kong,79
-Malta,Emiratos ¡rabes Unidos,70
-Malta,Sud·frica,56
+Malta,Emiratos √Årabes Unidos,70
+Malta,Sud√°frica,56
 Malta,Nigeria,30
 Malta,Egipto,38
 Malta,Argelia,34
 Malta,Australia,75
 Malta,Nueva Zelanda,74
-CÌtricos,Argentina,57
-CÌtricos,Brasil,65
-CÌtricos,MÈxico,78
-CÌtricos,Chile,70
-CÌtricos,Per˙,56
-CÌtricos,Colombia,60
-CÌtricos,Ecuador,51
-CÌtricos,Venezuela,24
-CÌtricos,Bolivia,39
-CÌtricos,Paraguay,54
-CÌtricos,Cuba,28
-CÌtricos,Costa Rica,58
-CÌtricos,Rep˙blica Dominicana,51
-CÌtricos,Guatemala,45
-CÌtricos,Honduras,41
-CÌtricos,El Salvador,46
-CÌtricos,Nicaragua,36
-CÌtricos,Panam·,66
-CÌtricos,Estados Unidos,89
-CÌtricos,Canad·,80
-CÌtricos,PaÌses Bajos,83
-CÌtricos,Alemania,81
-CÌtricos,EspaÒa,73
-CÌtricos,Italia,71
-CÌtricos,Francia,75
-CÌtricos,BÈlgica,74
-CÌtricos,Reino Unido,77
-CÌtricos,Suiza,79
-CÌtricos,Portugal,70
-CÌtricos,Polonia,56
-CÌtricos,China,79
-CÌtricos,JapÛn,78
-CÌtricos,Corea del Sur,80
-CÌtricos,India,68
-CÌtricos,Singapur,82
-CÌtricos,Hong Kong,80
-CÌtricos,Emiratos ¡rabes Unidos,71
-CÌtricos,Sud·frica,57
-CÌtricos,Nigeria,31
-CÌtricos,Egipto,39
-CÌtricos,Argelia,35
-CÌtricos,Australia,76
-CÌtricos,Nueva Zelanda,75
-Pl·sticos y manufacturas,Argentina,59
-Pl·sticos y manufacturas,Brasil,66
-Pl·sticos y manufacturas,MÈxico,79
-Pl·sticos y manufacturas,Chile,71
-Pl·sticos y manufacturas,Per˙,57
-Pl·sticos y manufacturas,Colombia,61
-Pl·sticos y manufacturas,Ecuador,52
-Pl·sticos y manufacturas,Venezuela,25
-Pl·sticos y manufacturas,Bolivia,40
-Pl·sticos y manufacturas,Paraguay,55
-Pl·sticos y manufacturas,Cuba,29
-Pl·sticos y manufacturas,Costa Rica,59
-Pl·sticos y manufacturas,Rep˙blica Dominicana,52
-Pl·sticos y manufacturas,Guatemala,46
-Pl·sticos y manufacturas,Honduras,42
-Pl·sticos y manufacturas,El Salvador,47
-Pl·sticos y manufacturas,Nicaragua,37
-Pl·sticos y manufacturas,Panam·,67
-Pl·sticos y manufacturas,Estados Unidos,90
-Pl·sticos y manufacturas,Canad·,81
-Pl·sticos y manufacturas,PaÌses Bajos,84
-Pl·sticos y manufacturas,Alemania,82
-Pl·sticos y manufacturas,EspaÒa,74
-Pl·sticos y manufacturas,Italia,72
-Pl·sticos y manufacturas,Francia,76
-Pl·sticos y manufacturas,BÈlgica,75
-Pl·sticos y manufacturas,Reino Unido,78
-Pl·sticos y manufacturas,Suiza,80
-Pl·sticos y manufacturas,Portugal,71
-Pl·sticos y manufacturas,Polonia,57
-Pl·sticos y manufacturas,China,80
-Pl·sticos y manufacturas,JapÛn,79
-Pl·sticos y manufacturas,Corea del Sur,81
-Pl·sticos y manufacturas,India,69
-Pl·sticos y manufacturas,Singapur,83
-Pl·sticos y manufacturas,Hong Kong,81
-Pl·sticos y manufacturas,Emiratos ¡rabes Unidos,72
-Pl·sticos y manufacturas,Sud·frica,58
-Pl·sticos y manufacturas,Nigeria,32
-Pl·sticos y manufacturas,Egipto,40
-Pl·sticos y manufacturas,Argelia,36
-Pl·sticos y manufacturas,Australia,77
-Pl·sticos y manufacturas,Nueva Zelanda,76
+C√≠tricos,Argentina,57
+C√≠tricos,Brasil,65
+C√≠tricos,M√©xico,78
+C√≠tricos,Chile,70
+C√≠tricos,Per√∫,56
+C√≠tricos,Colombia,60
+C√≠tricos,Ecuador,51
+C√≠tricos,Venezuela,24
+C√≠tricos,Bolivia,39
+C√≠tricos,Paraguay,54
+C√≠tricos,Cuba,28
+C√≠tricos,Costa Rica,58
+C√≠tricos,Rep√∫blica Dominicana,51
+C√≠tricos,Guatemala,45
+C√≠tricos,Honduras,41
+C√≠tricos,El Salvador,46
+C√≠tricos,Nicaragua,36
+C√≠tricos,Panam√°,66
+C√≠tricos,Estados Unidos,89
+C√≠tricos,Canad√°,80
+C√≠tricos,Pa√≠ses Bajos,83
+C√≠tricos,Alemania,81
+C√≠tricos,Espa√±a,73
+C√≠tricos,Italia,71
+C√≠tricos,Francia,75
+C√≠tricos,B√©lgica,74
+C√≠tricos,Reino Unido,77
+C√≠tricos,Suiza,79
+C√≠tricos,Portugal,70
+C√≠tricos,Polonia,56
+C√≠tricos,China,79
+C√≠tricos,Jap√≥n,78
+C√≠tricos,Corea del Sur,80
+C√≠tricos,India,68
+C√≠tricos,Singapur,82
+C√≠tricos,Hong Kong,80
+C√≠tricos,Emiratos √Årabes Unidos,71
+C√≠tricos,Sud√°frica,57
+C√≠tricos,Nigeria,31
+C√≠tricos,Egipto,39
+C√≠tricos,Argelia,35
+C√≠tricos,Australia,76
+C√≠tricos,Nueva Zelanda,75
+Pl√°sticos y manufacturas,Argentina,59
+Pl√°sticos y manufacturas,Brasil,66
+Pl√°sticos y manufacturas,M√©xico,79
+Pl√°sticos y manufacturas,Chile,71
+Pl√°sticos y manufacturas,Per√∫,57
+Pl√°sticos y manufacturas,Colombia,61
+Pl√°sticos y manufacturas,Ecuador,52
+Pl√°sticos y manufacturas,Venezuela,25
+Pl√°sticos y manufacturas,Bolivia,40
+Pl√°sticos y manufacturas,Paraguay,55
+Pl√°sticos y manufacturas,Cuba,29
+Pl√°sticos y manufacturas,Costa Rica,59
+Pl√°sticos y manufacturas,Rep√∫blica Dominicana,52
+Pl√°sticos y manufacturas,Guatemala,46
+Pl√°sticos y manufacturas,Honduras,42
+Pl√°sticos y manufacturas,El Salvador,47
+Pl√°sticos y manufacturas,Nicaragua,37
+Pl√°sticos y manufacturas,Panam√°,67
+Pl√°sticos y manufacturas,Estados Unidos,90
+Pl√°sticos y manufacturas,Canad√°,81
+Pl√°sticos y manufacturas,Pa√≠ses Bajos,84
+Pl√°sticos y manufacturas,Alemania,82
+Pl√°sticos y manufacturas,Espa√±a,74
+Pl√°sticos y manufacturas,Italia,72
+Pl√°sticos y manufacturas,Francia,76
+Pl√°sticos y manufacturas,B√©lgica,75
+Pl√°sticos y manufacturas,Reino Unido,78
+Pl√°sticos y manufacturas,Suiza,80
+Pl√°sticos y manufacturas,Portugal,71
+Pl√°sticos y manufacturas,Polonia,57
+Pl√°sticos y manufacturas,China,80
+Pl√°sticos y manufacturas,Jap√≥n,79
+Pl√°sticos y manufacturas,Corea del Sur,81
+Pl√°sticos y manufacturas,India,69
+Pl√°sticos y manufacturas,Singapur,83
+Pl√°sticos y manufacturas,Hong Kong,81
+Pl√°sticos y manufacturas,Emiratos √Årabes Unidos,72
+Pl√°sticos y manufacturas,Sud√°frica,58
+Pl√°sticos y manufacturas,Nigeria,32
+Pl√°sticos y manufacturas,Egipto,40
+Pl√°sticos y manufacturas,Argelia,36
+Pl√°sticos y manufacturas,Australia,77
+Pl√°sticos y manufacturas,Nueva Zelanda,76
 Semillas y frutos oleaginosos,Argentina,58
 Semillas y frutos oleaginosos,Brasil,64
-Semillas y frutos oleaginosos,MÈxico,77
+Semillas y frutos oleaginosos,M√©xico,77
 Semillas y frutos oleaginosos,Chile,69
-Semillas y frutos oleaginosos,Per˙,55
+Semillas y frutos oleaginosos,Per√∫,55
 Semillas y frutos oleaginosos,Colombia,59
 Semillas y frutos oleaginosos,Ecuador,50
 Semillas y frutos oleaginosos,Venezuela,23
@@ -656,21 +656,20 @@ Semillas y frutos oleaginosos,Bolivia,38
 Semillas y frutos oleaginosos,Paraguay,53
 Semillas y frutos oleaginosos,Cuba,27
 Semillas y frutos oleaginosos,Costa Rica,57
-Semillas y frutos oleaginosos,Rep˙blica Dominicana,50
+Semillas y frutos oleaginosos,Rep√∫blica Dominicana,50
 Semillas y frutos oleaginosos,Guatemala,44
 Semillas y frutos oleaginosos,Honduras,40
 Semillas y frutos oleaginosos,El Salvador,45
 Semillas y frutos oleaginosos,Nicaragua,35
-Semillas y frutos ole
 Semillas y frutos oleaginosos,Chile,78
 Semillas y frutos oleaginosos,Bolivia,60
-Semillas y frutos oleaginosos,Per˙,70
+Semillas y frutos oleaginosos,Per√∫,70
 Semillas y frutos oleaginosos,Colombia,70
 Semillas y frutos oleaginosos,Ecuador,65
-Semillas y frutos oleaginosos,MÈxico,73
-Semillas y frutos oleaginosos,Panam·,71
+Semillas y frutos oleaginosos,M√©xico,73
+Semillas y frutos oleaginosos,Panam√°,71
 Semillas y frutos oleaginosos,Costa Rica,72
-Semillas y frutos oleaginosos,Rep˙blica Dominicana,65
+Semillas y frutos oleaginosos,Rep√∫blica Dominicana,65
 Semillas y frutos oleaginosos,Guatemala,60
 Semillas y frutos oleaginosos,El Salvador,61
 Semillas y frutos oleaginosos,Honduras,58
@@ -678,7 +677,7 @@ Semillas y frutos oleaginosos,Nicaragua,54
 Semillas y frutos oleaginosos,Venezuela,30
 Semillas y frutos oleaginosos,Uruguay,71
 Semillas y frutos oleaginosos,Cuba,47
-Semillas y frutos oleaginosos,HaitÌ,32
+Semillas y frutos oleaginosos,Hait√≠,32
 Semillas y frutos oleaginosos,Puerto Rico,76
 Semillas y frutos oleaginosos,Belice,60
 Semillas y frutos oleaginosos,Jamaica,64
@@ -686,35 +685,35 @@ Semillas y frutos oleaginosos,Trinidad y Tobago,66
 Semillas y frutos oleaginosos,Barbados,69
 Semillas y frutos oleaginosos,Guyana,58
 Semillas y frutos oleaginosos,Surinam,55
-Semillas y frutos oleaginosos,Canad·,82
+Semillas y frutos oleaginosos,Canad√°,82
 Semillas y frutos oleaginosos,Estados Unidos,85
 Semillas y frutos oleaginosos,Alemania,81
 Semillas y frutos oleaginosos,Francia,78
 Semillas y frutos oleaginosos,Italia,75
-Semillas y frutos oleaginosos,EspaÒa,79
+Semillas y frutos oleaginosos,Espa√±a,79
 Semillas y frutos oleaginosos,Portugal,77
-Semillas y frutos oleaginosos,PaÌses Bajos,83
+Semillas y frutos oleaginosos,Pa√≠ses Bajos,83
 Semillas y frutos oleaginosos,Reino Unido,79
 Semillas y frutos oleaginosos,Rusia,58
 Semillas y frutos oleaginosos,India,78
 Semillas y frutos oleaginosos,China,82
-Semillas y frutos oleaginosos,JapÛn,82
+Semillas y frutos oleaginosos,Jap√≥n,82
 Semillas y frutos oleaginosos,Corea del Sur,83
 Semillas y frutos oleaginosos,Vietnam,74
 Semillas y frutos oleaginosos,Taiwan,82
-Semillas y frutos oleaginosos,Sud·frica,68
+Semillas y frutos oleaginosos,Sud√°frica,68
 Preparaciones de carne/pescado,Argentina,72
 Preparaciones de carne/pescado,Brasil,71
 Preparaciones de carne/pescado,Paraguay,66
 Preparaciones de carne/pescado,Chile,78
 Preparaciones de carne/pescado,Bolivia,61
-Preparaciones de carne/pescado,Per˙,70
+Preparaciones de carne/pescado,Per√∫,70
 Preparaciones de carne/pescado,Colombia,70
 Preparaciones de carne/pescado,Ecuador,65
-Preparaciones de carne/pescado,MÈxico,74
-Preparaciones de carne/pescado,Panam·,72
+Preparaciones de carne/pescado,M√©xico,74
+Preparaciones de carne/pescado,Panam√°,72
 Preparaciones de carne/pescado,Costa Rica,72
-Preparaciones de carne/pescado,Rep˙blica Dominicana,65
+Preparaciones de carne/pescado,Rep√∫blica Dominicana,65
 Preparaciones de carne/pescado,Guatemala,60
 Preparaciones de carne/pescado,El Salvador,61
 Preparaciones de carne/pescado,Honduras,58
@@ -722,7 +721,7 @@ Preparaciones de carne/pescado,Nicaragua,53
 Preparaciones de carne/pescado,Venezuela,30
 Preparaciones de carne/pescado,Uruguay,70
 Preparaciones de carne/pescado,Cuba,47
-Preparaciones de carne/pescado,HaitÌ,31
+Preparaciones de carne/pescado,Hait√≠,31
 Preparaciones de carne/pescado,Puerto Rico,76
 Preparaciones de carne/pescado,Belice,60
 Preparaciones de carne/pescado,Jamaica,64
@@ -730,35 +729,35 @@ Preparaciones de carne/pescado,Trinidad y Tobago,66
 Preparaciones de carne/pescado,Barbados,69
 Preparaciones de carne/pescado,Guyana,58
 Preparaciones de carne/pescado,Surinam,55
-Preparaciones de carne/pescado,Canad·,83
+Preparaciones de carne/pescado,Canad√°,83
 Preparaciones de carne/pescado,Estados Unidos,85
 Preparaciones de carne/pescado,Alemania,81
 Preparaciones de carne/pescado,Francia,78
 Preparaciones de carne/pescado,Italia,75
-Preparaciones de carne/pescado,EspaÒa,79
+Preparaciones de carne/pescado,Espa√±a,79
 Preparaciones de carne/pescado,Portugal,77
-Preparaciones de carne/pescado,PaÌses Bajos,83
+Preparaciones de carne/pescado,Pa√≠ses Bajos,83
 Preparaciones de carne/pescado,Reino Unido,79
 Preparaciones de carne/pescado,Rusia,58
 Preparaciones de carne/pescado,India,78
 Preparaciones de carne/pescado,China,82
-Preparaciones de carne/pescado,JapÛn,83
+Preparaciones de carne/pescado,Jap√≥n,83
 Preparaciones de carne/pescado,Corea del Sur,84
 Preparaciones de carne/pescado,Vietnam,74
 Preparaciones de carne/pescado,Taiwan,82
-Preparaciones de carne/pescado,Sud·frica,68
+Preparaciones de carne/pescado,Sud√°frica,68
 Bebidas,Argentina,73
 Bebidas,Brasil,70
 Bebidas,Paraguay,66
 Bebidas,Chile,78
 Bebidas,Bolivia,61
-Bebidas,Per˙,71
+Bebidas,Per√∫,71
 Bebidas,Colombia,70
 Bebidas,Ecuador,65
-Bebidas,MÈxico,74
-Bebidas,Panam·,72
+Bebidas,M√©xico,74
+Bebidas,Panam√°,72
 Bebidas,Costa Rica,72
-Bebidas,Rep˙blica Dominicana,63
+Bebidas,Rep√∫blica Dominicana,63
 Bebidas,Guatemala,58
 Bebidas,El Salvador,61
 Bebidas,Honduras,57
@@ -766,7 +765,7 @@ Bebidas,Nicaragua,52
 Bebidas,Venezuela,29
 Bebidas,Uruguay,70
 Bebidas,Cuba,46
-Bebidas,HaitÌ,31
+Bebidas,Hait√≠,31
 Bebidas,Puerto Rico,76
 Bebidas,Belice,59
 Bebidas,Jamaica,64
@@ -774,123 +773,123 @@ Bebidas,Trinidad y Tobago,65
 Bebidas,Barbados,68
 Bebidas,Guyana,57
 Bebidas,Surinam,54
-Bebidas,Canad·,82
+Bebidas,Canad√°,82
 Bebidas,Estados Unidos,85
 Bebidas,Alemania,80
 Bebidas,Francia,77
 Bebidas,Italia,74
-Bebidas,EspaÒa,78
+Bebidas,Espa√±a,78
 Bebidas,Portugal,76
-Bebidas,PaÌses Bajos,82
+Bebidas,Pa√≠ses Bajos,82
 Bebidas,Reino Unido,78
 Bebidas,Rusia,57
 Bebidas,India,77
 Bebidas,China,81
-Bebidas,JapÛn,82
+Bebidas,Jap√≥n,82
 Bebidas,Corea del Sur,83
 Bebidas,Vietnam,73
 Bebidas,Taiwan,81
-Bebidas,Sud·frica,67
-Productos de panaderÌa,Argentina,71
-Productos de panaderÌa,Brasil,72
-Productos de panaderÌa,Paraguay,65
-Productos de panaderÌa,Chile,78
-Productos de panaderÌa,Bolivia,60
-Productos de panaderÌa,Per˙,70
-Productos de panaderÌa,Colombia,70
-Productos de panaderÌa,Ecuador,65
-Productos de panaderÌa,MÈxico,73
-Productos de panaderÌa,Panam·,71
-Productos de panaderÌa,Costa Rica,72
-Productos de panaderÌa,Rep˙blica Dominicana,65
-Productos de panaderÌa,Guatemala,60
-Productos de panaderÌa,El Salvador,61
-Productos de panaderÌa,Honduras,58
-Productos de panaderÌa,Nicaragua,54
-Productos de panaderÌa,Venezuela,30
-Productos de panaderÌa,Uruguay,71
-Productos de panaderÌa,Cuba,47
-Productos de panaderÌa,HaitÌ,32
-Productos de panaderÌa,Puerto Rico,76
-Productos de panaderÌa,Belice,60
-Productos de panaderÌa,Jamaica,64
-Productos de panaderÌa,Trinidad y Tobago,66
-Productos de panaderÌa,Barbados,69
-Productos de panaderÌa,Guyana,58
-Productos de panaderÌa,Surinam,55
-Productos de panaderÌa,Canad·,82
-Productos de panaderÌa,Estados Unidos,85
-Productos de panaderÌa,Alemania,81
-Productos de panaderÌa,Francia,78
-Productos de panaderÌa,Italia,75
-Productos de panaderÌa,EspaÒa,79
-Productos de panaderÌa,Portugal,77
-Productos de panaderÌa,PaÌses Bajos,83
-Productos de panaderÌa,Reino Unido,79
-Productos de panaderÌa,Rusia,58
-Productos de panaderÌa,India,78
-Productos de panaderÌa,China,82
-Productos de panaderÌa,JapÛn,82
-Productos de panaderÌa,Corea del Sur,83
-Productos de panaderÌa,Vietnam,74
-Productos de panaderÌa,Taiwan,82
-Productos de panaderÌa,Sud·frica,68
-Az˙car,Argentina,72
-Az˙car,Brasil,71
-Az˙car,Paraguay,66
-Az˙car,Chile,77
-Az˙car,Bolivia,60
-Az˙car,Per˙,70
-Az˙car,Colombia,70
-Az˙car,Ecuador,65
-Az˙car,MÈxico,73
-Az˙car,Panam·,71
-Az˙car,Costa Rica,71
-Az˙car,Rep˙blica Dominicana,64
-Az˙car,Guatemala,59
-Az˙car,El Salvador,61
-Az˙car,Honduras,57
-Az˙car,Nicaragua,53
-Az˙car,Venezuela,29
-Az˙car,Uruguay,70
-Az˙car,Cuba,46
-Az˙car,HaitÌ,31
-Az˙car,Puerto Rico,75
-Az˙car,Belice,60
-Az˙car,Jamaica,63
-Az˙car,Trinidad y Tobago,65
-Az˙car,Barbados,68
-Az˙car,Guyana,57
-Az˙car,Surinam,54
-Az˙car,Canad·,82
-Az˙car,Estados Unidos,84
-Az˙car,Alemania,80
-Az˙car,Francia,77
-Az˙car,Italia,74
-Az˙car,EspaÒa,78
-Az˙car,Portugal,76
-Az˙car,PaÌses Bajos,82
-Az˙car,Reino Unido,78
-Az˙car,Rusia,58
-Az˙car,India,77
-Az˙car,China,81
-Az˙car,JapÛn,82
-Az˙car,Corea del Sur,83
-Az˙car,Vietnam,73
-Az˙car,Taiwan,81
-Az˙car,Sud·frica,67
+Bebidas,Sud√°frica,67
+Productos de panader√≠a,Argentina,71
+Productos de panader√≠a,Brasil,72
+Productos de panader√≠a,Paraguay,65
+Productos de panader√≠a,Chile,78
+Productos de panader√≠a,Bolivia,60
+Productos de panader√≠a,Per√∫,70
+Productos de panader√≠a,Colombia,70
+Productos de panader√≠a,Ecuador,65
+Productos de panader√≠a,M√©xico,73
+Productos de panader√≠a,Panam√°,71
+Productos de panader√≠a,Costa Rica,72
+Productos de panader√≠a,Rep√∫blica Dominicana,65
+Productos de panader√≠a,Guatemala,60
+Productos de panader√≠a,El Salvador,61
+Productos de panader√≠a,Honduras,58
+Productos de panader√≠a,Nicaragua,54
+Productos de panader√≠a,Venezuela,30
+Productos de panader√≠a,Uruguay,71
+Productos de panader√≠a,Cuba,47
+Productos de panader√≠a,Hait√≠,32
+Productos de panader√≠a,Puerto Rico,76
+Productos de panader√≠a,Belice,60
+Productos de panader√≠a,Jamaica,64
+Productos de panader√≠a,Trinidad y Tobago,66
+Productos de panader√≠a,Barbados,69
+Productos de panader√≠a,Guyana,58
+Productos de panader√≠a,Surinam,55
+Productos de panader√≠a,Canad√°,82
+Productos de panader√≠a,Estados Unidos,85
+Productos de panader√≠a,Alemania,81
+Productos de panader√≠a,Francia,78
+Productos de panader√≠a,Italia,75
+Productos de panader√≠a,Espa√±a,79
+Productos de panader√≠a,Portugal,77
+Productos de panader√≠a,Pa√≠ses Bajos,83
+Productos de panader√≠a,Reino Unido,79
+Productos de panader√≠a,Rusia,58
+Productos de panader√≠a,India,78
+Productos de panader√≠a,China,82
+Productos de panader√≠a,Jap√≥n,82
+Productos de panader√≠a,Corea del Sur,83
+Productos de panader√≠a,Vietnam,74
+Productos de panader√≠a,Taiwan,82
+Productos de panader√≠a,Sud√°frica,68
+Az√∫car,Argentina,72
+Az√∫car,Brasil,71
+Az√∫car,Paraguay,66
+Az√∫car,Chile,77
+Az√∫car,Bolivia,60
+Az√∫car,Per√∫,70
+Az√∫car,Colombia,70
+Az√∫car,Ecuador,65
+Az√∫car,M√©xico,73
+Az√∫car,Panam√°,71
+Az√∫car,Costa Rica,71
+Az√∫car,Rep√∫blica Dominicana,64
+Az√∫car,Guatemala,59
+Az√∫car,El Salvador,61
+Az√∫car,Honduras,57
+Az√∫car,Nicaragua,53
+Az√∫car,Venezuela,29
+Az√∫car,Uruguay,70
+Az√∫car,Cuba,46
+Az√∫car,Hait√≠,31
+Az√∫car,Puerto Rico,75
+Az√∫car,Belice,60
+Az√∫car,Jamaica,63
+Az√∫car,Trinidad y Tobago,65
+Az√∫car,Barbados,68
+Az√∫car,Guyana,57
+Az√∫car,Surinam,54
+Az√∫car,Canad√°,82
+Az√∫car,Estados Unidos,84
+Az√∫car,Alemania,80
+Az√∫car,Francia,77
+Az√∫car,Italia,74
+Az√∫car,Espa√±a,78
+Az√∫car,Portugal,76
+Az√∫car,Pa√≠ses Bajos,82
+Az√∫car,Reino Unido,78
+Az√∫car,Rusia,58
+Az√∫car,India,77
+Az√∫car,China,81
+Az√∫car,Jap√≥n,82
+Az√∫car,Corea del Sur,83
+Az√∫car,Vietnam,73
+Az√∫car,Taiwan,81
+Az√∫car,Sud√°frica,67
 Caucho y sus manufacturas,Argentina,73
 Caucho y sus manufacturas,Brasil,70
 Caucho y sus manufacturas,Paraguay,66
 Caucho y sus manufacturas,Chile,78
 Caucho y sus manufacturas,Bolivia,61
-Caucho y sus manufacturas,Per˙,71
+Caucho y sus manufacturas,Per√∫,71
 Caucho y sus manufacturas,Colombia,70
 Caucho y sus manufacturas,Ecuador,65
-Caucho y sus manufacturas,MÈxico,74
-Caucho y sus manufacturas,Panam·,72
+Caucho y sus manufacturas,M√©xico,74
+Caucho y sus manufacturas,Panam√°,72
 Caucho y sus manufacturas,Costa Rica,72
-Caucho y sus manufacturas,Rep˙blica Dominicana,63
+Caucho y sus manufacturas,Rep√∫blica Dominicana,63
 Caucho y sus manufacturas,Guatemala,58
 Caucho y sus manufacturas,El Salvador,61
 Caucho y sus manufacturas,Honduras,57
@@ -898,7 +897,7 @@ Caucho y sus manufacturas,Nicaragua,52
 Caucho y sus manufacturas,Venezuela,29
 Caucho y sus manufacturas,Uruguay,70
 Caucho y sus manufacturas,Cuba,46
-Caucho y sus manufacturas,HaitÌ,31
+Caucho y sus manufacturas,Hait√≠,31
 Caucho y sus manufacturas,Puerto Rico,76
 Caucho y sus manufacturas,Belice,59
 Caucho y sus manufacturas,Jamaica,64
@@ -906,167 +905,167 @@ Caucho y sus manufacturas,Trinidad y Tobago,65
 Caucho y sus manufacturas,Barbados,68
 Caucho y sus manufacturas,Guyana,57
 Caucho y sus manufacturas,Surinam,54
-Caucho y sus manufacturas,Canad·,82
+Caucho y sus manufacturas,Canad√°,82
 Caucho y sus manufacturas,Estados Unidos,85
 Caucho y sus manufacturas,Alemania,80
 Caucho y sus manufacturas,Francia,77
 Caucho y sus manufacturas,Italia,74
-Caucho y sus manufacturas,EspaÒa,78
+Caucho y sus manufacturas,Espa√±a,78
 Caucho y sus manufacturas,Portugal,76
-Caucho y sus manufacturas,PaÌses Bajos,82
+Caucho y sus manufacturas,Pa√≠ses Bajos,82
 Caucho y sus manufacturas,Reino Unido,78
 Caucho y sus manufacturas,Rusia,57
 Caucho y sus manufacturas,India,77
 Caucho y sus manufacturas,China,81
-Caucho y sus manufacturas,JapÛn,82
+Caucho y sus manufacturas,Jap√≥n,82
 Caucho y sus manufacturas,Corea del Sur,83
 Caucho y sus manufacturas,Vietnam,73
 Caucho y sus manufacturas,Taiwan,81
-Caucho y sus manufacturas,Sud·frica,67
-Productos quÌmicos org·nicos,Argentina,71
-Productos quÌmicos org·nicos,Brasil,72
-Productos quÌmicos org·nicos,Paraguay,65
-Productos quÌmicos org·nicos,Chile,78
-Productos quÌmicos org·nicos,Bolivia,60
-Productos quÌmicos org·nicos,Per˙,70
-Productos quÌmicos org·nicos,Colombia,70
-Productos quÌmicos org·nicos,Ecuador,65
-Productos quÌmicos org·nicos,MÈxico,73
-Productos quÌmicos org·nicos,Panam·,71
-Productos quÌmicos org·nicos,Costa Rica,72
-Productos quÌmicos org·nicos,Rep˙blica Dominicana,65
-Productos quÌmicos org·nicos,Guatemala,60
-Productos quÌmicos org·nicos,El Salvador,61
-Productos quÌmicos org·nicos,Honduras,58
-Productos quÌmicos org·nicos,Nicaragua,54
-Productos quÌmicos org·nicos,Venezuela,30
-Productos quÌmicos org·nicos,Uruguay,71
-Productos quÌmicos org·nicos,Cuba,47
-Productos quÌmicos org·nicos,HaitÌ,32
-Productos quÌmicos org·nicos,Puerto Rico,76
-Productos quÌmicos org·nicos,Belice,60
-Productos quÌmicos org·nicos,Jamaica,64
-Productos quÌmicos org·nicos,Trinidad y Tobago,66
-Productos quÌmicos org·nicos,Barbados,69
-Productos quÌmicos org·nicos,Guyana,58
-Productos quÌmicos org·nicos,Surinam,55
-Productos quÌmicos org·nicos,Canad·,82
-Productos quÌmicos org·nicos,Estados Unidos,85
-Productos quÌmicos org·nicos,Alemania,81
-Productos quÌmicos org·nicos,Francia,78
-Productos quÌmicos org·nicos,Italia,75
-Productos quÌmicos org·nicos,EspaÒa,79
-Productos quÌmicos org·nicos,Portugal,77
-Productos quÌmicos org·nicos,PaÌses Bajos,83
-Productos quÌmicos org·nicos,Reino Unido,79
-Productos quÌmicos org·nicos,Rusia,58
-Productos quÌmicos org·nicos,India,78
-Productos quÌmicos org·nicos,China,82
-Productos quÌmicos org·nicos,JapÛn,82
-Productos quÌmicos org·nicos,Corea del Sur,83
-Productos quÌmicos org·nicos,Vietnam,74
-Productos quÌmicos org·nicos,Taiwan,82
-Productos quÌmicos org·nicos,Sud·frica,68
-Material elÈctrico,Argentina,72
-Material elÈctrico,Brasil,71
-Material elÈctrico,Paraguay,66
-Material elÈctrico,Chile,77
-Material elÈctrico,Bolivia,60
-Material elÈctrico,Per˙,70
-Material elÈctrico,Colombia,70
-Material elÈctrico,Ecuador,65
-Material elÈctrico,MÈxico,73
-Material elÈctrico,Panam·,71
-Material elÈctrico,Costa Rica,71
-Material elÈctrico,Rep˙blica Dominicana,64
-Material elÈctrico,Guatemala,59
-Material elÈctrico,El Salvador,61
-Material elÈctrico,Honduras,57
-Material elÈctrico,Nicaragua,53
-Material elÈctrico,Venezuela,29
-Material elÈctrico,Uruguay,70
-Material elÈctrico,Cuba,46
-Material elÈctrico,HaitÌ,31
-Material elÈctrico,Puerto Rico,75
-Material elÈctrico,Belice,60
-Material elÈctrico,Jamaica,63
-Material elÈctrico,Trinidad y Tobago,65
-Material elÈctrico,Barbados,68
-Material elÈctrico,Guyana,57
-Material elÈctrico,Surinam,54
-Material elÈctrico,Canad·,82
-Material elÈctrico,Estados Unidos,84
-Material elÈctrico,Alemania,80
-Material elÈctrico,Francia,77
-Material elÈctrico,Italia,74
-Material elÈctrico,EspaÒa,78
-Material elÈctrico,Portugal,76
-Material elÈctrico,PaÌses Bajos,82
-Material elÈctrico,Reino Unido,78
-Material elÈctrico,Rusia,58
-Material elÈctrico,India,77
-Material elÈctrico,China,81
-Material elÈctrico,JapÛn,82
-Material elÈctrico,Corea del Sur,83
-Material elÈctrico,Vietnam,73
-Material elÈctrico,Taiwan,81
-Material elÈctrico,Sud·frica,67
-M·quinas y aparatos mec·nicos,Argentina,73
-M·quinas y aparatos mec·nicos,Brasil,70
-M·quinas y aparatos mec·nicos,Paraguay,66
-M·quinas y aparatos mec·nicos,Chile,78
-M·quinas y aparatos mec·nicos,Bolivia,61
-M·quinas y aparatos mec·nicos,Per˙,71
-M·quinas y aparatos mec·nicos,Colombia,70
-M·quinas y aparatos mec·nicos,Ecuador,65
-M·quinas y aparatos mec·nicos,MÈxico,74
-M·quinas y aparatos mec·nicos,Panam·,72
-M·quinas y aparatos mec·nicos,Costa Rica,72
-M·quinas y aparatos mec·nicos,Rep˙blica Dominicana,63
-M·quinas y aparatos mec·nicos,Guatemala,58
-M·quinas y aparatos mec·nicos,El Salvador,61
-M·quinas y aparatos mec·nicos,Honduras,57
-M·quinas y aparatos mec·nicos,Nicaragua,52
-M·quinas y aparatos mec·nicos,Venezuela,29
-M·quinas y aparatos mec·nicos,Uruguay,70
-M·quinas y aparatos mec·nicos,Cuba,46
-M·quinas y aparatos mec·nicos,HaitÌ,31
-M·quinas y aparatos mec·nicos,Puerto Rico,76
-M·quinas y aparatos mec·nicos,Belice,59
-M·quinas y aparatos mec·nicos,Jamaica,64
-M·quinas y aparatos mec·nicos,Trinidad y Tobago,65
-M·quinas y aparatos mec·nicos,Barbados,68
-M·quinas y aparatos mec·nicos,Guyana,57
-M·quinas y aparatos mec·nicos,Surinam,54
-M·quinas y aparatos mec·nicos,Canad·,82
-M·quinas y aparatos mec·nicos,Estados Unidos,85
-M·quinas y aparatos mec·nicos,Alemania,80
-M·quinas y aparatos mec·nicos,Francia,77
-M·quinas y aparatos mec·nicos,Italia,74
-M·quinas y aparatos mec·nicos,EspaÒa,78
-M·quinas y aparatos mec·nicos,Portugal,76
-M·quinas y aparatos mec·nicos,PaÌses Bajos,82
-M·quinas y aparatos mec·nicos,Reino Unido,78
-M·quinas y aparatos mec·nicos,Rusia,57
-M·quinas y aparatos mec·nicos,India,77
-M·quinas y aparatos mec·nicos,China,81
-M·quinas y aparatos mec·nicos,JapÛn,82
-M·quinas y aparatos mec·nicos,Corea del Sur,83
-M·quinas y aparatos mec·nicos,Vietnam,73
-M·quinas y aparatos mec·nicos,Taiwan,81
-M·quinas y aparatos mec·nicos,Sud·frica,67
+Caucho y sus manufacturas,Sud√°frica,67
+Productos qu√≠micos org√°nicos,Argentina,71
+Productos qu√≠micos org√°nicos,Brasil,72
+Productos qu√≠micos org√°nicos,Paraguay,65
+Productos qu√≠micos org√°nicos,Chile,78
+Productos qu√≠micos org√°nicos,Bolivia,60
+Productos qu√≠micos org√°nicos,Per√∫,70
+Productos qu√≠micos org√°nicos,Colombia,70
+Productos qu√≠micos org√°nicos,Ecuador,65
+Productos qu√≠micos org√°nicos,M√©xico,73
+Productos qu√≠micos org√°nicos,Panam√°,71
+Productos qu√≠micos org√°nicos,Costa Rica,72
+Productos qu√≠micos org√°nicos,Rep√∫blica Dominicana,65
+Productos qu√≠micos org√°nicos,Guatemala,60
+Productos qu√≠micos org√°nicos,El Salvador,61
+Productos qu√≠micos org√°nicos,Honduras,58
+Productos qu√≠micos org√°nicos,Nicaragua,54
+Productos qu√≠micos org√°nicos,Venezuela,30
+Productos qu√≠micos org√°nicos,Uruguay,71
+Productos qu√≠micos org√°nicos,Cuba,47
+Productos qu√≠micos org√°nicos,Hait√≠,32
+Productos qu√≠micos org√°nicos,Puerto Rico,76
+Productos qu√≠micos org√°nicos,Belice,60
+Productos qu√≠micos org√°nicos,Jamaica,64
+Productos qu√≠micos org√°nicos,Trinidad y Tobago,66
+Productos qu√≠micos org√°nicos,Barbados,69
+Productos qu√≠micos org√°nicos,Guyana,58
+Productos qu√≠micos org√°nicos,Surinam,55
+Productos qu√≠micos org√°nicos,Canad√°,82
+Productos qu√≠micos org√°nicos,Estados Unidos,85
+Productos qu√≠micos org√°nicos,Alemania,81
+Productos qu√≠micos org√°nicos,Francia,78
+Productos qu√≠micos org√°nicos,Italia,75
+Productos qu√≠micos org√°nicos,Espa√±a,79
+Productos qu√≠micos org√°nicos,Portugal,77
+Productos qu√≠micos org√°nicos,Pa√≠ses Bajos,83
+Productos qu√≠micos org√°nicos,Reino Unido,79
+Productos qu√≠micos org√°nicos,Rusia,58
+Productos qu√≠micos org√°nicos,India,78
+Productos qu√≠micos org√°nicos,China,82
+Productos qu√≠micos org√°nicos,Jap√≥n,82
+Productos qu√≠micos org√°nicos,Corea del Sur,83
+Productos qu√≠micos org√°nicos,Vietnam,74
+Productos qu√≠micos org√°nicos,Taiwan,82
+Productos qu√≠micos org√°nicos,Sud√°frica,68
+Material el√©ctrico,Argentina,72
+Material el√©ctrico,Brasil,71
+Material el√©ctrico,Paraguay,66
+Material el√©ctrico,Chile,77
+Material el√©ctrico,Bolivia,60
+Material el√©ctrico,Per√∫,70
+Material el√©ctrico,Colombia,70
+Material el√©ctrico,Ecuador,65
+Material el√©ctrico,M√©xico,73
+Material el√©ctrico,Panam√°,71
+Material el√©ctrico,Costa Rica,71
+Material el√©ctrico,Rep√∫blica Dominicana,64
+Material el√©ctrico,Guatemala,59
+Material el√©ctrico,El Salvador,61
+Material el√©ctrico,Honduras,57
+Material el√©ctrico,Nicaragua,53
+Material el√©ctrico,Venezuela,29
+Material el√©ctrico,Uruguay,70
+Material el√©ctrico,Cuba,46
+Material el√©ctrico,Hait√≠,31
+Material el√©ctrico,Puerto Rico,75
+Material el√©ctrico,Belice,60
+Material el√©ctrico,Jamaica,63
+Material el√©ctrico,Trinidad y Tobago,65
+Material el√©ctrico,Barbados,68
+Material el√©ctrico,Guyana,57
+Material el√©ctrico,Surinam,54
+Material el√©ctrico,Canad√°,82
+Material el√©ctrico,Estados Unidos,84
+Material el√©ctrico,Alemania,80
+Material el√©ctrico,Francia,77
+Material el√©ctrico,Italia,74
+Material el√©ctrico,Espa√±a,78
+Material el√©ctrico,Portugal,76
+Material el√©ctrico,Pa√≠ses Bajos,82
+Material el√©ctrico,Reino Unido,78
+Material el√©ctrico,Rusia,58
+Material el√©ctrico,India,77
+Material el√©ctrico,China,81
+Material el√©ctrico,Jap√≥n,82
+Material el√©ctrico,Corea del Sur,83
+Material el√©ctrico,Vietnam,73
+Material el√©ctrico,Taiwan,81
+Material el√©ctrico,Sud√°frica,67
+M√°quinas y aparatos mec√°nicos,Argentina,73
+M√°quinas y aparatos mec√°nicos,Brasil,70
+M√°quinas y aparatos mec√°nicos,Paraguay,66
+M√°quinas y aparatos mec√°nicos,Chile,78
+M√°quinas y aparatos mec√°nicos,Bolivia,61
+M√°quinas y aparatos mec√°nicos,Per√∫,71
+M√°quinas y aparatos mec√°nicos,Colombia,70
+M√°quinas y aparatos mec√°nicos,Ecuador,65
+M√°quinas y aparatos mec√°nicos,M√©xico,74
+M√°quinas y aparatos mec√°nicos,Panam√°,72
+M√°quinas y aparatos mec√°nicos,Costa Rica,72
+M√°quinas y aparatos mec√°nicos,Rep√∫blica Dominicana,63
+M√°quinas y aparatos mec√°nicos,Guatemala,58
+M√°quinas y aparatos mec√°nicos,El Salvador,61
+M√°quinas y aparatos mec√°nicos,Honduras,57
+M√°quinas y aparatos mec√°nicos,Nicaragua,52
+M√°quinas y aparatos mec√°nicos,Venezuela,29
+M√°quinas y aparatos mec√°nicos,Uruguay,70
+M√°quinas y aparatos mec√°nicos,Cuba,46
+M√°quinas y aparatos mec√°nicos,Hait√≠,31
+M√°quinas y aparatos mec√°nicos,Puerto Rico,76
+M√°quinas y aparatos mec√°nicos,Belice,59
+M√°quinas y aparatos mec√°nicos,Jamaica,64
+M√°quinas y aparatos mec√°nicos,Trinidad y Tobago,65
+M√°quinas y aparatos mec√°nicos,Barbados,68
+M√°quinas y aparatos mec√°nicos,Guyana,57
+M√°quinas y aparatos mec√°nicos,Surinam,54
+M√°quinas y aparatos mec√°nicos,Canad√°,82
+M√°quinas y aparatos mec√°nicos,Estados Unidos,85
+M√°quinas y aparatos mec√°nicos,Alemania,80
+M√°quinas y aparatos mec√°nicos,Francia,77
+M√°quinas y aparatos mec√°nicos,Italia,74
+M√°quinas y aparatos mec√°nicos,Espa√±a,78
+M√°quinas y aparatos mec√°nicos,Portugal,76
+M√°quinas y aparatos mec√°nicos,Pa√≠ses Bajos,82
+M√°quinas y aparatos mec√°nicos,Reino Unido,78
+M√°quinas y aparatos mec√°nicos,Rusia,57
+M√°quinas y aparatos mec√°nicos,India,77
+M√°quinas y aparatos mec√°nicos,China,81
+M√°quinas y aparatos mec√°nicos,Jap√≥n,82
+M√°quinas y aparatos mec√°nicos,Corea del Sur,83
+M√°quinas y aparatos mec√°nicos,Vietnam,73
+M√°quinas y aparatos mec√°nicos,Taiwan,81
+M√°quinas y aparatos mec√°nicos,Sud√°frica,67
 Fertilizantes,Argentina,71
 Fertilizantes,Brasil,72
 Fertilizantes,Paraguay,65
 Fertilizantes,Chile,78
 Fertilizantes,Bolivia,60
-Fertilizantes,Per˙,70
+Fertilizantes,Per√∫,70
 Fertilizantes,Colombia,70
 Fertilizantes,Ecuador,65
-Fertilizantes,MÈxico,73
-Fertilizantes,Panam·,71
+Fertilizantes,M√©xico,73
+Fertilizantes,Panam√°,71
 Fertilizantes,Costa Rica,72
-Fertilizantes,Rep˙blica Dominicana,65
+Fertilizantes,Rep√∫blica Dominicana,65
 Fertilizantes,Guatemala,60
 Fertilizantes,El Salvador,61
 Fertilizantes,Honduras,58
@@ -1074,7 +1073,7 @@ Fertilizantes,Nicaragua,54
 Fertilizantes,Venezuela,30
 Fertilizantes,Uruguay,71
 Fertilizantes,Cuba,47
-Fertilizantes,HaitÌ,32
+Fertilizantes,Hait√≠,32
 Fertilizantes,Puerto Rico,76
 Fertilizantes,Belice,60
 Fertilizantes,Jamaica,64
@@ -1082,79 +1081,79 @@ Fertilizantes,Trinidad y Tobago,66
 Fertilizantes,Barbados,69
 Fertilizantes,Guyana,58
 Fertilizantes,Surinam,55
-Fertilizantes,Canad·,82
+Fertilizantes,Canad√°,82
 Fertilizantes,Estados Unidos,85
 Fertilizantes,Alemania,81
 Fertilizantes,Francia,78
 Fertilizantes,Italia,75
-Fertilizantes,EspaÒa,79
+Fertilizantes,Espa√±a,79
 Fertilizantes,Portugal,77
-Fertilizantes,PaÌses Bajos,83
+Fertilizantes,Pa√≠ses Bajos,83
 Fertilizantes,Reino Unido,79
 Fertilizantes,Rusia,58
 Fertilizantes,India,78
 Fertilizantes,China,82
-Fertilizantes,JapÛn,82
+Fertilizantes,Jap√≥n,82
 Fertilizantes,Corea del Sur,83
 Fertilizantes,Vietnam,74
 Fertilizantes,Taiwan,82
-Fertilizantes,Sud·frica,68
-Frutas (otras que cÌtricos),Argentina,72
-Frutas (otras que cÌtricos),Brasil,71
-Frutas (otras que cÌtricos),Paraguay,66
-Frutas (otras que cÌtricos),Chile,77
-Frutas (otras que cÌtricos),Bolivia,60
-Frutas (otras que cÌtricos),Per˙,70
-Frutas (otras que cÌtricos),Colombia,70
-Frutas (otras que cÌtricos),Ecuador,65
-Frutas (otras que cÌtricos),MÈxico,73
-Frutas (otras que cÌtricos),Panam·,71
-Frutas (otras que cÌtricos),Costa Rica,71
-Frutas (otras que cÌtricos),Rep˙blica Dominicana,64
-Frutas (otras que cÌtricos),Guatemala,59
-Frutas (otras que cÌtricos),El Salvador,61
-Frutas (otras que cÌtricos),Honduras,57
-Frutas (otras que cÌtricos),Nicaragua,53
-Frutas (otras que cÌtricos),Venezuela,29
-Frutas (otras que cÌtricos),Uruguay,70
-Frutas (otras que cÌtricos),Cuba,46
-Frutas (otras que cÌtricos),HaitÌ,31
-Frutas (otras que cÌtricos),Puerto Rico,75
-Frutas (otras que cÌtricos),Belice,60
-Frutas (otras que cÌtricos),Jamaica,63
-Frutas (otras que cÌtricos),Trinidad y Tobago,65
-Frutas (otras que cÌtricos),Barbados,68
-Frutas (otras que cÌtricos),Guyana,57
-Frutas (otras que cÌtricos),Surinam,54
-Frutas (otras que cÌtricos),Canad·,82
-Frutas (otras que cÌtricos),Estados Unidos,84
-Frutas (otras que cÌtricos),Alemania,80
-Frutas (otras que cÌtricos),Francia,77
-Frutas (otras que cÌtricos),Italia,74
-Frutas (otras que cÌtricos),EspaÒa,78
-Frutas (otras que cÌtricos),Portugal,76
-Frutas (otras que cÌtricos),PaÌses Bajos,82
-Frutas (otras que cÌtricos),Reino Unido,78
-Frutas (otras que cÌtricos),Rusia,58
-Frutas (otras que cÌtricos),India,77
-Frutas (otras que cÌtricos),China,81
-Frutas (otras que cÌtricos),JapÛn,82
-Frutas (otras que cÌtricos),Corea del Sur,83
-Frutas (otras que cÌtricos),Vietnam,73
-Frutas (otras que cÌtricos),Taiwan,81
-Frutas (otras que cÌtricos),Sud·frica,67
+Fertilizantes,Sud√°frica,68
+Frutas (otras que c√≠tricos),Argentina,72
+Frutas (otras que c√≠tricos),Brasil,71
+Frutas (otras que c√≠tricos),Paraguay,66
+Frutas (otras que c√≠tricos),Chile,77
+Frutas (otras que c√≠tricos),Bolivia,60
+Frutas (otras que c√≠tricos),Per√∫,70
+Frutas (otras que c√≠tricos),Colombia,70
+Frutas (otras que c√≠tricos),Ecuador,65
+Frutas (otras que c√≠tricos),M√©xico,73
+Frutas (otras que c√≠tricos),Panam√°,71
+Frutas (otras que c√≠tricos),Costa Rica,71
+Frutas (otras que c√≠tricos),Rep√∫blica Dominicana,64
+Frutas (otras que c√≠tricos),Guatemala,59
+Frutas (otras que c√≠tricos),El Salvador,61
+Frutas (otras que c√≠tricos),Honduras,57
+Frutas (otras que c√≠tricos),Nicaragua,53
+Frutas (otras que c√≠tricos),Venezuela,29
+Frutas (otras que c√≠tricos),Uruguay,70
+Frutas (otras que c√≠tricos),Cuba,46
+Frutas (otras que c√≠tricos),Hait√≠,31
+Frutas (otras que c√≠tricos),Puerto Rico,75
+Frutas (otras que c√≠tricos),Belice,60
+Frutas (otras que c√≠tricos),Jamaica,63
+Frutas (otras que c√≠tricos),Trinidad y Tobago,65
+Frutas (otras que c√≠tricos),Barbados,68
+Frutas (otras que c√≠tricos),Guyana,57
+Frutas (otras que c√≠tricos),Surinam,54
+Frutas (otras que c√≠tricos),Canad√°,82
+Frutas (otras que c√≠tricos),Estados Unidos,84
+Frutas (otras que c√≠tricos),Alemania,80
+Frutas (otras que c√≠tricos),Francia,77
+Frutas (otras que c√≠tricos),Italia,74
+Frutas (otras que c√≠tricos),Espa√±a,78
+Frutas (otras que c√≠tricos),Portugal,76
+Frutas (otras que c√≠tricos),Pa√≠ses Bajos,82
+Frutas (otras que c√≠tricos),Reino Unido,78
+Frutas (otras que c√≠tricos),Rusia,58
+Frutas (otras que c√≠tricos),India,77
+Frutas (otras que c√≠tricos),China,81
+Frutas (otras que c√≠tricos),Jap√≥n,82
+Frutas (otras que c√≠tricos),Corea del Sur,83
+Frutas (otras que c√≠tricos),Vietnam,73
+Frutas (otras que c√≠tricos),Taiwan,81
+Frutas (otras que c√≠tricos),Sud√°frica,67
 Verduras,Argentina,73
 Verduras,Brasil,70
 Verduras,Paraguay,66
 Verduras,Chile,78
 Verduras,Bolivia,61
-Verduras,Per˙,71
+Verduras,Per√∫,71
 Verduras,Colombia,70
 Verduras,Ecuador,65
-Verduras,MÈxico,74
-Verduras,Panam·,72
+Verduras,M√©xico,74
+Verduras,Panam√°,72
 Verduras,Costa Rica,72
-Verduras,Rep˙blica Dominicana,63
+Verduras,Rep√∫blica Dominicana,63
 Verduras,Guatemala,58
 Verduras,El Salvador,61
 Verduras,Honduras,57
@@ -1162,7 +1161,7 @@ Verduras,Nicaragua,52
 Verduras,Venezuela,29
 Verduras,Uruguay,70
 Verduras,Cuba,46
-Verduras,HaitÌ,31
+Verduras,Hait√≠,31
 Verduras,Puerto Rico,76
 Verduras,Belice,59
 Verduras,Jamaica,64
@@ -1170,35 +1169,35 @@ Verduras,Trinidad y Tobago,65
 Verduras,Barbados,68
 Verduras,Guyana,57
 Verduras,Surinam,54
-Verduras,Canad·,82
+Verduras,Canad√°,82
 Verduras,Estados Unidos,85
 Verduras,Alemania,80
 Verduras,Francia,77
 Verduras,Italia,74
-Verduras,EspaÒa,78
+Verduras,Espa√±a,78
 Verduras,Portugal,76
-Verduras,PaÌses Bajos,82
+Verduras,Pa√≠ses Bajos,82
 Verduras,Reino Unido,78
 Verduras,Rusia,57
 Verduras,India,77
 Verduras,China,81
-Verduras,JapÛn,82
+Verduras,Jap√≥n,82
 Verduras,Corea del Sur,83
 Verduras,Vietnam,73
 Verduras,Taiwan,81
-Verduras,Sud·frica,67
+Verduras,Sud√°frica,67
 Miel,Argentina,71
 Miel,Brasil,72
 Miel,Paraguay,65
 Miel,Chile,78
 Miel,Bolivia,60
-Miel,Per˙,70
+Miel,Per√∫,70
 Miel,Colombia,70
 Miel,Ecuador,65
-Miel,MÈxico,73
-Miel,Panam·,71
+Miel,M√©xico,73
+Miel,Panam√°,71
 Miel,Costa Rica,72
-Miel,Rep˙blica Dominicana,65
+Miel,Rep√∫blica Dominicana,65
 Miel,Guatemala,60
 Miel,El Salvador,61
 Miel,Honduras,58
@@ -1206,7 +1205,7 @@ Miel,Nicaragua,54
 Miel,Venezuela,30
 Miel,Uruguay,71
 Miel,Cuba,47
-Miel,HaitÌ,32
+Miel,Hait√≠,32
 Miel,Puerto Rico,76
 Miel,Belice,60
 Miel,Jamaica,64
@@ -1214,35 +1213,35 @@ Miel,Trinidad y Tobago,66
 Miel,Barbados,69
 Miel,Guyana,58
 Miel,Surinam,55
-Miel,Canad·,82
+Miel,Canad√°,82
 Miel,Estados Unidos,85
 Miel,Alemania,81
 Miel,Francia,78
 Miel,Italia,75
-Miel,EspaÒa,79
+Miel,Espa√±a,79
 Miel,Portugal,77
-Miel,PaÌses Bajos,83
+Miel,Pa√≠ses Bajos,83
 Miel,Reino Unido,79
 Miel,Rusia,58
 Miel,India,78
 Miel,China,82
-Miel,JapÛn,82
+Miel,Jap√≥n,82
 Miel,Corea del Sur,83
 Miel,Vietnam,74
 Miel,Taiwan,82
-Miel,Sud·frica,68
+Miel,Sud√°frica,68
 Aceites y grasas vegetales,Argentina,72
 Aceites y grasas vegetales,Brasil,71
 Aceites y grasas vegetales,Paraguay,66
 Aceites y grasas vegetales,Chile,77
 Aceites y grasas vegetales,Bolivia,60
-Aceites y grasas vegetales,Per˙,70
+Aceites y grasas vegetales,Per√∫,70
 Aceites y grasas vegetales,Colombia,70
 Aceites y grasas vegetales,Ecuador,65
-Aceites y grasas vegetales,MÈxico,73
-Aceites y grasas vegetales,Panam·,71
+Aceites y grasas vegetales,M√©xico,73
+Aceites y grasas vegetales,Panam√°,71
 Aceites y grasas vegetales,Costa Rica,71
-Aceites y grasas vegetales,Rep˙blica Dominicana,64
+Aceites y grasas vegetales,Rep√∫blica Dominicana,64
 Aceites y grasas vegetales,Guatemala,59
 Aceites y grasas vegetales,El Salvador,61
 Aceites y grasas vegetales,Honduras,57
@@ -1250,7 +1249,7 @@ Aceites y grasas vegetales,Nicaragua,53
 Aceites y grasas vegetales,Venezuela,29
 Aceites y grasas vegetales,Uruguay,70
 Aceites y grasas vegetales,Cuba,46
-Aceites y grasas vegetales,HaitÌ,31
+Aceites y grasas vegetales,Hait√≠,31
 Aceites y grasas vegetales,Puerto Rico,75
 Aceites y grasas vegetales,Belice,60
 Aceites y grasas vegetales,Jamaica,63
@@ -1258,123 +1257,123 @@ Aceites y grasas vegetales,Trinidad y Tobago,65
 Aceites y grasas vegetales,Barbados,68
 Aceites y grasas vegetales,Guyana,57
 Aceites y grasas vegetales,Surinam,54
-Aceites y grasas vegetales,Canad·,82
+Aceites y grasas vegetales,Canad√°,82
 Aceites y grasas vegetales,Estados Unidos,84
 Aceites y grasas vegetales,Alemania,80
 Aceites y grasas vegetales,Francia,77
 Aceites y grasas vegetales,Italia,74
-Aceites y grasas vegetales,EspaÒa,78
+Aceites y grasas vegetales,Espa√±a,78
 Aceites y grasas vegetales,Portugal,76
-Aceites y grasas vegetales,PaÌses Bajos,82
+Aceites y grasas vegetales,Pa√≠ses Bajos,82
 Aceites y grasas vegetales,Reino Unido,78
 Aceites y grasas vegetales,Rusia,58
 Aceites y grasas vegetales,India,77
 Aceites y grasas vegetales,China,81
-Aceites y grasas vegetales,JapÛn,82
+Aceites y grasas vegetales,Jap√≥n,82
 Aceites y grasas vegetales,Corea del Sur,83
 Aceites y grasas vegetales,Vietnam,73
 Aceites y grasas vegetales,Taiwan,81
-Aceites y grasas vegetales,Sud·frica,67
-Caucho sintÈtico,Argentina,73
-Caucho sintÈtico,Brasil,70
-Caucho sintÈtico,Paraguay,66
-Caucho sintÈtico,Chile,78
-Caucho sintÈtico,Bolivia,61
-Caucho sintÈtico,Per˙,71
-Caucho sintÈtico,Colombia,70
-Caucho sintÈtico,Ecuador,65
-Caucho sintÈtico,MÈxico,74
-Caucho sintÈtico,Panam·,72
-Caucho sintÈtico,Costa Rica,72
-Caucho sintÈtico,Rep˙blica Dominicana,63
-Caucho sintÈtico,Guatemala,58
-Caucho sintÈtico,El Salvador,61
-Caucho sintÈtico,Honduras,57
-Caucho sintÈtico,Nicaragua,52
-Caucho sintÈtico,Venezuela,29
-Caucho sintÈtico,Uruguay,70
-Caucho sintÈtico,Cuba,46
-Caucho sintÈtico,HaitÌ,31
-Caucho sintÈtico,Puerto Rico,76
-Caucho sintÈtico,Belice,59
-Caucho sintÈtico,Jamaica,64
-Caucho sintÈtico,Trinidad y Tobago,65
-Caucho sintÈtico,Barbados,68
-Caucho sintÈtico,Guyana,57
-Caucho sintÈtico,Surinam,54
-Caucho sintÈtico,Canad·,82
-Caucho sintÈtico,Estados Unidos,85
-Caucho sintÈtico,Alemania,80
-Caucho sintÈtico,Francia,77
-Caucho sintÈtico,Italia,74
-Caucho sintÈtico,EspaÒa,78
-Caucho sintÈtico,Portugal,76
-Caucho sintÈtico,PaÌses Bajos,82
-Caucho sintÈtico,Reino Unido,78
-Caucho sintÈtico,Rusia,57
-Caucho sintÈtico,India,77
-Caucho sintÈtico,China,81
-Caucho sintÈtico,JapÛn,82
-Caucho sintÈtico,Corea del Sur,83
-Caucho sintÈtico,Vietnam,73
-Caucho sintÈtico,Taiwan,81
-Caucho sintÈtico,Sud·frica,67
-Papel y cartÛn,Argentina,71
-Papel y cartÛn,Brasil,72
-Papel y cartÛn,Paraguay,65
-Papel y cartÛn,Chile,78
-Papel y cartÛn,Bolivia,60
-Papel y cartÛn,Per˙,70
-Papel y cartÛn,Colombia,70
-Papel y cartÛn,Ecuador,65
-Papel y cartÛn,MÈxico,73
-Papel y cartÛn,Panam·,71
-Papel y cartÛn,Costa Rica,72
-Papel y cartÛn,Rep˙blica Dominicana,65
-Papel y cartÛn,Guatemala,60
-Papel y cartÛn,El Salvador,61
-Papel y cartÛn,Honduras,58
-Papel y cartÛn,Nicaragua,54
-Papel y cartÛn,Venezuela,30
-Papel y cartÛn,Uruguay,71
-Papel y cartÛn,Cuba,47
-Papel y cartÛn,HaitÌ,32
-Papel y cartÛn,Puerto Rico,76
-Papel y cartÛn,Belice,60
-Papel y cartÛn,Jamaica,64
-Papel y cartÛn,Trinidad y Tobago,66
-Papel y cartÛn,Barbados,69
-Papel y cartÛn,Guyana,58
-Papel y cartÛn,Surinam,55
-Papel y cartÛn,Canad·,82
-Papel y cartÛn,Estados Unidos,85
-Papel y cartÛn,Alemania,81
-Papel y cartÛn,Francia,78
-Papel y cartÛn,Italia,75
-Papel y cartÛn,EspaÒa,79
-Papel y cartÛn,Portugal,77
-Papel y cartÛn,PaÌses Bajos,83
-Papel y cartÛn,Reino Unido,79
-Papel y cartÛn,Rusia,58
-Papel y cartÛn,India,78
-Papel y cartÛn,China,82
-Papel y cartÛn,JapÛn,82
-Papel y cartÛn,Corea del Sur,83
-Papel y cartÛn,Vietnam,74
-Papel y cartÛn,Taiwan,82
-Papel y cartÛn,Sud·frica,68
+Aceites y grasas vegetales,Sud√°frica,67
+Caucho sint√©tico,Argentina,73
+Caucho sint√©tico,Brasil,70
+Caucho sint√©tico,Paraguay,66
+Caucho sint√©tico,Chile,78
+Caucho sint√©tico,Bolivia,61
+Caucho sint√©tico,Per√∫,71
+Caucho sint√©tico,Colombia,70
+Caucho sint√©tico,Ecuador,65
+Caucho sint√©tico,M√©xico,74
+Caucho sint√©tico,Panam√°,72
+Caucho sint√©tico,Costa Rica,72
+Caucho sint√©tico,Rep√∫blica Dominicana,63
+Caucho sint√©tico,Guatemala,58
+Caucho sint√©tico,El Salvador,61
+Caucho sint√©tico,Honduras,57
+Caucho sint√©tico,Nicaragua,52
+Caucho sint√©tico,Venezuela,29
+Caucho sint√©tico,Uruguay,70
+Caucho sint√©tico,Cuba,46
+Caucho sint√©tico,Hait√≠,31
+Caucho sint√©tico,Puerto Rico,76
+Caucho sint√©tico,Belice,59
+Caucho sint√©tico,Jamaica,64
+Caucho sint√©tico,Trinidad y Tobago,65
+Caucho sint√©tico,Barbados,68
+Caucho sint√©tico,Guyana,57
+Caucho sint√©tico,Surinam,54
+Caucho sint√©tico,Canad√°,82
+Caucho sint√©tico,Estados Unidos,85
+Caucho sint√©tico,Alemania,80
+Caucho sint√©tico,Francia,77
+Caucho sint√©tico,Italia,74
+Caucho sint√©tico,Espa√±a,78
+Caucho sint√©tico,Portugal,76
+Caucho sint√©tico,Pa√≠ses Bajos,82
+Caucho sint√©tico,Reino Unido,78
+Caucho sint√©tico,Rusia,57
+Caucho sint√©tico,India,77
+Caucho sint√©tico,China,81
+Caucho sint√©tico,Jap√≥n,82
+Caucho sint√©tico,Corea del Sur,83
+Caucho sint√©tico,Vietnam,73
+Caucho sint√©tico,Taiwan,81
+Caucho sint√©tico,Sud√°frica,67
+Papel y cart√≥n,Argentina,71
+Papel y cart√≥n,Brasil,72
+Papel y cart√≥n,Paraguay,65
+Papel y cart√≥n,Chile,78
+Papel y cart√≥n,Bolivia,60
+Papel y cart√≥n,Per√∫,70
+Papel y cart√≥n,Colombia,70
+Papel y cart√≥n,Ecuador,65
+Papel y cart√≥n,M√©xico,73
+Papel y cart√≥n,Panam√°,71
+Papel y cart√≥n,Costa Rica,72
+Papel y cart√≥n,Rep√∫blica Dominicana,65
+Papel y cart√≥n,Guatemala,60
+Papel y cart√≥n,El Salvador,61
+Papel y cart√≥n,Honduras,58
+Papel y cart√≥n,Nicaragua,54
+Papel y cart√≥n,Venezuela,30
+Papel y cart√≥n,Uruguay,71
+Papel y cart√≥n,Cuba,47
+Papel y cart√≥n,Hait√≠,32
+Papel y cart√≥n,Puerto Rico,76
+Papel y cart√≥n,Belice,60
+Papel y cart√≥n,Jamaica,64
+Papel y cart√≥n,Trinidad y Tobago,66
+Papel y cart√≥n,Barbados,69
+Papel y cart√≥n,Guyana,58
+Papel y cart√≥n,Surinam,55
+Papel y cart√≥n,Canad√°,82
+Papel y cart√≥n,Estados Unidos,85
+Papel y cart√≥n,Alemania,81
+Papel y cart√≥n,Francia,78
+Papel y cart√≥n,Italia,75
+Papel y cart√≥n,Espa√±a,79
+Papel y cart√≥n,Portugal,77
+Papel y cart√≥n,Pa√≠ses Bajos,83
+Papel y cart√≥n,Reino Unido,79
+Papel y cart√≥n,Rusia,58
+Papel y cart√≥n,India,78
+Papel y cart√≥n,China,82
+Papel y cart√≥n,Jap√≥n,82
+Papel y cart√≥n,Corea del Sur,83
+Papel y cart√≥n,Vietnam,74
+Papel y cart√≥n,Taiwan,82
+Papel y cart√≥n,Sud√°frica,68
 Muebles,Argentina,72
 Muebles,Brasil,71
 Muebles,Paraguay,66
 Muebles,Chile,77
 Muebles,Bolivia,60
-Muebles,Per˙,70
+Muebles,Per√∫,70
 Muebles,Colombia,70
 Muebles,Ecuador,65
-Muebles,MÈxico,73
-Muebles,Panam·,71
+Muebles,M√©xico,73
+Muebles,Panam√°,71
 Muebles,Costa Rica,71
-Muebles,Rep˙blica Dominicana,64
+Muebles,Rep√∫blica Dominicana,64
 Muebles,Guatemala,59
 Muebles,El Salvador,61
 Muebles,Honduras,57
@@ -1382,7 +1381,7 @@ Muebles,Nicaragua,53
 Muebles,Venezuela,29
 Muebles,Uruguay,70
 Muebles,Cuba,46
-Muebles,HaitÌ,31
+Muebles,Hait√≠,31
 Muebles,Puerto Rico,75
 Muebles,Belice,60
 Muebles,Jamaica,63
@@ -1390,35 +1389,35 @@ Muebles,Trinidad y Tobago,65
 Muebles,Barbados,68
 Muebles,Guyana,57
 Muebles,Surinam,54
-Muebles,Canad·,82
+Muebles,Canad√°,82
 Muebles,Estados Unidos,84
 Muebles,Alemania,80
 Muebles,Francia,77
 Muebles,Italia,74
-Muebles,EspaÒa,78
+Muebles,Espa√±a,78
 Muebles,Portugal,76
-Muebles,PaÌses Bajos,82
+Muebles,Pa√≠ses Bajos,82
 Muebles,Reino Unido,78
 Muebles,Rusia,58
 Muebles,India,77
 Muebles,China,81
-Muebles,JapÛn,82
+Muebles,Jap√≥n,82
 Muebles,Corea del Sur,83
 Muebles,Vietnam,73
 Muebles,Taiwan,81
-Muebles,Sud·frica,67
+Muebles,Sud√°frica,67
 Calzados,Argentina,73
 Calzados,Brasil,70
 Calzados,Paraguay,66
 Calzados,Chile,78
 Calzados,Bolivia,61
-Calzados,Per˙,71
+Calzados,Per√∫,71
 Calzados,Colombia,70
 Calzados,Ecuador,65
-Calzados,MÈxico,74
-Calzados,Panam·,72
+Calzados,M√©xico,74
+Calzados,Panam√°,72
 Calzados,Costa Rica,72
-Calzados,Rep˙blica Dominicana,63
+Calzados,Rep√∫blica Dominicana,63
 Calzados,Guatemala,58
 Calzados,El Salvador,61
 Calzados,Honduras,57
@@ -1426,7 +1425,7 @@ Calzados,Nicaragua,52
 Calzados,Venezuela,29
 Calzados,Uruguay,70
 Calzados,Cuba,46
-Calzados,HaitÌ,31
+Calzados,Hait√≠,31
 Calzados,Puerto Rico,76
 Calzados,Belice,59
 Calzados,Jamaica,64
@@ -1434,79 +1433,79 @@ Calzados,Trinidad y Tobago,65
 Calzados,Barbados,68
 Calzados,Guyana,57
 Calzados,Surinam,54
-Calzados,Canad·,82
+Calzados,Canad√°,82
 Calzados,Estados Unidos,85
 Calzados,Alemania,80
 Calzados,Francia,77
 Calzados,Italia,74
-Calzados,EspaÒa,78
+Calzados,Espa√±a,78
 Calzados,Portugal,76
-Calzados,PaÌses Bajos,82
+Calzados,Pa√≠ses Bajos,82
 Calzados,Reino Unido,78
 Calzados,Rusia,57
 Calzados,India,77
 Calzados,China,81
-Calzados,JapÛn,82
+Calzados,Jap√≥n,82
 Calzados,Corea del Sur,83
 Calzados,Vietnam,73
 Calzados,Taiwan,81
-Calzados,Sud·frica,67
-Juguetes y artÌculos de deporte,Argentina,71
-Juguetes y artÌculos de deporte,Brasil,72
-Juguetes y artÌculos de deporte,Paraguay,65
-Juguetes y artÌculos de deporte,Chile,78
-Juguetes y artÌculos de deporte,Bolivia,60
-Juguetes y artÌculos de deporte,Per˙,70
-Juguetes y artÌculos de deporte,Colombia,70
-Juguetes y artÌculos de deporte,Ecuador,65
-Juguetes y artÌculos de deporte,MÈxico,73
-Juguetes y artÌculos de deporte,Panam·,71
-Juguetes y artÌculos de deporte,Costa Rica,72
-Juguetes y artÌculos de deporte,Rep˙blica Dominicana,65
-Juguetes y artÌculos de deporte,Guatemala,60
-Juguetes y artÌculos de deporte,El Salvador,61
-Juguetes y artÌculos de deporte,Honduras,58
-Juguetes y artÌculos de deporte,Nicaragua,54
-Juguetes y artÌculos de deporte,Venezuela,30
-Juguetes y artÌculos de deporte,Uruguay,71
-Juguetes y artÌculos de deporte,Cuba,47
-Juguetes y artÌculos de deporte,HaitÌ,32
-Juguetes y artÌculos de deporte,Puerto Rico,76
-Juguetes y artÌculos de deporte,Belice,60
-Juguetes y artÌculos de deporte,Jamaica,64
-Juguetes y artÌculos de deporte,Trinidad y Tobago,66
-Juguetes y artÌculos de deporte,Barbados,69
-Juguetes y artÌculos de deporte,Guyana,58
-Juguetes y artÌculos de deporte,Surinam,55
-Juguetes y artÌculos de deporte,Canad·,82
-Juguetes y artÌculos de deporte,Estados Unidos,85
-Juguetes y artÌculos de deporte,Alemania,81
-Juguetes y artÌculos de deporte,Francia,78
-Juguetes y artÌculos de deporte,Italia,75
-Juguetes y artÌculos de deporte,EspaÒa,79
-Juguetes y artÌculos de deporte,Portugal,77
-Juguetes y artÌculos de deporte,PaÌses Bajos,83
-Juguetes y artÌculos de deporte,Reino Unido,79
-Juguetes y artÌculos de deporte,Rusia,58
-Juguetes y artÌculos de deporte,India,78
-Juguetes y artÌculos de deporte,China,82
-Juguetes y artÌculos de deporte,JapÛn,82
-Juguetes y artÌculos de deporte,Corea del Sur,83
-Juguetes y artÌculos de deporte,Vietnam,74
-Juguetes y artÌculos de deporte,Taiwan,82
-Juguetes y artÌculos de deporte,Sud·frica,68
+Calzados,Sud√°frica,67
+Juguetes y art√≠culos de deporte,Argentina,71
+Juguetes y art√≠culos de deporte,Brasil,72
+Juguetes y art√≠culos de deporte,Paraguay,65
+Juguetes y art√≠culos de deporte,Chile,78
+Juguetes y art√≠culos de deporte,Bolivia,60
+Juguetes y art√≠culos de deporte,Per√∫,70
+Juguetes y art√≠culos de deporte,Colombia,70
+Juguetes y art√≠culos de deporte,Ecuador,65
+Juguetes y art√≠culos de deporte,M√©xico,73
+Juguetes y art√≠culos de deporte,Panam√°,71
+Juguetes y art√≠culos de deporte,Costa Rica,72
+Juguetes y art√≠culos de deporte,Rep√∫blica Dominicana,65
+Juguetes y art√≠culos de deporte,Guatemala,60
+Juguetes y art√≠culos de deporte,El Salvador,61
+Juguetes y art√≠culos de deporte,Honduras,58
+Juguetes y art√≠culos de deporte,Nicaragua,54
+Juguetes y art√≠culos de deporte,Venezuela,30
+Juguetes y art√≠culos de deporte,Uruguay,71
+Juguetes y art√≠culos de deporte,Cuba,47
+Juguetes y art√≠culos de deporte,Hait√≠,32
+Juguetes y art√≠culos de deporte,Puerto Rico,76
+Juguetes y art√≠culos de deporte,Belice,60
+Juguetes y art√≠culos de deporte,Jamaica,64
+Juguetes y art√≠culos de deporte,Trinidad y Tobago,66
+Juguetes y art√≠culos de deporte,Barbados,69
+Juguetes y art√≠culos de deporte,Guyana,58
+Juguetes y art√≠culos de deporte,Surinam,55
+Juguetes y art√≠culos de deporte,Canad√°,82
+Juguetes y art√≠culos de deporte,Estados Unidos,85
+Juguetes y art√≠culos de deporte,Alemania,81
+Juguetes y art√≠culos de deporte,Francia,78
+Juguetes y art√≠culos de deporte,Italia,75
+Juguetes y art√≠culos de deporte,Espa√±a,79
+Juguetes y art√≠culos de deporte,Portugal,77
+Juguetes y art√≠culos de deporte,Pa√≠ses Bajos,83
+Juguetes y art√≠culos de deporte,Reino Unido,79
+Juguetes y art√≠culos de deporte,Rusia,58
+Juguetes y art√≠culos de deporte,India,78
+Juguetes y art√≠culos de deporte,China,82
+Juguetes y art√≠culos de deporte,Jap√≥n,82
+Juguetes y art√≠culos de deporte,Corea del Sur,83
+Juguetes y art√≠culos de deporte,Vietnam,74
+Juguetes y art√≠culos de deporte,Taiwan,82
+Juguetes y art√≠culos de deporte,Sud√°frica,68
 Preparaciones de legumbres,Argentina,72
 Preparaciones de legumbres,Brasil,71
 Preparaciones de legumbres,Paraguay,66
 Preparaciones de legumbres,Chile,77
 Preparaciones de legumbres,Bolivia,60
-Preparaciones de legumbres,Per˙,70
+Preparaciones de legumbres,Per√∫,70
 Preparaciones de legumbres,Colombia,70
 Preparaciones de legumbres,Ecuador,65
-Preparaciones de legumbres,MÈxico,73
-Preparaciones de legumbres,Panam·,71
+Preparaciones de legumbres,M√©xico,73
+Preparaciones de legumbres,Panam√°,71
 Preparaciones de legumbres,Costa Rica,71
-Preparaciones de legumbres,Rep˙blica Dominicana,64
+Preparaciones de legumbres,Rep√∫blica Dominicana,64
 Preparaciones de legumbres,Guatemala,59
 Preparaciones de legumbres,El Salvador,61
 Preparaciones de legumbres,Honduras,57
@@ -1514,7 +1513,7 @@ Preparaciones de legumbres,Nicaragua,53
 Preparaciones de legumbres,Venezuela,29
 Preparaciones de legumbres,Uruguay,70
 Preparaciones de legumbres,Cuba,46
-Preparaciones de legumbres,HaitÌ,31
+Preparaciones de legumbres,Hait√≠,31
 Preparaciones de legumbres,Puerto Rico,75
 Preparaciones de legumbres,Belice,60
 Preparaciones de legumbres,Jamaica,63
@@ -1522,79 +1521,79 @@ Preparaciones de legumbres,Trinidad y Tobago,65
 Preparaciones de legumbres,Barbados,68
 Preparaciones de legumbres,Guyana,57
 Preparaciones de legumbres,Surinam,54
-Preparaciones de legumbres,Canad·,82
+Preparaciones de legumbres,Canad√°,82
 Preparaciones de legumbres,Estados Unidos,84
 Preparaciones de legumbres,Alemania,80
 Preparaciones de legumbres,Francia,77
 Preparaciones de legumbres,Italia,74
-Preparaciones de legumbres,EspaÒa,78
+Preparaciones de legumbres,Espa√±a,78
 Preparaciones de legumbres,Portugal,76
-Preparaciones de legumbres,PaÌses Bajos,82
+Preparaciones de legumbres,Pa√≠ses Bajos,82
 Preparaciones de legumbres,Reino Unido,78
 Preparaciones de legumbres,Rusia,58
 Preparaciones de legumbres,India,77
 Preparaciones de legumbres,China,81
-Preparaciones de legumbres,JapÛn,82
+Preparaciones de legumbres,Jap√≥n,82
 Preparaciones de legumbres,Corea del Sur,83
 Preparaciones de legumbres,Vietnam,73
 Preparaciones de legumbres,Taiwan,81
-Preparaciones de legumbres,Sud·frica,67
-Productos de molinerÌa,Argentina,73
-Productos de molinerÌa,Brasil,70
-Productos de molinerÌa,Paraguay,66
-Productos de molinerÌa,Chile,78
-Productos de molinerÌa,Bolivia,61
-Productos de molinerÌa,Per˙,71
-Productos de molinerÌa,Colombia,70
-Productos de molinerÌa,Ecuador,65
-Productos de molinerÌa,MÈxico,74
-Productos de molinerÌa,Panam·,72
-Productos de molinerÌa,Costa Rica,72
-Productos de molinerÌa,Rep˙blica Dominicana,63
-Productos de molinerÌa,Guatemala,58
-Productos de molinerÌa,El Salvador,61
-Productos de molinerÌa,Honduras,57
-Productos de molinerÌa,Nicaragua,52
-Productos de molinerÌa,Venezuela,29
-Productos de molinerÌa,Uruguay,70
-Productos de molinerÌa,Cuba,46
-Productos de molinerÌa,HaitÌ,31
-Productos de molinerÌa,Puerto Rico,76
-Productos de molinerÌa,Belice,59
-Productos de molinerÌa,Jamaica,64
-Productos de molinerÌa,Trinidad y Tobago,65
-Productos de molinerÌa,Barbados,68
-Productos de molinerÌa,Guyana,57
-Productos de molinerÌa,Surinam,54
-Productos de molinerÌa,Canad·,82
-Productos de molinerÌa,Estados Unidos,85
-Productos de molinerÌa,Alemania,80
-Productos de molinerÌa,Francia,77
-Productos de molinerÌa,Italia,74
-Productos de molinerÌa,EspaÒa,78
-Productos de molinerÌa,Portugal,76
-Productos de molinerÌa,PaÌses Bajos,82
-Productos de molinerÌa,Reino Unido,78
-Productos de molinerÌa,Rusia,57
-Productos de molinerÌa,India,77
-Productos de molinerÌa,China,81
-Productos de molinerÌa,JapÛn,82
-Productos de molinerÌa,Corea del Sur,83
-Productos de molinerÌa,Vietnam,73
-Productos de molinerÌa,Taiwan,81
-Productos de molinerÌa,Sud·frica,67
+Preparaciones de legumbres,Sud√°frica,67
+Productos de moliner√≠a,Argentina,73
+Productos de moliner√≠a,Brasil,70
+Productos de moliner√≠a,Paraguay,66
+Productos de moliner√≠a,Chile,78
+Productos de moliner√≠a,Bolivia,61
+Productos de moliner√≠a,Per√∫,71
+Productos de moliner√≠a,Colombia,70
+Productos de moliner√≠a,Ecuador,65
+Productos de moliner√≠a,M√©xico,74
+Productos de moliner√≠a,Panam√°,72
+Productos de moliner√≠a,Costa Rica,72
+Productos de moliner√≠a,Rep√∫blica Dominicana,63
+Productos de moliner√≠a,Guatemala,58
+Productos de moliner√≠a,El Salvador,61
+Productos de moliner√≠a,Honduras,57
+Productos de moliner√≠a,Nicaragua,52
+Productos de moliner√≠a,Venezuela,29
+Productos de moliner√≠a,Uruguay,70
+Productos de moliner√≠a,Cuba,46
+Productos de moliner√≠a,Hait√≠,31
+Productos de moliner√≠a,Puerto Rico,76
+Productos de moliner√≠a,Belice,59
+Productos de moliner√≠a,Jamaica,64
+Productos de moliner√≠a,Trinidad y Tobago,65
+Productos de moliner√≠a,Barbados,68
+Productos de moliner√≠a,Guyana,57
+Productos de moliner√≠a,Surinam,54
+Productos de moliner√≠a,Canad√°,82
+Productos de moliner√≠a,Estados Unidos,85
+Productos de moliner√≠a,Alemania,80
+Productos de moliner√≠a,Francia,77
+Productos de moliner√≠a,Italia,74
+Productos de moliner√≠a,Espa√±a,78
+Productos de moliner√≠a,Portugal,76
+Productos de moliner√≠a,Pa√≠ses Bajos,82
+Productos de moliner√≠a,Reino Unido,78
+Productos de moliner√≠a,Rusia,57
+Productos de moliner√≠a,India,77
+Productos de moliner√≠a,China,81
+Productos de moliner√≠a,Jap√≥n,82
+Productos de moliner√≠a,Corea del Sur,83
+Productos de moliner√≠a,Vietnam,73
+Productos de moliner√≠a,Taiwan,81
+Productos de moliner√≠a,Sud√°frica,67
 Textiles,Argentina,71
 Textiles,Brasil,72
 Textiles,Paraguay,65
 Textiles,Chile,78
 Textiles,Bolivia,60
-Textiles,Per˙,70
+Textiles,Per√∫,70
 Textiles,Colombia,70
 Textiles,Ecuador,65
-Textiles,MÈxico,73
-Textiles,Panam·,71
+Textiles,M√©xico,73
+Textiles,Panam√°,71
 Textiles,Costa Rica,72
-Textiles,Rep˙blica Dominicana,65
+Textiles,Rep√∫blica Dominicana,65
 Textiles,Guatemala,60
 Textiles,El Salvador,61
 Textiles,Honduras,58
@@ -1602,7 +1601,7 @@ Textiles,Nicaragua,54
 Textiles,Venezuela,30
 Textiles,Uruguay,71
 Textiles,Cuba,47
-Textiles,HaitÌ,32
+Textiles,Hait√≠,32
 Textiles,Puerto Rico,76
 Textiles,Belice,60
 Textiles,Jamaica,64
@@ -1610,123 +1609,123 @@ Textiles,Trinidad y Tobago,66
 Textiles,Barbados,69
 Textiles,Guyana,58
 Textiles,Surinam,55
-Textiles,Canad·,82
+Textiles,Canad√°,82
 Textiles,Estados Unidos,85
 Textiles,Alemania,81
 Textiles,Francia,78
 Textiles,Italia,75
-Textiles,EspaÒa,79
+Textiles,Espa√±a,79
 Textiles,Portugal,77
-Textiles,PaÌses Bajos,83
+Textiles,Pa√≠ses Bajos,83
 Textiles,Reino Unido,79
 Textiles,Rusia,58
 Textiles,India,78
 Textiles,China,82
-Textiles,JapÛn,82
+Textiles,Jap√≥n,82
 Textiles,Corea del Sur,83
 Textiles,Vietnam,74
 Textiles,Taiwan,82
-Textiles,Sud·frica,68
-Productos farmacÈuticos,Argentina,72
-Productos farmacÈuticos,Brasil,71
-Productos farmacÈuticos,Paraguay,66
-Productos farmacÈuticos,Chile,77
-Productos farmacÈuticos,Bolivia,60
-Productos farmacÈuticos,Per˙,70
-Productos farmacÈuticos,Colombia,70
-Productos farmacÈuticos,Ecuador,65
-Productos farmacÈuticos,MÈxico,73
-Productos farmacÈuticos,Panam·,71
-Productos farmacÈuticos,Costa Rica,71
-Productos farmacÈuticos,Rep˙blica Dominicana,64
-Productos farmacÈuticos,Guatemala,59
-Productos farmacÈuticos,El Salvador,61
-Productos farmacÈuticos,Honduras,57
-Productos farmacÈuticos,Nicaragua,53
-Productos farmacÈuticos,Venezuela,29
-Productos farmacÈuticos,Uruguay,70
-Productos farmacÈuticos,Cuba,46
-Productos farmacÈuticos,HaitÌ,31
-Productos farmacÈuticos,Puerto Rico,75
-Productos farmacÈuticos,Belice,60
-Productos farmacÈuticos,Jamaica,63
-Productos farmacÈuticos,Trinidad y Tobago,65
-Productos farmacÈuticos,Barbados,68
-Productos farmacÈuticos,Guyana,57
-Productos farmacÈuticos,Surinam,54
-Productos farmacÈuticos,Canad·,82
-Productos farmacÈuticos,Estados Unidos,84
-Productos farmacÈuticos,Alemania,80
-Productos farmacÈuticos,Francia,77
-Productos farmacÈuticos,Italia,74
-Productos farmacÈuticos,EspaÒa,78
-Productos farmacÈuticos,Portugal,76
-Productos farmacÈuticos,PaÌses Bajos,82
-Productos farmacÈuticos,Reino Unido,78
-Productos farmacÈuticos,Rusia,58
-Productos farmacÈuticos,India,77
-Productos farmacÈuticos,China,81
-Productos farmacÈuticos,JapÛn,82
-Productos farmacÈuticos,Corea del Sur,83
-Productos farmacÈuticos,Vietnam,73
-Productos farmacÈuticos,Taiwan,81
-Productos farmacÈuticos,Sud·frica,67
-Instrumentos Ûpticos,Argentina,73
-Instrumentos Ûpticos,Brasil,70
-Instrumentos Ûpticos,Paraguay,66
-Instrumentos Ûpticos,Chile,78
-Instrumentos Ûpticos,Bolivia,61
-Instrumentos Ûpticos,Per˙,71
-Instrumentos Ûpticos,Colombia,70
-Instrumentos Ûpticos,Ecuador,65
-Instrumentos Ûpticos,MÈxico,74
-Instrumentos Ûpticos,Panam·,72
-Instrumentos Ûpticos,Costa Rica,72
-Instrumentos Ûpticos,Rep˙blica Dominicana,63
-Instrumentos Ûpticos,Guatemala,58
-Instrumentos Ûpticos,El Salvador,61
-Instrumentos Ûpticos,Honduras,57
-Instrumentos Ûpticos,Nicaragua,52
-Instrumentos Ûpticos,Venezuela,29
-Instrumentos Ûpticos,Uruguay,70
-Instrumentos Ûpticos,Cuba,46
-Instrumentos Ûpticos,HaitÌ,31
-Instrumentos Ûpticos,Puerto Rico,76
-Instrumentos Ûpticos,Belice,59
-Instrumentos Ûpticos,Jamaica,64
-Instrumentos Ûpticos,Trinidad y Tobago,65
-Instrumentos Ûpticos,Barbados,68
-Instrumentos Ûpticos,Guyana,57
-Instrumentos Ûpticos,Surinam,54
-Instrumentos Ûpticos,Canad·,82
-Instrumentos Ûpticos,Estados Unidos,85
-Instrumentos Ûpticos,Alemania,80
-Instrumentos Ûpticos,Francia,77
-Instrumentos Ûpticos,Italia,74
-Instrumentos Ûpticos,EspaÒa,78
-Instrumentos Ûpticos,Portugal,76
-Instrumentos Ûpticos,PaÌses Bajos,82
-Instrumentos Ûpticos,Reino Unido,78
-Instrumentos Ûpticos,Rusia,57
-Instrumentos Ûpticos,India,77
-Instrumentos Ûpticos,China,81
-Instrumentos Ûpticos,JapÛn,82
-Instrumentos Ûpticos,Corea del Sur,83
-Instrumentos Ûpticos,Vietnam,73
-Instrumentos Ûpticos,Taiwan,81
-Instrumentos Ûpticos,Sud·frica,67
+Textiles,Sud√°frica,68
+Productos farmac√©uticos,Argentina,72
+Productos farmac√©uticos,Brasil,71
+Productos farmac√©uticos,Paraguay,66
+Productos farmac√©uticos,Chile,77
+Productos farmac√©uticos,Bolivia,60
+Productos farmac√©uticos,Per√∫,70
+Productos farmac√©uticos,Colombia,70
+Productos farmac√©uticos,Ecuador,65
+Productos farmac√©uticos,M√©xico,73
+Productos farmac√©uticos,Panam√°,71
+Productos farmac√©uticos,Costa Rica,71
+Productos farmac√©uticos,Rep√∫blica Dominicana,64
+Productos farmac√©uticos,Guatemala,59
+Productos farmac√©uticos,El Salvador,61
+Productos farmac√©uticos,Honduras,57
+Productos farmac√©uticos,Nicaragua,53
+Productos farmac√©uticos,Venezuela,29
+Productos farmac√©uticos,Uruguay,70
+Productos farmac√©uticos,Cuba,46
+Productos farmac√©uticos,Hait√≠,31
+Productos farmac√©uticos,Puerto Rico,75
+Productos farmac√©uticos,Belice,60
+Productos farmac√©uticos,Jamaica,63
+Productos farmac√©uticos,Trinidad y Tobago,65
+Productos farmac√©uticos,Barbados,68
+Productos farmac√©uticos,Guyana,57
+Productos farmac√©uticos,Surinam,54
+Productos farmac√©uticos,Canad√°,82
+Productos farmac√©uticos,Estados Unidos,84
+Productos farmac√©uticos,Alemania,80
+Productos farmac√©uticos,Francia,77
+Productos farmac√©uticos,Italia,74
+Productos farmac√©uticos,Espa√±a,78
+Productos farmac√©uticos,Portugal,76
+Productos farmac√©uticos,Pa√≠ses Bajos,82
+Productos farmac√©uticos,Reino Unido,78
+Productos farmac√©uticos,Rusia,58
+Productos farmac√©uticos,India,77
+Productos farmac√©uticos,China,81
+Productos farmac√©uticos,Jap√≥n,82
+Productos farmac√©uticos,Corea del Sur,83
+Productos farmac√©uticos,Vietnam,73
+Productos farmac√©uticos,Taiwan,81
+Productos farmac√©uticos,Sud√°frica,67
+Instrumentos √≥pticos,Argentina,73
+Instrumentos √≥pticos,Brasil,70
+Instrumentos √≥pticos,Paraguay,66
+Instrumentos √≥pticos,Chile,78
+Instrumentos √≥pticos,Bolivia,61
+Instrumentos √≥pticos,Per√∫,71
+Instrumentos √≥pticos,Colombia,70
+Instrumentos √≥pticos,Ecuador,65
+Instrumentos √≥pticos,M√©xico,74
+Instrumentos √≥pticos,Panam√°,72
+Instrumentos √≥pticos,Costa Rica,72
+Instrumentos √≥pticos,Rep√∫blica Dominicana,63
+Instrumentos √≥pticos,Guatemala,58
+Instrumentos √≥pticos,El Salvador,61
+Instrumentos √≥pticos,Honduras,57
+Instrumentos √≥pticos,Nicaragua,52
+Instrumentos √≥pticos,Venezuela,29
+Instrumentos √≥pticos,Uruguay,70
+Instrumentos √≥pticos,Cuba,46
+Instrumentos √≥pticos,Hait√≠,31
+Instrumentos √≥pticos,Puerto Rico,76
+Instrumentos √≥pticos,Belice,59
+Instrumentos √≥pticos,Jamaica,64
+Instrumentos √≥pticos,Trinidad y Tobago,65
+Instrumentos √≥pticos,Barbados,68
+Instrumentos √≥pticos,Guyana,57
+Instrumentos √≥pticos,Surinam,54
+Instrumentos √≥pticos,Canad√°,82
+Instrumentos √≥pticos,Estados Unidos,85
+Instrumentos √≥pticos,Alemania,80
+Instrumentos √≥pticos,Francia,77
+Instrumentos √≥pticos,Italia,74
+Instrumentos √≥pticos,Espa√±a,78
+Instrumentos √≥pticos,Portugal,76
+Instrumentos √≥pticos,Pa√≠ses Bajos,82
+Instrumentos √≥pticos,Reino Unido,78
+Instrumentos √≥pticos,Rusia,57
+Instrumentos √≥pticos,India,77
+Instrumentos √≥pticos,China,81
+Instrumentos √≥pticos,Jap√≥n,82
+Instrumentos √≥pticos,Corea del Sur,83
+Instrumentos √≥pticos,Vietnam,73
+Instrumentos √≥pticos,Taiwan,81
+Instrumentos √≥pticos,Sud√°frica,67
 Jabones,Argentina,71
 Jabones,Brasil,72
 Jabones,Paraguay,65
 Jabones,Chile,78
 Jabones,Bolivia,60
-Jabones,Per˙,70
+Jabones,Per√∫,70
 Jabones,Colombia,70
 Jabones,Ecuador,65
-Jabones,MÈxico,73
-Jabones,Panam·,71
+Jabones,M√©xico,73
+Jabones,Panam√°,71
 Jabones,Costa Rica,72
-Jabones,Rep˙blica Dominicana,65
+Jabones,Rep√∫blica Dominicana,65
 Jabones,Guatemala,60
 Jabones,El Salvador,61
 Jabones,Honduras,58
@@ -1734,7 +1733,7 @@ Jabones,Nicaragua,54
 Jabones,Venezuela,30
 Jabones,Uruguay,71
 Jabones,Cuba,47
-Jabones,HaitÌ,32
+Jabones,Hait√≠,32
 Jabones,Puerto Rico,76
 Jabones,Belice,60
 Jabones,Jamaica,64
@@ -1742,167 +1741,167 @@ Jabones,Trinidad y Tobago,66
 Jabones,Barbados,69
 Jabones,Guyana,58
 Jabones,Surinam,55
-Jabones,Canad·,82
+Jabones,Canad√°,82
 Jabones,Estados Unidos,85
 Jabones,Alemania,81
 Jabones,Francia,78
 Jabones,Italia,75
-Jabones,EspaÒa,79
+Jabones,Espa√±a,79
 Jabones,Portugal,77
-Jabones,PaÌses Bajos,83
+Jabones,Pa√≠ses Bajos,83
 Jabones,Reino Unido,79
 Jabones,Rusia,58
 Jabones,India,78
 Jabones,China,82
-Jabones,JapÛn,82
+Jabones,Jap√≥n,82
 Jabones,Corea del Sur,83
 Jabones,Vietnam,74
 Jabones,Taiwan,82
-Jabones,Sud·frica,68
-Perfumes y cosmÈticos,Argentina,72
-Perfumes y cosmÈticos,Brasil,71
-Perfumes y cosmÈticos,Paraguay,66
-Perfumes y cosmÈticos,Chile,77
-Perfumes y cosmÈticos,Bolivia,60
-Perfumes y cosmÈticos,Per˙,70
-Perfumes y cosmÈticos,Colombia,70
-Perfumes y cosmÈticos,Ecuador,65
-Perfumes y cosmÈticos,MÈxico,73
-Perfumes y cosmÈticos,Panam·,71
-Perfumes y cosmÈticos,Costa Rica,71
-Perfumes y cosmÈticos,Rep˙blica Dominicana,64
-Perfumes y cosmÈticos,Guatemala,59
-Perfumes y cosmÈticos,El Salvador,61
-Perfumes y cosmÈticos,Honduras,57
-Perfumes y cosmÈticos,Nicaragua,53
-Perfumes y cosmÈticos,Venezuela,29
-Perfumes y cosmÈticos,Uruguay,70
-Perfumes y cosmÈticos,Cuba,46
-Perfumes y cosmÈticos,HaitÌ,31
-Perfumes y cosmÈticos,Puerto Rico,75
-Perfumes y cosmÈticos,Belice,60
-Perfumes y cosmÈticos,Jamaica,63
-Perfumes y cosmÈticos,Trinidad y Tobago,65
-Perfumes y cosmÈticos,Barbados,68
-Perfumes y cosmÈticos,Guyana,57
-Perfumes y cosmÈticos,Surinam,54
-Perfumes y cosmÈticos,Canad·,82
-Perfumes y cosmÈticos,Estados Unidos,84
-Perfumes y cosmÈticos,Alemania,80
-Perfumes y cosmÈticos,Francia,77
-Perfumes y cosmÈticos,Italia,74
-Perfumes y cosmÈticos,EspaÒa,78
-Perfumes y cosmÈticos,Portugal,76
-Perfumes y cosmÈticos,PaÌses Bajos,82
-Perfumes y cosmÈticos,Reino Unido,78
-Perfumes y cosmÈticos,Rusia,58
-Perfumes y cosmÈticos,India,77
-Perfumes y cosmÈticos,China,81
-Perfumes y cosmÈticos,JapÛn,82
-Perfumes y cosmÈticos,Corea del Sur,83
-Perfumes y cosmÈticos,Vietnam,73
-Perfumes y cosmÈticos,Taiwan,81
-Perfumes y cosmÈticos,Sud·frica,67
-ArtÌculos de viaje,Argentina,73
-ArtÌculos de viaje,Brasil,70
-ArtÌculos de viaje,Paraguay,66
-ArtÌculos de viaje,Chile,78
-ArtÌculos de viaje,Bolivia,61
-ArtÌculos de viaje,Per˙,71
-ArtÌculos de viaje,Colombia,70
-ArtÌculos de viaje,Ecuador,65
-ArtÌculos de viaje,MÈxico,74
-ArtÌculos de viaje,Panam·,72
-ArtÌculos de viaje,Costa Rica,72
-ArtÌculos de viaje,Rep˙blica Dominicana,63
-ArtÌculos de viaje,Guatemala,58
-ArtÌculos de viaje,El Salvador,61
-ArtÌculos de viaje,Honduras,57
-ArtÌculos de viaje,Nicaragua,52
-ArtÌculos de viaje,Venezuela,29
-ArtÌculos de viaje,Uruguay,70
-ArtÌculos de viaje,Cuba,46
-ArtÌculos de viaje,HaitÌ,31
-ArtÌculos de viaje,Puerto Rico,76
-ArtÌculos de viaje,Belice,59
-ArtÌculos de viaje,Jamaica,64
-ArtÌculos de viaje,Trinidad y Tobago,65
-ArtÌculos de viaje,Barbados,68
-ArtÌculos de viaje,Guyana,57
-ArtÌculos de viaje,Surinam,54
-ArtÌculos de viaje,Canad·,82
-ArtÌculos de viaje,Estados Unidos,85
-ArtÌculos de viaje,Alemania,80
-ArtÌculos de viaje,Francia,77
-ArtÌculos de viaje,Italia,74
-ArtÌculos de viaje,EspaÒa,78
-ArtÌculos de viaje,Portugal,76
-ArtÌculos de viaje,PaÌses Bajos,82
-ArtÌculos de viaje,Reino Unido,78
-ArtÌculos de viaje,Rusia,57
-ArtÌculos de viaje,India,77
-ArtÌculos de viaje,China,81
-ArtÌculos de viaje,JapÛn,82
-ArtÌculos de viaje,Corea del Sur,83
-ArtÌculos de viaje,Vietnam,73
-ArtÌculos de viaje,Taiwan,81
-ArtÌculos de viaje,Sud·frica,67
-Cer·mica,Argentina,71
-Cer·mica,Brasil,72
-Cer·mica,Paraguay,65
-Cer·mica,Chile,78
-Cer·mica,Bolivia,60
-Cer·mica,Per˙,70
-Cer·mica,Colombia,70
-Cer·mica,Ecuador,65
-Cer·mica,MÈxico,73
-Cer·mica,Panam·,71
-Cer·mica,Costa Rica,72
-Cer·mica,Rep˙blica Dominicana,65
-Cer·mica,Guatemala,60
-Cer·mica,El Salvador,61
-Cer·mica,Honduras,58
-Cer·mica,Nicaragua,54
-Cer·mica,Venezuela,30
-Cer·mica,Uruguay,71
-Cer·mica,Cuba,47
-Cer·mica,HaitÌ,32
-Cer·mica,Puerto Rico,76
-Cer·mica,Belice,60
-Cer·mica,Jamaica,64
-Cer·mica,Trinidad y Tobago,66
-Cer·mica,Barbados,69
-Cer·mica,Guyana,58
-Cer·mica,Surinam,55
-Cer·mica,Canad·,82
-Cer·mica,Estados Unidos,85
-Cer·mica,Alemania,81
-Cer·mica,Francia,78
-Cer·mica,Italia,75
-Cer·mica,EspaÒa,79
-Cer·mica,Portugal,77
-Cer·mica,PaÌses Bajos,83
-Cer·mica,Reino Unido,79
-Cer·mica,Rusia,58
-Cer·mica,India,78
-Cer·mica,China,82
-Cer·mica,JapÛn,82
-Cer·mica,Corea del Sur,83
-Cer·mica,Vietnam,74
-Cer·mica,Taiwan,82
-Cer·mica,Sud·frica,68
+Jabones,Sud√°frica,68
+Perfumes y cosm√©ticos,Argentina,72
+Perfumes y cosm√©ticos,Brasil,71
+Perfumes y cosm√©ticos,Paraguay,66
+Perfumes y cosm√©ticos,Chile,77
+Perfumes y cosm√©ticos,Bolivia,60
+Perfumes y cosm√©ticos,Per√∫,70
+Perfumes y cosm√©ticos,Colombia,70
+Perfumes y cosm√©ticos,Ecuador,65
+Perfumes y cosm√©ticos,M√©xico,73
+Perfumes y cosm√©ticos,Panam√°,71
+Perfumes y cosm√©ticos,Costa Rica,71
+Perfumes y cosm√©ticos,Rep√∫blica Dominicana,64
+Perfumes y cosm√©ticos,Guatemala,59
+Perfumes y cosm√©ticos,El Salvador,61
+Perfumes y cosm√©ticos,Honduras,57
+Perfumes y cosm√©ticos,Nicaragua,53
+Perfumes y cosm√©ticos,Venezuela,29
+Perfumes y cosm√©ticos,Uruguay,70
+Perfumes y cosm√©ticos,Cuba,46
+Perfumes y cosm√©ticos,Hait√≠,31
+Perfumes y cosm√©ticos,Puerto Rico,75
+Perfumes y cosm√©ticos,Belice,60
+Perfumes y cosm√©ticos,Jamaica,63
+Perfumes y cosm√©ticos,Trinidad y Tobago,65
+Perfumes y cosm√©ticos,Barbados,68
+Perfumes y cosm√©ticos,Guyana,57
+Perfumes y cosm√©ticos,Surinam,54
+Perfumes y cosm√©ticos,Canad√°,82
+Perfumes y cosm√©ticos,Estados Unidos,84
+Perfumes y cosm√©ticos,Alemania,80
+Perfumes y cosm√©ticos,Francia,77
+Perfumes y cosm√©ticos,Italia,74
+Perfumes y cosm√©ticos,Espa√±a,78
+Perfumes y cosm√©ticos,Portugal,76
+Perfumes y cosm√©ticos,Pa√≠ses Bajos,82
+Perfumes y cosm√©ticos,Reino Unido,78
+Perfumes y cosm√©ticos,Rusia,58
+Perfumes y cosm√©ticos,India,77
+Perfumes y cosm√©ticos,China,81
+Perfumes y cosm√©ticos,Jap√≥n,82
+Perfumes y cosm√©ticos,Corea del Sur,83
+Perfumes y cosm√©ticos,Vietnam,73
+Perfumes y cosm√©ticos,Taiwan,81
+Perfumes y cosm√©ticos,Sud√°frica,67
+Art√≠culos de viaje,Argentina,73
+Art√≠culos de viaje,Brasil,70
+Art√≠culos de viaje,Paraguay,66
+Art√≠culos de viaje,Chile,78
+Art√≠culos de viaje,Bolivia,61
+Art√≠culos de viaje,Per√∫,71
+Art√≠culos de viaje,Colombia,70
+Art√≠culos de viaje,Ecuador,65
+Art√≠culos de viaje,M√©xico,74
+Art√≠culos de viaje,Panam√°,72
+Art√≠culos de viaje,Costa Rica,72
+Art√≠culos de viaje,Rep√∫blica Dominicana,63
+Art√≠culos de viaje,Guatemala,58
+Art√≠culos de viaje,El Salvador,61
+Art√≠culos de viaje,Honduras,57
+Art√≠culos de viaje,Nicaragua,52
+Art√≠culos de viaje,Venezuela,29
+Art√≠culos de viaje,Uruguay,70
+Art√≠culos de viaje,Cuba,46
+Art√≠culos de viaje,Hait√≠,31
+Art√≠culos de viaje,Puerto Rico,76
+Art√≠culos de viaje,Belice,59
+Art√≠culos de viaje,Jamaica,64
+Art√≠culos de viaje,Trinidad y Tobago,65
+Art√≠culos de viaje,Barbados,68
+Art√≠culos de viaje,Guyana,57
+Art√≠culos de viaje,Surinam,54
+Art√≠culos de viaje,Canad√°,82
+Art√≠culos de viaje,Estados Unidos,85
+Art√≠culos de viaje,Alemania,80
+Art√≠culos de viaje,Francia,77
+Art√≠culos de viaje,Italia,74
+Art√≠culos de viaje,Espa√±a,78
+Art√≠culos de viaje,Portugal,76
+Art√≠culos de viaje,Pa√≠ses Bajos,82
+Art√≠culos de viaje,Reino Unido,78
+Art√≠culos de viaje,Rusia,57
+Art√≠culos de viaje,India,77
+Art√≠culos de viaje,China,81
+Art√≠culos de viaje,Jap√≥n,82
+Art√≠culos de viaje,Corea del Sur,83
+Art√≠culos de viaje,Vietnam,73
+Art√≠culos de viaje,Taiwan,81
+Art√≠culos de viaje,Sud√°frica,67
+Cer√°mica,Argentina,71
+Cer√°mica,Brasil,72
+Cer√°mica,Paraguay,65
+Cer√°mica,Chile,78
+Cer√°mica,Bolivia,60
+Cer√°mica,Per√∫,70
+Cer√°mica,Colombia,70
+Cer√°mica,Ecuador,65
+Cer√°mica,M√©xico,73
+Cer√°mica,Panam√°,71
+Cer√°mica,Costa Rica,72
+Cer√°mica,Rep√∫blica Dominicana,65
+Cer√°mica,Guatemala,60
+Cer√°mica,El Salvador,61
+Cer√°mica,Honduras,58
+Cer√°mica,Nicaragua,54
+Cer√°mica,Venezuela,30
+Cer√°mica,Uruguay,71
+Cer√°mica,Cuba,47
+Cer√°mica,Hait√≠,32
+Cer√°mica,Puerto Rico,76
+Cer√°mica,Belice,60
+Cer√°mica,Jamaica,64
+Cer√°mica,Trinidad y Tobago,66
+Cer√°mica,Barbados,69
+Cer√°mica,Guyana,58
+Cer√°mica,Surinam,55
+Cer√°mica,Canad√°,82
+Cer√°mica,Estados Unidos,85
+Cer√°mica,Alemania,81
+Cer√°mica,Francia,78
+Cer√°mica,Italia,75
+Cer√°mica,Espa√±a,79
+Cer√°mica,Portugal,77
+Cer√°mica,Pa√≠ses Bajos,83
+Cer√°mica,Reino Unido,79
+Cer√°mica,Rusia,58
+Cer√°mica,India,78
+Cer√°mica,China,82
+Cer√°mica,Jap√≥n,82
+Cer√°mica,Corea del Sur,83
+Cer√°mica,Vietnam,74
+Cer√°mica,Taiwan,82
+Cer√°mica,Sud√°frica,68
 Vidrio,Argentina,72
 Vidrio,Brasil,71
 Vidrio,Paraguay,66
 Vidrio,Chile,77
 Vidrio,Bolivia,60
-Vidrio,Per˙,70
+Vidrio,Per√∫,70
 Vidrio,Colombia,70
 Vidrio,Ecuador,65
-Vidrio,MÈxico,73
-Vidrio,Panam·,71
+Vidrio,M√©xico,73
+Vidrio,Panam√°,71
 Vidrio,Costa Rica,71
-Vidrio,Rep˙blica Dominicana,64
+Vidrio,Rep√∫blica Dominicana,64
 Vidrio,Guatemala,59
 Vidrio,El Salvador,61
 Vidrio,Honduras,57
@@ -1910,7 +1909,7 @@ Vidrio,Nicaragua,53
 Vidrio,Venezuela,29
 Vidrio,Uruguay,70
 Vidrio,Cuba,46
-Vidrio,HaitÌ,31
+Vidrio,Hait√≠,31
 Vidrio,Puerto Rico,75
 Vidrio,Belice,60
 Vidrio,Jamaica,63
@@ -1918,79 +1917,79 @@ Vidrio,Trinidad y Tobago,65
 Vidrio,Barbados,68
 Vidrio,Guyana,57
 Vidrio,Surinam,54
-Vidrio,Canad·,82
+Vidrio,Canad√°,82
 Vidrio,Estados Unidos,84
 Vidrio,Alemania,80
 Vidrio,Francia,77
 Vidrio,Italia,74
-Vidrio,EspaÒa,78
+Vidrio,Espa√±a,78
 Vidrio,Portugal,76
-Vidrio,PaÌses Bajos,82
+Vidrio,Pa√≠ses Bajos,82
 Vidrio,Reino Unido,78
 Vidrio,Rusia,58
 Vidrio,India,77
 Vidrio,China,81
-Vidrio,JapÛn,82
+Vidrio,Jap√≥n,82
 Vidrio,Corea del Sur,83
 Vidrio,Vietnam,73
 Vidrio,Taiwan,81
-Vidrio,Sud·frica,67
-FundiciÛn de hierro y acero,Argentina,73
-FundiciÛn de hierro y acero,Brasil,70
-FundiciÛn de hierro y acero,Paraguay,66
-FundiciÛn de hierro y acero,Chile,78
-FundiciÛn de hierro y acero,Bolivia,61
-FundiciÛn de hierro y acero,Per˙,71
-FundiciÛn de hierro y acero,Colombia,70
-FundiciÛn de hierro y acero,Ecuador,65
-FundiciÛn de hierro y acero,MÈxico,74
-FundiciÛn de hierro y acero,Panam·,72
-FundiciÛn de hierro y acero,Costa Rica,72
-FundiciÛn de hierro y acero,Rep˙blica Dominicana,63
-FundiciÛn de hierro y acero,Guatemala,58
-FundiciÛn de hierro y acero,El Salvador,61
-FundiciÛn de hierro y acero,Honduras,57
-FundiciÛn de hierro y acero,Nicaragua,52
-FundiciÛn de hierro y acero,Venezuela,29
-FundiciÛn de hierro y acero,Uruguay,70
-FundiciÛn de hierro y acero,Cuba,46
-FundiciÛn de hierro y acero,HaitÌ,31
-FundiciÛn de hierro y acero,Puerto Rico,76
-FundiciÛn de hierro y acero,Belice,59
-FundiciÛn de hierro y acero,Jamaica,64
-FundiciÛn de hierro y acero,Trinidad y Tobago,65
-FundiciÛn de hierro y acero,Barbados,68
-FundiciÛn de hierro y acero,Guyana,57
-FundiciÛn de hierro y acero,Surinam,54
-FundiciÛn de hierro y acero,Canad·,82
-FundiciÛn de hierro y acero,Estados Unidos,85
-FundiciÛn de hierro y acero,Alemania,80
-FundiciÛn de hierro y acero,Francia,77
-FundiciÛn de hierro y acero,Italia,74
-FundiciÛn de hierro y acero,EspaÒa,78
-FundiciÛn de hierro y acero,Portugal,76
-FundiciÛn de hierro y acero,PaÌses Bajos,82
-FundiciÛn de hierro y acero,Reino Unido,78
-FundiciÛn de hierro y acero,Rusia,57
-FundiciÛn de hierro y acero,India,77
-FundiciÛn de hierro y acero,China,81
-FundiciÛn de hierro y acero,JapÛn,82
-FundiciÛn de hierro y acero,Corea del Sur,83
-FundiciÛn de hierro y acero,Vietnam,73
-FundiciÛn de hierro y acero,Taiwan,81
-FundiciÛn de hierro y acero,Sud·frica,67
+Vidrio,Sud√°frica,67
+Fundici√≥n de hierro y acero,Argentina,73
+Fundici√≥n de hierro y acero,Brasil,70
+Fundici√≥n de hierro y acero,Paraguay,66
+Fundici√≥n de hierro y acero,Chile,78
+Fundici√≥n de hierro y acero,Bolivia,61
+Fundici√≥n de hierro y acero,Per√∫,71
+Fundici√≥n de hierro y acero,Colombia,70
+Fundici√≥n de hierro y acero,Ecuador,65
+Fundici√≥n de hierro y acero,M√©xico,74
+Fundici√≥n de hierro y acero,Panam√°,72
+Fundici√≥n de hierro y acero,Costa Rica,72
+Fundici√≥n de hierro y acero,Rep√∫blica Dominicana,63
+Fundici√≥n de hierro y acero,Guatemala,58
+Fundici√≥n de hierro y acero,El Salvador,61
+Fundici√≥n de hierro y acero,Honduras,57
+Fundici√≥n de hierro y acero,Nicaragua,52
+Fundici√≥n de hierro y acero,Venezuela,29
+Fundici√≥n de hierro y acero,Uruguay,70
+Fundici√≥n de hierro y acero,Cuba,46
+Fundici√≥n de hierro y acero,Hait√≠,31
+Fundici√≥n de hierro y acero,Puerto Rico,76
+Fundici√≥n de hierro y acero,Belice,59
+Fundici√≥n de hierro y acero,Jamaica,64
+Fundici√≥n de hierro y acero,Trinidad y Tobago,65
+Fundici√≥n de hierro y acero,Barbados,68
+Fundici√≥n de hierro y acero,Guyana,57
+Fundici√≥n de hierro y acero,Surinam,54
+Fundici√≥n de hierro y acero,Canad√°,82
+Fundici√≥n de hierro y acero,Estados Unidos,85
+Fundici√≥n de hierro y acero,Alemania,80
+Fundici√≥n de hierro y acero,Francia,77
+Fundici√≥n de hierro y acero,Italia,74
+Fundici√≥n de hierro y acero,Espa√±a,78
+Fundici√≥n de hierro y acero,Portugal,76
+Fundici√≥n de hierro y acero,Pa√≠ses Bajos,82
+Fundici√≥n de hierro y acero,Reino Unido,78
+Fundici√≥n de hierro y acero,Rusia,57
+Fundici√≥n de hierro y acero,India,77
+Fundici√≥n de hierro y acero,China,81
+Fundici√≥n de hierro y acero,Jap√≥n,82
+Fundici√≥n de hierro y acero,Corea del Sur,83
+Fundici√≥n de hierro y acero,Vietnam,73
+Fundici√≥n de hierro y acero,Taiwan,81
+Fundici√≥n de hierro y acero,Sud√°frica,67
 Aluminio,Argentina,71
 Aluminio,Brasil,72
 Aluminio,Paraguay,65
 Aluminio,Chile,78
 Aluminio,Bolivia,60
-Aluminio,Per˙,70
+Aluminio,Per√∫,70
 Aluminio,Colombia,70
 Aluminio,Ecuador,65
-Aluminio,MÈxico,73
-Aluminio,Panam·,71
+Aluminio,M√©xico,73
+Aluminio,Panam√°,71
 Aluminio,Costa Rica,72
-Aluminio,Rep˙blica Dominicana,65
+Aluminio,Rep√∫blica Dominicana,65
 Aluminio,Guatemala,60
 Aluminio,El Salvador,61
 Aluminio,Honduras,58
@@ -1998,7 +1997,7 @@ Aluminio,Nicaragua,54
 Aluminio,Venezuela,30
 Aluminio,Uruguay,71
 Aluminio,Cuba,47
-Aluminio,HaitÌ,32
+Aluminio,Hait√≠,32
 Aluminio,Puerto Rico,76
 Aluminio,Belice,60
 Aluminio,Jamaica,64
@@ -2006,35 +2005,35 @@ Aluminio,Trinidad y Tobago,66
 Aluminio,Barbados,69
 Aluminio,Guyana,58
 Aluminio,Surinam,55
-Aluminio,Canad·,82
+Aluminio,Canad√°,82
 Aluminio,Estados Unidos,85
 Aluminio,Alemania,81
 Aluminio,Francia,78
 Aluminio,Italia,75
-Aluminio,EspaÒa,79
+Aluminio,Espa√±a,79
 Aluminio,Portugal,77
-Aluminio,PaÌses Bajos,83
+Aluminio,Pa√≠ses Bajos,83
 Aluminio,Reino Unido,79
 Aluminio,Rusia,58
 Aluminio,India,78
 Aluminio,China,82
-Aluminio,JapÛn,82
+Aluminio,Jap√≥n,82
 Aluminio,Corea del Sur,83
 Aluminio,Vietnam,74
 Aluminio,Taiwan,82
-Aluminio,Sud·frica,68
+Aluminio,Sud√°frica,68
 Cobre,Argentina,72
 Cobre,Brasil,71
 Cobre,Paraguay,66
 Cobre,Chile,77
 Cobre,Bolivia,60
-Cobre,Per˙,70
+Cobre,Per√∫,70
 Cobre,Colombia,70
 Cobre,Ecuador,65
-Cobre,MÈxico,73
-Cobre,Panam·,71
+Cobre,M√©xico,73
+Cobre,Panam√°,71
 Cobre,Costa Rica,71
-Cobre,Rep˙blica Dominicana,64
+Cobre,Rep√∫blica Dominicana,64
 Cobre,Guatemala,59
 Cobre,El Salvador,61
 Cobre,Honduras,57
@@ -2042,7 +2041,7 @@ Cobre,Nicaragua,53
 Cobre,Venezuela,29
 Cobre,Uruguay,70
 Cobre,Cuba,46
-Cobre,HaitÌ,31
+Cobre,Hait√≠,31
 Cobre,Puerto Rico,75
 Cobre,Belice,60
 Cobre,Jamaica,63
@@ -2050,79 +2049,79 @@ Cobre,Trinidad y Tobago,65
 Cobre,Barbados,68
 Cobre,Guyana,57
 Cobre,Surinam,54
-Cobre,Canad·,82
+Cobre,Canad√°,82
 Cobre,Estados Unidos,84
 Cobre,Alemania,80
 Cobre,Francia,77
 Cobre,Italia,74
-Cobre,EspaÒa,78
+Cobre,Espa√±a,78
 Cobre,Portugal,76
-Cobre,PaÌses Bajos,82
+Cobre,Pa√≠ses Bajos,82
 Cobre,Reino Unido,78
 Cobre,Rusia,58
 Cobre,India,77
 Cobre,China,81
-Cobre,JapÛn,82
+Cobre,Jap√≥n,82
 Cobre,Corea del Sur,83
 Cobre,Vietnam,73
 Cobre,Taiwan,81
-Cobre,Sud·frica,67
-NÌquel,Argentina,73
-NÌquel,Brasil,70
-NÌquel,Paraguay,66
-NÌquel,Chile,78
-NÌquel,Bolivia,61
-NÌquel,Per˙,71
-NÌquel,Colombia,70
-NÌquel,Ecuador,65
-NÌquel,MÈxico,74
-NÌquel,Panam·,72
-NÌquel,Costa Rica,72
-NÌquel,Rep˙blica Dominicana,63
-NÌquel,Guatemala,58
-NÌquel,El Salvador,61
-NÌquel,Honduras,57
-NÌquel,Nicaragua,52
-NÌquel,Venezuela,29
-NÌquel,Uruguay,70
-NÌquel,Cuba,46
-NÌquel,HaitÌ,31
-NÌquel,Puerto Rico,76
-NÌquel,Belice,59
-NÌquel,Jamaica,64
-NÌquel,Trinidad y Tobago,65
-NÌquel,Barbados,68
-NÌquel,Guyana,57
-NÌquel,Surinam,54
-NÌquel,Canad·,82
-NÌquel,Estados Unidos,85
-NÌquel,Alemania,80
-NÌquel,Francia,77
-NÌquel,Italia,74
-NÌquel,EspaÒa,78
-NÌquel,Portugal,76
-NÌquel,PaÌses Bajos,82
-NÌquel,Reino Unido,78
-NÌquel,Rusia,57
-NÌquel,India,77
-NÌquel,China,81
-NÌquel,JapÛn,82
-NÌquel,Corea del Sur,83
-NÌquel,Vietnam,73
-NÌquel,Taiwan,81
-NÌquel,Sud·frica,67
+Cobre,Sud√°frica,67
+N√≠quel,Argentina,73
+N√≠quel,Brasil,70
+N√≠quel,Paraguay,66
+N√≠quel,Chile,78
+N√≠quel,Bolivia,61
+N√≠quel,Per√∫,71
+N√≠quel,Colombia,70
+N√≠quel,Ecuador,65
+N√≠quel,M√©xico,74
+N√≠quel,Panam√°,72
+N√≠quel,Costa Rica,72
+N√≠quel,Rep√∫blica Dominicana,63
+N√≠quel,Guatemala,58
+N√≠quel,El Salvador,61
+N√≠quel,Honduras,57
+N√≠quel,Nicaragua,52
+N√≠quel,Venezuela,29
+N√≠quel,Uruguay,70
+N√≠quel,Cuba,46
+N√≠quel,Hait√≠,31
+N√≠quel,Puerto Rico,76
+N√≠quel,Belice,59
+N√≠quel,Jamaica,64
+N√≠quel,Trinidad y Tobago,65
+N√≠quel,Barbados,68
+N√≠quel,Guyana,57
+N√≠quel,Surinam,54
+N√≠quel,Canad√°,82
+N√≠quel,Estados Unidos,85
+N√≠quel,Alemania,80
+N√≠quel,Francia,77
+N√≠quel,Italia,74
+N√≠quel,Espa√±a,78
+N√≠quel,Portugal,76
+N√≠quel,Pa√≠ses Bajos,82
+N√≠quel,Reino Unido,78
+N√≠quel,Rusia,57
+N√≠quel,India,77
+N√≠quel,China,81
+N√≠quel,Jap√≥n,82
+N√≠quel,Corea del Sur,83
+N√≠quel,Vietnam,73
+N√≠quel,Taiwan,81
+N√≠quel,Sud√°frica,67
 Herramientas,Argentina,71
 Herramientas,Brasil,72
 Herramientas,Paraguay,65
 Herramientas,Chile,78
 Herramientas,Bolivia,60
-Herramientas,Per˙,70
+Herramientas,Per√∫,70
 Herramientas,Colombia,70
 Herramientas,Ecuador,65
-Herramientas,MÈxico,73
-Herramientas,Panam·,71
+Herramientas,M√©xico,73
+Herramientas,Panam√°,71
 Herramientas,Costa Rica,72
-Herramientas,Rep˙blica Dominicana,65
+Herramientas,Rep√∫blica Dominicana,65
 Herramientas,Guatemala,60
 Herramientas,El Salvador,61
 Herramientas,Honduras,58
@@ -2130,7 +2129,7 @@ Herramientas,Nicaragua,54
 Herramientas,Venezuela,30
 Herramientas,Uruguay,71
 Herramientas,Cuba,47
-Herramientas,HaitÌ,32
+Herramientas,Hait√≠,32
 Herramientas,Puerto Rico,76
 Herramientas,Belice,60
 Herramientas,Jamaica,64
@@ -2138,35 +2137,35 @@ Herramientas,Trinidad y Tobago,66
 Herramientas,Barbados,69
 Herramientas,Guyana,58
 Herramientas,Surinam,55
-Herramientas,Canad·,82
+Herramientas,Canad√°,82
 Herramientas,Estados Unidos,85
 Herramientas,Alemania,81
 Herramientas,Francia,78
 Herramientas,Italia,75
-Herramientas,EspaÒa,79
+Herramientas,Espa√±a,79
 Herramientas,Portugal,77
-Herramientas,PaÌses Bajos,83
+Herramientas,Pa√≠ses Bajos,83
 Herramientas,Reino Unido,79
 Herramientas,Rusia,58
 Herramientas,India,78
 Herramientas,China,82
-Herramientas,JapÛn,82
+Herramientas,Jap√≥n,82
 Herramientas,Corea del Sur,83
 Herramientas,Vietnam,74
 Herramientas,Taiwan,82
-Herramientas,Sud·frica,68
+Herramientas,Sud√°frica,68
 Otros agropecuarios,Argentina,72
 Otros agropecuarios,Brasil,71
 Otros agropecuarios,Paraguay,66
 Otros agropecuarios,Chile,77
 Otros agropecuarios,Bolivia,60
-Otros agropecuarios,Per˙,70
+Otros agropecuarios,Per√∫,70
 Otros agropecuarios,Colombia,70
 Otros agropecuarios,Ecuador,65
-Otros agropecuarios,MÈxico,73
-Otros agropecuarios,Panam·,71
+Otros agropecuarios,M√©xico,73
+Otros agropecuarios,Panam√°,71
 Otros agropecuarios,Costa Rica,71
-Otros agropecuarios,Rep˙blica Dominicana,64
+Otros agropecuarios,Rep√∫blica Dominicana,64
 Otros agropecuarios,Guatemala,59
 Otros agropecuarios,El Salvador,61
 Otros agropecuarios,Honduras,57
@@ -2174,7 +2173,7 @@ Otros agropecuarios,Nicaragua,53
 Otros agropecuarios,Venezuela,29
 Otros agropecuarios,Uruguay,70
 Otros agropecuarios,Cuba,46
-Otros agropecuarios,HaitÌ,31
+Otros agropecuarios,Hait√≠,31
 Otros agropecuarios,Puerto Rico,75
 Otros agropecuarios,Belice,60
 Otros agropecuarios,Jamaica,63
@@ -2182,20 +2181,20 @@ Otros agropecuarios,Trinidad y Tobago,65
 Otros agropecuarios,Barbados,68
 Otros agropecuarios,Guyana,57
 Otros agropecuarios,Surinam,54
-Otros agropecuarios,Canad·,82
+Otros agropecuarios,Canad√°,82
 Otros agropecuarios,Estados Unidos,84
 Otros agropecuarios,Alemania,80
 Otros agropecuarios,Francia,77
 Otros agropecuarios,Italia,74
-Otros agropecuarios,EspaÒa,78
+Otros agropecuarios,Espa√±a,78
 Otros agropecuarios,Portugal,76
-Otros agropecuarios,PaÌses Bajos,82
+Otros agropecuarios,Pa√≠ses Bajos,82
 Otros agropecuarios,Reino Unido,78
 Otros agropecuarios,Rusia,58
 Otros agropecuarios,India,77
 Otros agropecuarios,China,81
-Otros agropecuarios,JapÛn,82
+Otros agropecuarios,Jap√≥n,82
 Otros agropecuarios,Corea del Sur,83
 Otros agropecuarios,Vietnam,73
 Otros agropecuarios,Taiwan,81
-Otros agropecuarios,Sud·frica,67
+Otros agropecuarios,Sud√°frica,67
