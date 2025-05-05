@@ -7,8 +7,12 @@ import numpy as np
 mercados_df = pd.read_csv('mercados.csv')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
 
-# Título e imagen
-st.image('logo_ccsuy.png', width=200)  # Logo de la Cámara de Comercio y Servicios
+# Título e imagen (logo centrado y más grande)
+st.markdown("""
+    <div style="text-align: center;">
+        <img src="logo_ccsuy.png" width="400">
+    </div>
+""", unsafe_allow_html=True)  # Logo de la Cámara de Comercio y Servicios
 st.title("🌍 Bot de Recomendación de Mercados de Exportación")
 
 # Descripción
@@ -106,6 +110,13 @@ if orden == 'Ascendente':
     st.dataframe(mercados_df.sort_values(by=columna_orden, ascending=True))
 else:
     st.dataframe(mercados_df.sort_values(by=columna_orden, ascending=False))
+
+# Botón para mostrar el archivo read.md
+if st.button("📄 Ver Instrucciones"):
+    # Cargar y mostrar el contenido de un archivo read.md
+    with open("read.md", "r", encoding="utf-8") as file:
+        readme_content = file.read()
+    st.markdown(readme_content)
 
 # Mensaje final
 st.markdown("""
