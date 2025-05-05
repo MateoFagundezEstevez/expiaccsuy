@@ -62,11 +62,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Logo centrado y grande
-st.markdown("""
-    <div class="logo-container">
-        <img src="logo_ccsuy.png" alt="Logo de la Cámara de Comercio y Servicios del Uruguay">
-    </div>
-""", unsafe_allow_html=True)
+from PIL import Image
+
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    logo = Image.open("logo_ccsuy.png")
+    st.image(logo, width=400)
 
 # Título de la aplicación
 st.title("🌍 Bot de Recomendación de Mercados de Exportación")
