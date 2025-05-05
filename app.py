@@ -1,68 +1,48 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 
-# Ruta de los archivos CSV ya subidos
-afinidad_file_path = "afinidad_producto_país.csv"
-mercados_file_path = "mercados.csv"
-
-# Función para cargar los archivos CSV
-def load_csv_file(file_path):
-    try:
-        return pd.read_csv(file_path, encoding='utf-8')
-    except UnicodeDecodeError:
-        return pd.read_csv(file_path, encoding='ISO-8859-1')
-
-# Cargar los archivos CSV directamente desde las rutas
-afinidad_df = load_csv_file(afinidad_file_path)
-mercados_df = load_csv_file(mercados_file_path)
-
-# Cargar y mostrar el logo de la Cámara de Comercio y Servicios del Uruguay
-logo_url = "camara_comercio_uruguay_logo.png"  # Asegúrate de tener el archivo de logo en el directorio correcto
-st.image(logo_url, width=200)  # Ajusta el tamaño según sea necesario
-st.markdown("<h1 style='text-align: center; color: #007bff;'>🌍 ¡Descubre los Mejores Mercados para tu Producto! 🚀</h1>", unsafe_allow_html=True)
-st.markdown("**Bienvenido!** Utiliza esta herramienta para encontrar los mercados internacionales más prometedores para exportar tu producto. 🌟")
-
-# Botón para mostrar/ocultar los datos de los CSV
-if st.button("Mostrar Datos de los Archivos CSV 📊"):
-    if afinidad_df is not None:
-        st.write("### Datos de 'afinidad_producto_país.csv' 🔍")
-        st.write(afinidad_df)
-
-    if mercados_df is not None:
-        st.write("### Datos de 'mercados.csv' 🌐")
-        st.write(mercados_df)
-
-# Interfaz para seleccionar el producto con un título atractivo
-producto_seleccionado = st.selectbox(
-    '✨ Selecciona un Producto:',
-    afinidad_df['Producto'].unique(),
-    index=0, # Primer producto como predeterminado
-)
-
-# Filtrar los datos de afinidad por el producto seleccionado
-afinidad_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
-
-# Mostrar la afinidad del producto en diferentes países con colores y emoji
-st.write(f"📊 **Afinidad del Producto '{producto_seleccionado}' en los países**:")
-st.write(afinidad_producto[['País', 'Afinidad']])
+# Cargar los datos de los CSV (ya están subidos en Streamlit Cloud)
+afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
+mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
 
 # Función para recomendar los mejores mercados
 def recomendar_mercados(afinidad_producto, mercados_df):
+    # Crear una columna adicional para identificar la región
+    latinoamerica = [
+        "Argentina", "Brasil", "Paraguay", "Chile", "Bolivia", "Perú", "Colombia", "Ecuador", 
+        "México", "Panamá", "Costa Rica", "República Dominicana", "Guatemala", "El Salvador", 
+        "Honduras", "Nicaragua", "Venezuela", "Uruguay", "Cuba", "Haití", "Puerto Rico", "Belice", 
+        "Jamaica", "Trinidad y Tobago", "Barbados", "Guyana", "Surinam"
+    ]
+    
+    # Agregar columna de región
+    mercados_df['Región'] = mercados_df['País'].apply(lambda x: 'Latinoamérica' if x in latinoamerica else 'Global')
+
     # Merge para combinar los datos de afinidad y mercado
     df_completo = pd.merge(afinidad_producto[['País', 'Afinidad']], mercados_df, on='País', how='inner')
 
-    # Calcular una puntuación ponderada combinando los índices del mercado
-    df_completo['Puntaje'] = (
-        0.4 * df_completo['Afinidad'] + # Ponderación para la afinidad
-        0.3 * df_completo['Demanda esperada'] + # Ponderación para la demanda
-        0.2 * df_completo['Facilidad para hacer negocios'] + # Ponderación para la facilidad para hacer negocios
-        0.1 * df_completo['Estabilidad política'] # Ponderación para la estabilidad política
-    )
+    # Ajustar las ponderaciones según la región
+    def calcular_puntaje(row):
+        if row['Región'] == 'Latinoamérica':
+            return (
+                0.6 * row['Afinidad'] +  # Mayor peso a la afinidad para Latinoamérica
+                0.15 * row['Demanda esperada'] +
+                0.1 * row['Facilidad para hacer negocios'] +
+                0.15 * row['Estabilidad política']
+            )
+        else:
+            return (
+                0.4 * row['Afinidad'] +  # Menor peso a la afinidad para mercados globales
+                0.25 * row['Demanda esperada'] +
+                0.2 * row['Facilidad para hacer negocios'] +
+                0.15 * row['Estabilidad política']
+            )
+    
+    # Aplicar la función de puntaje
+    df_completo['Puntaje'] = df_completo.apply(calcular_puntaje, axis=1)
 
-    # Ordenar por la puntuación en orden descendente y seleccionar los 5 mejores mercados
+    # Ordenar los mercados por puntaje y seleccionar los 5 mejores
     df_recomendado = df_completo.sort_values(by='Puntaje', ascending=False).head(5)
 
     # Generar los fundamentos
@@ -83,24 +63,62 @@ def recomendar_mercados(afinidad_producto, mercados_df):
     
     return df_recomendado[['País', 'Puntaje']], recomendaciones
 
-# Llamar a la función para obtener las recomendaciones
-mercados_recomendados, fundamentos = recomendar_mercados(afinidad_producto, mercados_df)
+# Interfaz de usuario
+st.set_page_config(page_title="Recomendador de Mercados de Exportación", page_icon="🌍")
 
-# Títulos de las recomendaciones
-st.write(f"🎯 **Los 5 mejores mercados de exportación para el Producto '{producto_seleccionado}'**:")
-st.write(mercados_recomendados)
+# Cargar el logo de la Cámara de Comercio y Servicios del Uruguay
+logo_url = "https://www.ccsuy.org.uy/wp-content/uploads/2020/09/camara-comercio-servicios-uruguay-logo.png"
+st.image(logo_url, use_column_width=True)
 
-# Mostrar los fundamentos para cada recomendación con un toque visual
-st.write(f"📝 **Fundamentos de la recomendación**:")
-for i, fundamento in enumerate(fundamentos):
-    st.write(f"**{i+1}. {mercados_recomendados.iloc[i]['País']}** 🌍")
-    st.write(fundamento)
-    st.write("---")  # Línea separadora para mejorar la visualización
+# Título principal
+st.markdown("<h1 style='color: #3E8E41;'>Bienvenido al Recomendador de Mercados de Exportación 🌎</h1>", unsafe_allow_html=True)
 
-# Opcional: Visualización de la distribución de puntajes
-if st.checkbox('Mostrar Distribución de Puntajes 📈'):
-    fig, ax = plt.subplots(figsize=(10, 6))
-    sns.barplot(x='País', y='Puntaje', data=mercados_recomendados, palette='viridis')
-    plt.title(f'Distribución de Puntajes para el Producto {producto_seleccionado}')
-    plt.xticks(rotation=45, ha='right')
-    st.pyplot(fig)
+# Subtítulo con instrucciones
+st.markdown(
+    """
+    🚀 **Elige tu producto y descubre los mejores mercados para exportarlo.** 
+    En esta herramienta, te recomendaremos los 5 mercados con mayor potencial de exportación para tu producto, basándonos en diversos indicadores.
+    """
+)
+
+# Selección de producto
+categoria = st.selectbox("Selecciona la categoría de tu producto", afinidad_df['Categoria'].unique())
+
+# Filtrar por categoría
+producto_filtrado = afinidad_df[afinidad_df['Categoria'] == categoria]
+producto = st.selectbox("Selecciona tu producto", producto_filtrado['Producto'].unique())
+
+# Botón para obtener la recomendación
+if st.button("Obtener recomendaciones"):
+    # Filtrar datos del producto
+    afinidad_producto = producto_filtrado[producto_filtrado['Producto'] == producto]
+    
+    # Obtener las recomendaciones de mercado
+    df_recomendado, fundamentos = recomendar_mercados(afinidad_producto, mercados_df)
+    
+    # Mostrar resultados
+    st.subheader("Top 5 Mercados recomendados para tu producto:")
+    
+    for i, (mercado, fundamento) in enumerate(zip(df_recomendado['País'], fundamentos)):
+        # Añadir colores y formato
+        st.markdown(f"**{i+1}. {mercado}**")
+        st.markdown(fundamento)
+        st.markdown("---")
+
+    # Mostrar los resultados en formato tabla
+    st.subheader("Detalles de los mercados recomendados")
+    st.dataframe(df_recomendado)
+
+# Estilo con colores y emojis para la interfaz
+st.markdown("""
+    <style>
+        .stButton > button {
+            background-color: #3E8E41;
+            color: white;
+            font-size: 16px;
+        }
+        .stButton > button:hover {
+            background-color: #45a049;
+        }
+    </style>
+""", unsafe_allow_html=True)
