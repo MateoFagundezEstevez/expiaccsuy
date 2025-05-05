@@ -39,17 +39,23 @@ st.subheader("📍 Mapa Interactivo de los Mercados - Facilidad para hacer negoc
 
 # Asegurarse de que la columna "Facilidad Negocios (WB 2019)" esté en el DataFrame
 df_producto_map = mercados_df[mercados_df['País'].isin(df_producto['País'])]
-fig_map = px.scatter_geo(df_producto_map,
-                         locations="País",
-                         size="Facilidad Negocios (WB 2019)",
-                         hover_name="País",
-                         size_max=100,
-                         title=f"Facilidad para hacer negocios en los mercados recomendados para {producto_seleccionado}",
-                         color="Facilidad Negocios (WB 2019)",
-                         color_continuous_scale="Viridis")
 
-# Mostrar el mapa interactivo
-st.plotly_chart(fig_map)
+# Verificar que las columnas de latitud y longitud existan
+if 'Latitud' in df_producto_map.columns and 'Longitud' in df_producto_map.columns:
+    # Crear el mapa usando latitud y longitud
+    fig_map = px.scatter_geo(df_producto_map,
+                             lat="Latitud",
+                             lon="Longitud",
+                             size="Facilidad Negocios (WB 2019)",
+                             hover_name="País",
+                             size_max=100,
+                             title=f"Facilidad para hacer negocios en los mercados recomendados para {producto_seleccionado}",
+                             color="Facilidad Negocios (WB 2019)",
+                             color_continuous_scale="Viridis")
+    # Mostrar el mapa interactivo
+    st.plotly_chart(fig_map)
+else:
+    st.error("El archivo de datos no contiene las columnas de Latitud y Longitud necesarias para mostrar el mapa.")
 
 # Botón de recomendación
 if st.button('Recomendar mercados'):
@@ -73,3 +79,4 @@ st.markdown("""
 Gracias por usar nuestro **Bot de Recomendación de Mercados de Exportación**. 
 ¡Esperamos que esta herramienta te ayude a tomar decisiones informadas sobre tus exportaciones! 🌍
 """)
+
