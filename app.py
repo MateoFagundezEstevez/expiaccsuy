@@ -70,7 +70,7 @@ st.markdown("""
 
 # Título de la aplicación
 st.title("🌍 Bot de Recomendación de Mercados de Exportación")
-
+st.image('logo_ccsuy.png', width=400) 
 # Opción para desplegar/ocultar las instrucciones
 with st.expander("📄 Ver Instrucciones", expanded=False):
     try:
