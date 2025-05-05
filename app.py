@@ -1,5 +1,11 @@
 import streamlit as st
 import pandas as pd
+
+# Cargar los datos con el encoding adecuado
+afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
+mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
+acuerdos_df = pd.read_csv("acuerdos_comerciales.csv", encoding="ISO-8859-1")
+
 import folium
 from streamlit_folium import st_folium
 
