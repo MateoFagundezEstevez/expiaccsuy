@@ -160,4 +160,16 @@ if st.button("Obtener recomendaciones"):
     with st.expander("🔍 Ver más mercados del Resto del Mundo (opcional)"):
         extra_count = st.slider("¿Cuántos mercados adicionales del mundo quieres ver?", min_value=1, max_value=10, value=3)
         df_ext, fundamentos_ext = recomendar_mercados(afinidad_producto, mercados_df, extra_global=extra_count)
-        nuevos_globales = df_ext[~df_ext['Pa]()_]()
+        nuevos_globales = df_ext[~df_ext['País'].isin(df_recomendado['País']) & (df_ext['Región'] == "Resto del Mundo")]
+
+        for i, row in nuevos_globales.iterrows():
+            st.markdown(f"**🌐 {row['País']}** - Puntaje: {round(row['Puntaje'], 2)}")
+        st.dataframe(nuevos_globales)
+
+# Estilos
+st.markdown(""" 
+    <style> 
+        .stButton > button { background-color: #3E8E41; color: white; font-size: 16px; } 
+        .stButton > button:hover { background-color: #45a049; } 
+    </style> 
+""", unsafe_allow_html=True)
