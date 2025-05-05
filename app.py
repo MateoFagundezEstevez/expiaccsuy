@@ -37,10 +37,10 @@ def calcular_afinidad(producto, mercado):
     
     # Normalizar y ponderar los valores
     scaler = MinMaxScaler()
-    scaler.fit(mercados_df[['Facilidad Negocios', 'PIB per cápita', 'Crecimiento Anual PIB', 
+    scaler.fit(mercados_df[['Facilidad Negocios', 'PIB per cápita (USD)', 'Crecimiento Anual PIB', 
                             'Tamaño del Mercado', 'Población', 'Logística', 'Crecimiento Importaciones', 
                             'Sofisticación Exportaciones', 'Población Urbana', 'Infraestructura Portuaria']])
-    mercado_normalizado = scaler.transform(mercado_datos[['Facilidad Negocios', 'PIB per cápita', 'Crecimiento Anual PIB', 
+    mercado_normalizado = scaler.transform(mercado_datos[['Facilidad Negocios', 'PIB per cápita (USD)', 'Crecimiento Anual PIB', 
                                                          'Tamaño del Mercado', 'Población', 'Logística', 'Crecimiento Importaciones', 
                                                          'Sofisticación Exportaciones', 'Población Urbana', 'Infraestructura Portuaria']].values.reshape(1, -1))
     
