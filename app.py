@@ -64,13 +64,13 @@ st.markdown("""
 # Logo centrado y grande
 st.markdown("""
     <div class="logo-container">
-
+        <img src="logo_ccsuy.png" alt="Logo de la Cámara de Comercio y Servicios del Uruguay">
     </div>
 """, unsafe_allow_html=True)
 
 # Título de la aplicación
 st.title("🌍 Bot de Recomendación de Mercados de Exportación")
-st.image('logo_ccsuy.png', width=400) 
+
 # Opción para desplegar/ocultar las instrucciones
 with st.expander("📄 Ver Instrucciones", expanded=False):
     try:
@@ -159,28 +159,5 @@ A continuación se muestra la información detallada sobre todos los mercados di
 st.dataframe(mercados_df)
 
 # Opción de filtrar la tabla
-st.subheader("🔍 Filtrar y ordenar los mercados")
-columnas = st.multiselect(
-    "Selecciona las columnas que deseas ver",
-    mercados_df.columns.tolist(),
-    default=mercados_df.columns.tolist()
-)
+st.subheader("🔍
 
-# Mostrar solo las columnas seleccionadas
-st.dataframe(mercados_df[columnas])
-
-# Ordenar la tabla según la columna seleccionada
-columna_orden = st.selectbox("Selecciona la columna para ordenar", mercados_df.columns.tolist())
-orden = st.radio("¿Orden ascendente o descendente?", ('Ascendente', 'Descendente'))
-
-# Aplicar el orden
-if orden == 'Ascendente':
-    st.dataframe(mercados_df.sort_values(by=columna_orden, ascending=True))
-else:
-    st.dataframe(mercados_df.sort_values(by=columna_orden, ascending=False))
-
-# Mensaje final
-st.markdown("""
-Gracias por usar nuestro **Bot de Recomendación de Mercados de Exportación**. 
-¡Esperamos que esta herramienta te ayude a tomar decisiones informadas sobre tus exportaciones! 🌍
-""")
