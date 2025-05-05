@@ -72,6 +72,28 @@ st.image("logo_ccsuy.png", use_container_width=True)
 # Título e instrucciones
 st.markdown("<h1 style='color: #3E8E41;'>Bienvenido al Recomendador de Mercados de Exportación 🌎</h1>", unsafe_allow_html=True)
 st.markdown("🚀 Selecciona tu producto y descubre los mejores mercados para exportarlo. Priorizamos Latinoamérica, pero puedes explorar también el resto del mundo.")
+with st.expander("ℹ️ ¿Cómo funciona esta herramienta?"):
+    st.markdown("""
+    Esta aplicación te ayuda a identificar los mejores mercados para exportar productos uruguayos.  
+    Se basa en indicadores como:
+
+    - **Afinidad** del producto con cada país (según comercio histórico).
+    - **Demanda esperada** (proyección de consumo/importación).
+    - **Facilidad para hacer negocios** (índices globales como el Doing Business).
+    - **Beneficios arancelarios** (preferencias vigentes entre Uruguay y el país destino).
+    - **Estabilidad política** (datos de organismos internacionales como el Banco Mundial o Economist Intelligence Unit).
+
+    Los mercados se priorizan primero en **Latinoamérica** (mayor cercanía y afinidad cultural), y luego se muestran las mejores opciones del **resto del mundo**.
+
+    Los datos fueron extraídos y consolidados desde fuentes como:
+    - Banco Mundial
+    - Banco Interamericano de Desarrollo (BID)
+    - OMC
+    - Trademap (ITC)
+    - Cámara de Comercio y Servicios del Uruguay
+
+    👇 Elegí tu producto y explorá las recomendaciones.
+    """)
 
 # Selección de producto
 producto = st.selectbox("Selecciona tu producto", afinidad_df['Producto'].unique())
