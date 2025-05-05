@@ -81,17 +81,13 @@ st.markdown(
     """
 )
 
-# Selección de categoría y producto
-categoria = st.selectbox("Selecciona la categoría de tu producto", afinidad_df['Categoria'].unique())
-
-# Filtrar por categoría
-producto_filtrado = afinidad_df[afinidad_df['Categoria'] == categoria]
-producto = st.selectbox("Selecciona tu producto", producto_filtrado['Producto'].unique())
+# Selección de producto
+producto = st.selectbox("Selecciona tu producto", afinidad_df['Producto'].unique())
 
 # Botón para obtener la recomendación
 if st.button("Obtener recomendaciones"):
     # Filtrar datos del producto
-    afinidad_producto = producto_filtrado[producto_filtrado['Producto'] == producto]
+    afinidad_producto = afinidad_df[afinidad_df['Producto'] == producto]
     
     # Obtener las recomendaciones de mercado
     df_recomendado, fundamentos = recomendar_mercados(afinidad_producto, mercados_df)
@@ -111,17 +107,14 @@ if st.button("Obtener recomendaciones"):
 
 # Estilo con colores y emojis para la interfaz
 st.markdown(""" 
-    <style>
-        .stButton > button {
-            background-color: #3E8E41;
-            color: white;
-            font-size: 16px;
-        }
-        .stButton > button:hover {
-            background-color: #45a049;
-        }
-        h1 {
-            color: #3E8E41;
-        }
-    </style>
+    <style> 
+        .stButton > button { 
+            background-color: #3E8E41; 
+            color: white; 
+            font-size: 16px; 
+        } 
+        .stButton > button:hover { 
+            background-color: #45a049; 
+        } 
+    </style> 
 """, unsafe_allow_html=True)
