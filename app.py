@@ -1,138 +1,61 @@
- import streamlit as st
+# app.py
+import streamlit as st
 import pandas as pd
-import numpy as np
 import chardet
 
-with open('afinidad_producto_país.csv', 'rb') as f:
-    result = chardet.detect(f.read())
-    encoding = result['encoding']
+st.set_page_config(page_title="Recomendador de Mercados", layout="centered")
 
-afinidad_df = pd.read_csv('afinidad_producto_país.csv', encoding=encoding)
+st.title("🌍 Recomendador de Mercados para Exportadores Uruguayos")
 
-# Cargar los datos localmente
-afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
-mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
+# Función para detectar codificación de un archivo
+def detectar_codificacion(filepath):
+    with open(filepath, 'rb') as f:
+        resultado = chardet.detect(f.read())
+    return resultado['encoding']
 
-# Definir la función principal
-def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
-    # Lista de países de Latinoamérica
-    latinoamerica = [
-        "Argentina", "Brasil", "Paraguay", "Chile", "Bolivia", "Perú", "Colombia", "Ecuador", 
-        "México", "Panamá", "Costa Rica", "República Dominicana", "Guatemala", "El Salvador", 
-        "Honduras", "Nicaragua", "Venezuela", "Uruguay", "Cuba", "Haití", "Puerto Rico", "Belice", 
-        "Jamaica", "Trinidad y Tobago", "Barbados", "Guyana", "Surinam"
-    ]
+# Cargar archivos
+@st.cache_data
+def cargar_datos():
+    # Detectar codificación del archivo afinidad
+    encoding_afinidad = detectar_codificacion("/mnt/data/afinidad_producto_país.csv")
 
-    # Clasificar región
-    mercados_df['Región'] = mercados_df['País'].apply(lambda x: 'Latinoamérica' if x in latinoamerica else 'Resto del Mundo')
-
-    # Unir datasets
-    df_completo = pd.merge(afinidad_producto[['País', 'Afinidad']], mercados_df, on='País', how='inner')
-
-    # Calcular puntajes ponderados
-    def calcular_puntaje(row):
-        if row['Región'] == 'Latinoamérica':
-            return (
-                0.6 * row['Afinidad'] +
-                0.15 * row['Demanda esperada'] +
-                0.1 * row['Facilidad para hacer negocios'] +
-                0.15 * row['Estabilidad política']
-            )
-        else:
-            return (
-                0.4 * row['Afinidad'] +
-                0.25 * row['Demanda esperada'] +
-                0.2 * row['Facilidad para hacer negocios'] +
-                0.15 * row['Estabilidad política']
-            )
+    mercados = pd.read_csv("/mnt/data/mercados.csv")  # Asumimos UTF-8 correcto
+    afinidad = pd.read_csv("/mnt/data/afinidad_producto_país.csv", encoding=encoding_afinidad)
     
-    df_completo['Puntaje'] = df_completo.apply(calcular_puntaje, axis=1)
+    return mercados, afinidad
 
-    # Seleccionar mercados recomendados
-    top_latam = df_completo[df_completo['Región'] == 'Latinoamérica'].sort_values(by='Puntaje', ascending=False).head(3)
-    top_global = df_completo[df_completo['Región'] == 'Resto del Mundo'].sort_values(by='Puntaje', ascending=False).head(2 + extra_global)
+mercados_df, afinidad_df = cargar_datos()
 
-    df_recomendado = pd.concat([top_latam, top_global])
+# Interfaz para ingresar producto
+producto = st.text_input("Ingrese el nombre del producto que desea exportar:", "")
 
-    # Fundamentos
-    recomendaciones = []
-    for index, row in df_recomendado.iterrows():
-        fundamento = (
-            f"**🌍 Mercado recomendado: {row['País']} ({row['Región']})**\n\n"
-            f"- **Afinidad del producto**: {row['Afinidad']}\n"
-            f"- **Demanda esperada**: {row['Demanda esperada']}\n"
-            f"- **Facilidad para hacer negocios**: {row['Facilidad para hacer negocios']}\n"
-            f"- **Beneficios arancelarios**: {row['Beneficios arancelarios']}\n"
-            f"- **Estabilidad política**: {row['Estabilidad política']}\n\n"
-            "✅ Este mercado presenta condiciones favorables para exportar tu producto, considerando su afinidad, demanda y entorno económico y político."
+if producto:
+    producto_filtrado = afinidad_df[afinidad_df['Producto'].str.lower() == producto.lower()]
+
+    if producto_filtrado.empty:
+        st.warning("⚠️ No se encontró afinidad para ese producto.")
+    else:
+        # Unir afinidad con datos de mercado
+        datos_combinados = pd.merge(producto_filtrado, mercados_df, on="País", how="inner")
+
+        # Crear una puntuación compuesta (puedes ajustar los pesos)
+        datos_combinados["Puntaje Total"] = (
+            datos_combinados["Afinidad"] * 0.4 +
+            datos_combinados["Demanda esperada"] * 0.3 +
+            datos_combinados["Facilidad para hacer negocios"] * 0.2 +
+            datos_combinados["Beneficios arancelarios"] * 0.05 +
+            datos_combinados["Estabilidad política"] * 0.05
         )
-        recomendaciones.append(fundamento)
-    
-    return df_recomendado[['País', 'Región', 'Puntaje']], recomendaciones
 
-# Configuración de la app
-st.set_page_config(page_title="Recomendador de Mercados", page_icon="🌎")
+        datos_ordenados = datos_combinados.sort_values(by="Puntaje Total", ascending=False)
 
-# Logo
-st.image("logo_ccsuy.png", use_container_width=True)
+        st.success(f"🌟 Ranking de países recomendados para exportar '{producto}':")
+        st.dataframe(
+            datos_ordenados[[
+                "País", "Puntaje Total", "Afinidad", "Demanda esperada",
+                "Facilidad para hacer negocios", "Beneficios arancelarios", "Estabilidad política"
+            ]].reset_index(drop=True)
+        )
+else:
+    st.info("Ingrese un producto para ver recomendaciones.")
 
-# Título e instrucciones
-st.markdown("<h1 style='color: #3E8E41;'>Bienvenido al Recomendador de Mercados de Exportación 🌎</h1>", unsafe_allow_html=True)
-st.markdown("🚀 Selecciona tu producto y descubre los mejores mercados para exportarlo. Priorizamos Latinoamérica, pero puedes explorar también el resto del mundo.")
-with st.expander("ℹ️ ¿Cómo funciona esta herramienta?"):
-    st.markdown("""
-    Esta aplicación te ayuda a identificar los mejores mercados para exportar productos uruguayos.  
-    Se basa en indicadores como:
-
-    - **Afinidad** del producto con cada país (según comercio histórico).
-    - **Demanda esperada** (proyección de consumo/importación).
-    - **Facilidad para hacer negocios** (índices globales como el Doing Business).
-    - **Beneficios arancelarios** (preferencias vigentes entre Uruguay y el país destino).
-    - **Estabilidad política** (datos de organismos internacionales como el Banco Mundial o Economist Intelligence Unit).
-
-    Los mercados se priorizan primero en **Latinoamérica** (mayor cercanía y afinidad cultural), y luego se muestran las mejores opciones del **resto del mundo**.
-
-    Los datos fueron extraídos y consolidados desde fuentes como:
-    - Banco Mundial
-    - Banco Interamericano de Desarrollo (BID)
-    - OMC
-    - Trademap (ITC)
-    - Cámara de Comercio y Servicios del Uruguay
-
-    👇 Elegí tu producto y explorá las recomendaciones.
-    """)
-
-# Selección de producto
-producto = st.selectbox("Selecciona tu producto", afinidad_df['Producto'].unique())
-
-# Recomendación principal
-if st.button("Obtener recomendaciones"):
-    afinidad_producto = afinidad_df[afinidad_df['Producto'] == producto]
-    df_recomendado, fundamentos = recomendar_mercados(afinidad_producto, mercados_df)
-
-    st.subheader("🌟 Mercados recomendados (con prioridad LATAM)")
-    for i, (mercado, fundamento) in enumerate(zip(df_recomendado['País'], fundamentos)):
-        st.markdown(f"**{i+1}. {mercado}**")
-        st.markdown(fundamento)
-        st.markdown("---")
-    
-    st.subheader("📊 Tabla de puntajes")
-    st.dataframe(df_recomendado)
-
-    # Expandible para más mercados globales
-    with st.expander("🔍 Ver más mercados del Resto del Mundo (opcional)"):
-        extra_count = st.slider("¿Cuántos mercados adicionales del mundo quieres ver?", min_value=1, max_value=10, value=3)
-        df_ext, fundamentos_ext = recomendar_mercados(afinidad_producto, mercados_df, extra_global=extra_count)
-        nuevos_globales = df_ext[~df_ext['País'].isin(df_recomendado['País']) & (df_ext['Región'] == "Resto del Mundo")]
-
-        for i, row in nuevos_globales.iterrows():
-            st.markdown(f"**🌐 {row['País']}** - Puntaje: {round(row['Puntaje'], 2)}")
-        st.dataframe(nuevos_globales)
-
-# Estilos
-st.markdown(""" 
-    <style> 
-        .stButton > button { background-color: #3E8E41; color: white; font-size: 16px; } 
-        .stButton > button:hover { background-color: #45a049; } 
-    </style> 
-""", unsafe_allow_html=True)
