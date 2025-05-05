@@ -72,7 +72,7 @@ st.image("logo_ccsuy.png", use_container_width=True)
 st.markdown("<h1 style='color: #3E8E41;'>Bienvenido al Recomendador de Mercados de Exportación 🌎</h1>", unsafe_allow_html=True)
 st.markdown("🚀 Selecciona tu producto y descubre los mejores mercados para exportarlo. Priorizamos Latinoamérica, pero puedes explorar también el resto del mundo.")
 with st.expander("ℹ️ ¿Cómo funciona esta herramienta?"):
-    st.markdown("""
+ st.markdown("""
   # Recomendador de Mercados de Exportación 🌎
 
 ## Descripción
@@ -167,6 +167,8 @@ Si deseas instalar y ejecutar esta herramienta localmente, puedes seguir los sig
 ## Contacto
 
 Si tienes preguntas o comentarios, no dudes en ponerte en contacto con nosotros a través de [correo electrónico o enlaces de contacto].
+""", unsafe_allow_html=True)
+
 
 )
 # Selección de producto
