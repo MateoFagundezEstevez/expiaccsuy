@@ -51,11 +51,11 @@ def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0, priorida
         df_completo['Distancia'] = df_completo['País'].apply(lambda x: np.random.randint(1000, 12000))  # Esto es un ejemplo, debes tener datos reales
         df_completo = df_completo[df_completo['Distancia'] <= distancia_maxima]
     
-    # Seleccionar mercados recomendados
+    # Seleccionar mercados ndados
     top_latam = df_completo[df_completo['Región'] == 'Latinoamérica'].sort_values(by='Puntaje', ascending=False).head(3)
     top_global = df_completo[df_completo['Región'] == 'Resto del Mundo'].sort_values(by='Puntaje', ascending=False).head(2 + extra_global)
 
-    df_recomendado = pd.concat([top_latam, top_global])
+    df_ndado = pd.concat([top_latam, top_global])
 
     # Fundamentos
     recomendaciones = []
@@ -70,7 +70,24 @@ def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0, priorida
             "✅ Este mercado presenta condiciones favorables para exportar tu producto, considerando su afinidad, demanda y entorno económico y político."
         )
         recomendaciones.append(fundamento)
-    
+    from streamlit_folium import st_folium
+import folium
+
+# Mapa interactivo
+st.subheader("🗺️ Visualización Interactiva en Mapa")
+
+mapa = folium.Map(location=[0, 0], zoom_start=2)
+
+for _, row in df_recomendado.iterrows():
+    if 'Latitud' in row and 'Longitud' in row:
+        folium.Marker(
+            location=[row['Latitud'], row['Longitud']],
+            popup=f"{row['País']}: Puntaje {round(row['Puntaje'], 2)}",
+            icon=folium.Icon(color='blue', icon='flag')
+        ).add_to(mapa)
+
+st_folium(mapa, width=700, height=500)
+
     return df_recomendado[['País', 'Región', 'Puntaje']], recomendaciones
 
 # Configuración de la app
