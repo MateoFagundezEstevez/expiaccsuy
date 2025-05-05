@@ -1,15 +1,31 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import pydeck as pdk
 
-# Cargar los datos localmente
-afinidad_df = pd.read_csv("afinidad_producto_país.csv", encoding="ISO-8859-1")
-mercados_df = pd.read_csv("mercados.csv", encoding="ISO-8859-1")
-acuerdos_df = pd.read_csv("acuerdos_comerciales.csv", encoding="ISO-8859-1")
+# Intentar cargar los datos con distintas codificaciones y delimitadores
+try:
+    # Intentar cargar con codificación UTF-8 y delimitador por defecto (coma)
+    mercados_df = pd.read_csv("mercados.csv", encoding="utf-8")
+except UnicodeDecodeError:
+    # Si hay error de codificación, intentar con Latin1
+    mercados_df = pd.read_csv("mercados.csv", encoding="latin1")
+except Exception as e:
+    st.error(f"Error al cargar el archivo mercados.csv: {e}")
 
-# Filtrar las columnas de acuerdos comerciales
-acuerdos_cols = ['País', 'Acuerdo Comercial', 'Descripción', 'Vigencia', 'Enlace', 'Notas importantes', 'Categorías negociadas']
-acuerdos_info = acuerdos_df[acuerdos_cols].drop_duplicates()
+# Si el archivo no tiene el delimitador por coma, intentar con punto y coma
+if mercados_df.empty:
+    try:
+        mercados_df = pd.read_csv("mercados.csv", encoding="utf-8", sep=";")
+    except Exception as e:
+        st.error(f"Error al cargar el archivo mercados.csv con punto y coma: {e}")
+
+# Verificar si el DataFrame tiene contenido
+if mercados_df.empty:
+    st.error("El archivo mercados.csv está vacío o tiene un formato incorrecto.")
+
+# Mostrar una muestra de los datos cargados para verificar
+st.write(mercados_df.head())
 
 # Lista de países de Latinoamérica
 latinoamerica = [
@@ -28,16 +44,16 @@ def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
         if row['Región'] == 'Latinoamérica':
             return (
                 0.6 * row['Afinidad'] +
-                0.15 * row['Crecimiento Importaciones (%)'] +
-                0.1 * row['Facilidad Negocios (WB 2019)'] +
-                0.15 * row['PIB per cápita (USD)']
+                0.15 * row['Demanda esperada'] +
+                0.1 * row['Facilidad para hacer negocios'] +
+                0.15 * row['Estabilidad política']
             )
         else:
             return (
                 0.4 * row['Afinidad'] +
-                0.25 * row['Crecimiento Importaciones (%)'] +
-                0.2 * row['Facilidad Negocios (WB 2019)'] +
-                0.15 * row['PIB per cápita (USD)']
+                0.25 * row['Demanda esperada'] +
+                0.2 * row['Facilidad para hacer negocios'] +
+                0.15 * row['Estabilidad política']
             )
     
     df_completo['Puntaje'] = df_completo.apply(calcular_puntaje, axis=1)
@@ -49,20 +65,13 @@ def recomendar_mercados(afinidad_producto, mercados_df, extra_global=0):
 
     recomendaciones = []
     for index, row in df_recomendado.iterrows():
-        acuerdos_pais = acuerdos_info[acuerdos_info['País'] == row['País']]
-        acuerdos_texto = ""
-        if not acuerdos_pais.empty:
-            acuerdos_texto = "\n\n**Acuerdos Comerciales:**\n"
-            for _, ac in acuerdos_pais.iterrows():
-                acuerdos_texto += f"- **{ac['Acuerdo Comercial']}**: {ac['Descripción']} (Vigencia: {ac['Vigencia']}) - [Ver más]({ac['Enlace']})\n"
-        
         fundamento = (
             f"**🌍 Mercado recomendado: {row['País']} ({row['Región']})**\n\n"
             f"- **Afinidad del producto**: {row['Afinidad']}\n"
-            f"- **Crecimiento Importaciones**: {row['Crecimiento Importaciones (%)']}%\n"
-            f"- **Facilidad para hacer negocios**: {row['Facilidad Negocios (WB 2019)']}\n"
-            f"- **PIB per cápita**: {row['PIB per cápita (USD)']}\n\n"
-            f"{acuerdos_texto}\n"
+            f"- **Demanda esperada**: {row['Demanda esperada']}\n"
+            f"- **Facilidad para hacer negocios**: {row['Facilidad para hacer negocios']}\n"
+            f"- **Beneficios arancelarios**: {row['Beneficios arancelarios']}\n"
+            f"- **Estabilidad política**: {row['Estabilidad política']}\n\n"
             "✅ Este mercado presenta condiciones favorables para exportar tu producto, considerando su afinidad, demanda y entorno económico y político."
         )
         recomendaciones.append(fundamento)
@@ -76,13 +85,18 @@ st.image("logo_ccsuy.png", use_container_width=True)
 st.markdown("<h1 style='color: #3E8E41;'>Bienvenido al Recomendador de Mercados de Exportación 🌎</h1>", unsafe_allow_html=True)
 st.markdown("🚀 Selecciona tu producto y descubre los mejores mercados para exportarlo. Priorizamos Latinoamérica, pero puedes explorar también el resto del mundo.")
 with st.expander("ℹ️ ¿Cómo funciona esta herramienta?"):
-    st.markdown("""Esta aplicación te ayuda a identificar los mejores mercados para exportar productos uruguayos. Se basa en indicadores como: 
+    st.markdown(""" 
+    Esta aplicación te ayuda a identificar los mejores mercados para exportar productos uruguayos.  
+    Se basa en indicadores como:
+
     - **Afinidad** del producto con cada país.
-    - **Crecimiento de las importaciones**.
+    - **Demanda esperada**.
     - **Facilidad para hacer negocios**.
-    - **PIB per cápita**.
-    - **Acuerdos comerciales** existentes.
-    👇 Elegí tu producto y explorá las recomendaciones.""")
+    - **Beneficios arancelarios**.
+    - **Estabilidad política**.
+
+    👇 Elegí tu producto y explorá las recomendaciones.
+    """)
 
 producto = st.selectbox("Selecciona tu producto", afinidad_df['Producto'].unique())
 
@@ -147,3 +161,21 @@ if st.button("Obtener recomendaciones"):
     )
 
     st.pydeck_chart(mapa)
+
+    with st.expander("🔍 Ver más mercados del Resto del Mundo (opcional)"):
+        extra_count = st.slider("¿Cuántos mercados adicionales del mundo quieres ver?", min_value=1, max_value=10, value=3)
+        df_ext, fundamentos_ext = recomendar_mercados(afinidad_producto, mercados_df, extra_global=extra_count)
+        nuevos_globales = df_ext[~df_ext['País'].isin(df_recomendado['País']) & (df_ext['Región'] == "Resto del Mundo")]
+
+        for i, row in nuevos_globales.iterrows():
+            st.markdown(f"**🌐 {row['País']}** - Puntaje: {round(row['Puntaje'], 2)}")
+        st.dataframe(nuevos_globales)
+
+# Estilos
+st.markdown(""" 
+    <style> 
+        .stButton > button { background-color: #3E8E41; color: white; font-size: 16px; } 
+        .stButton > button:hover { background-color: #45a049; } 
+    </style> 
+""", unsafe_allow_html=True)
+
