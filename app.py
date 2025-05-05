@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Leer los datos de mercados
-df = pd.read_csv('mercados.csv')
+df = pd.read_csv('mercados.csv', encoding='utf-8')
 
 # Descripción de la app
 st.title("Identificación del Mejor Mercado para Exportar")
