@@ -104,11 +104,11 @@ if not mercados_filtrados.empty:
     for index, row in mercados_filtrados.iterrows():
         st.write(f"**Recomendación:** {row['País']}")
         
-        # Justificación de la recomendación
-        justificacion = f"- Afinidad con el producto: **{row['Afinidad']}**"
+        # Parafraseo amigable de la justificación de la recomendación
+        justificacion = f"Este mercado tiene una alta afinidad de **{row['Afinidad']}** con su producto, lo que indica una buena demanda."
         
         if mostrar_acuerdo and pd.notnull(row['Acuerdo Comercial']):
-            justificacion += f"\n- Acuerdo comercial disponible: **{row['Acuerdo Comercial']}**\n  ({row['Descripción del Acuerdo']})"
+            justificacion += f" Además, hay un acuerdo comercial con **{row['Acuerdo Comercial']}**, lo que facilita el acceso y reduce costos."
         
         st.write(justificacion)
     
