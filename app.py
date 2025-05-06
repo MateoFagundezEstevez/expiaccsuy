@@ -7,7 +7,7 @@ from PIL import Image
 # Cargar datos
 mercados_df = pd.read_csv('mercados.csv')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
-acuerdos_df = pd.read_csv('acuerdos_comerciales.csv')
+acuerdos_df = pd.read_csv('acuerdos_comerciales.csv', encoding='utf-8', errors='replace')
 
 # Logo
 col1, col2, col3 = st.columns([1, 2, 1])
