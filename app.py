@@ -2,168 +2,91 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
-
-# Cargar los archivos CSV con los datos
-mercados_df = pd.read_csv('mercados.csv')
-afinidad_df = pd.read_csv('afinidad_producto_país.csv')
-acuerdos_df = pd.read_csv('acuerdos_comerciales.csv')  # Este es el CSV con la información de acuerdos comerciales
-
-# Estilo CSS para personalizar el logo y las secciones
-st.markdown("""
-    <style>
-        /* Centrar el logo y hacerlo más grande */
-        .logo-container {
-            text-align: center;
-        }
-        .logo-container img {
-            width: 400px;  /* Aproximadamente 10 cm */
-        }
-
-        /* Colores personalizados para las secciones */
-        .section-title {
-            color: #003B5C;  /* Un color oscuro azul, por ejemplo */
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .section-description {
-            color: #9E2A2F;  /* Color rojo oscuro */
-            font-size: 16px;
-        }
-
-        .section {
-            background-color: #E8F4F9;  /* Fondo de sección en azul claro */
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-        }
-
-        .expander-title {
-            font-size: 20px;
-            color: #003B5C;
-        }
-
-        .expander-content {
-            font-size: 14px;
-            color: #4A4A4A;
-        }
-
-        .button {
-            background-color: #9E2A2F;  /* Rojo oscuro */
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-
-        .button:hover {
-            background-color: #C84B53;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# Logo centrado y grande
 from PIL import Image
 
+# Configuración general
+st.set_page_config(page_title="Bot de Recomendación de Mercados", layout="wide")
+
+# Cargar los datos
+mercados_df = pd.read_csv("mercados.csv")
+afinidad_df = pd.read_csv("afinidad_producto_pais.csv")
+acuerdos_df = pd.read_csv("acuerdos_comerciales.csv", encoding="utf-8", quotechar='"')
+
+# Preprocesamiento
+acuerdos_df["Acuerdo Comercial"] = acuerdos_df["Acuerdo Comercial"].map({"Sí": 1, "No": 0})
+df = pd.merge(afinidad_df, mercados_df, on="País", how="left")
+df = pd.merge(df, acuerdos_df, on="País", how="left")
+
+# Mostrar logo
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     logo = Image.open("logo_ccsuy.png")
     st.image(logo, width=400)
 
-# Título de la aplicación
+# Título y descripción
 st.title("🌍 Bot de Recomendación de Mercados de Exportación")
 
-# Opción para desplegar/ocultar las instrucciones
-with st.expander("📄 Ver Instrucciones", expanded=False):
-    try:
-        with open("README.md", "r", encoding="utf-8") as file:
-            readme_content = file.read()
-        st.markdown(f'<div class="expander-content">{readme_content}</div>', unsafe_allow_html=True)
-    except FileNotFoundError:
-        st.error("El archivo README.md no se encuentra disponible.")
-
-# Descripción de la herramienta
 st.markdown("""
-<div class="section">
-    <p class="section-description">
-        Bienvenido al **Bot de Recomendación de Mercados de Exportación**. 
-        Este bot le ayudará a encontrar los mercados más adecuados para exportar sus productos, basándose en una serie de indicadores clave de cada país. 
-        Seleccione un producto y vea los mercados recomendados. 🚀
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
-# Selección de Producto
-productos = afinidad_df['Producto'].unique()
-producto_seleccionado = st.selectbox("🔍 Elija un Producto", productos)
-
-# Filtrar los datos según el producto seleccionado
-df_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
-
-# Unir los datos de acuerdos comerciales a los datos de mercados
-df_producto = pd.merge(df_producto, acuerdos_df[['País', 'Acuerdo Comercial']], how='left', on='País')
-
-# Usar un formulario para manejar la interacción
-with st.form(key='mercados_form'):
-    st.markdown('<div class="section-title">🌎 Mercados recomendados para {}</div>'.format(producto_seleccionado), unsafe_allow_html=True)
-    
-    # Mostrar los datos del producto seleccionado con las columnas de acuerdo
-    st.dataframe(df_producto[['País', 'Afinidad', 'Acuerdo Comercial']])
-
-    # Mostrar un gráfico interactivo de los mercados recomendados
-    fig = px.bar(df_producto, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
-    st.plotly_chart(fig)
-
-    # Mostrar un mapa interactivo de la facilidad para hacer negocios
-    st.subheader("📍 Mapa Interactivo de los Mercados - Facilidad para hacer negocios")
-    
-    # Asegurarse de que la columna "Facilidad Negocios (WB 2019)" esté en el DataFrame
-    df_producto_map = mercados_df[mercados_df['País'].isin(df_producto['País'])]
-
-    # Verificar que las columnas de latitud y longitud existan
-    if 'Latitud' in df_producto_map.columns and 'Longitud' in df_producto_map.columns:
-        # Crear el mapa usando latitud y longitud
-        fig_map = px.scatter_geo(df_producto_map,
-                                 lat="Latitud",
-                                 lon="Longitud",
-                                 size="Facilidad Negocios (WB 2019)",
-                                 hover_name="País",
-                                 size_max=50,  # Reducir el tamaño máximo de los globos
-                                 title=f"Facilidad para hacer negocios en los mercados recomendados para {producto_seleccionado}",
-                                 color="Facilidad Negocios (WB 2019)",
-                                 color_continuous_scale="Viridis")
-        # Mostrar el mapa interactivo
-        st.plotly_chart(fig_map)
-    else:
-        st.error("El archivo de datos no contiene las columnas de Latitud y Longitud necesarias para mostrar el mapa.")
-    
-    # Botón de recomendación - el botón de 'submit' está en el formulario
-    submit_button = st.form_submit_button("Ver Recomendaciones")
-    
-    if submit_button:
-        st.markdown("""
-        ### Recomendaciones:
-        Los siguientes mercados tienen una alta afinidad para el producto seleccionado.
-        Los mercados con mayor puntaje de afinidad son los más recomendados.
-        """)
-        st.write(df_producto[['País', 'Afinidad', 'Acuerdo Comercial']].sort_values(by='Afinidad', ascending=False))
-
-    # Agregar algún cuadro interactivo (ejemplo con Slider)
-    st.subheader("🔄 Personaliza tu Recomendación")
-    slider = st.slider("Ajusta la Afinidad mínima para la recomendación", 0, 100, 50)
-    mercados_filtrados = df_producto[df_producto['Afinidad'] >= slider]
-
-    st.write(f"🛍️ Mercados con afinidad mayor a {slider}:")
-    st.dataframe(mercados_filtrados[['País', 'Afinidad', 'Acuerdo Comercial']])
-
-# Mostrar todas las columnas de mercados.csv
-st.markdown('<div class="section-title">📝 Información completa sobre los mercados</div>', unsafe_allow_html=True)
-st.write("""
-A continuación se muestra la información detallada sobre todos los mercados disponibles:
+Este bot te ayuda a identificar mercados recomendados para exportar productos uruguayos, basándose en:
+- Afinidad histórica del producto en ese mercado
+- Facilidad para hacer negocios
+- Nivel de demanda estimada
+- Existencia de acuerdos comerciales
 """)
 
-# Hacer que la tabla de 'mercados_df' sea más interactiva
-st.dataframe(mercados_df)
+# Selección de producto
+productos = df["Producto"].unique()
+producto = st.selectbox("🔍 Selecciona un producto", productos)
 
-# Hacer que la tabla de 'mercados_df' sea más interactiva
-st.dataframe(mercados_df)
+df_producto = df[df["Producto"] == producto]
+
+# Ponderación de criterios
+st.markdown("### ⚖️ Asigna importancia a cada criterio (suma 100)")
+col1, col2, col3, col4 = st.columns(4)
+peso_afinidad = col1.slider("Afinidad", 0, 100, 30)
+peso_facilidad = col2.slider("Facilidad Negocios", 0, 100, 30)
+peso_demanda = col3.slider("Demanda", 0, 100, 30)
+peso_acuerdo = col4.slider("Acuerdo Comercial", 0, 100, 10)
+
+peso_total = peso_afinidad + peso_facilidad + peso_demanda + peso_acuerdo
+if peso_total != 100:
+    st.warning("⚠️ La suma de los pesos debe ser 100.")
+    st.stop()
+
+# Normalización de columnas relevantes
+df_producto["Afinidad_norm"] = df_producto["Afinidad"] / df_producto["Afinidad"].max()
+df_producto["Facilidad_norm"] = df_producto["Facilidad para hacer negocios"] / df_producto["Facilidad para hacer negocios"].max()
+df_producto["Demanda_norm"] = df_producto["Demanda esperada"] / df_producto["Demanda esperada"].max()
+
+# Score ponderado
+df_producto["Score"] = (
+    df_producto["Afinidad_norm"] * peso_afinidad +
+    df_producto["Facilidad_norm"] * peso_facilidad +
+    df_producto["Demanda_norm"] * peso_demanda +
+    df_producto["Acuerdo Comercial"] * peso_acuerdo
+) / 100
+
+# Mostrar resultados
+st.markdown("### 📊 Mercados recomendados")
+st.dataframe(df_producto[["País", "Score", "Afinidad", "Facilidad para hacer negocios", "Demanda esperada", "Acuerdo Comercial", "Descripción Acuerdo"]].sort_values(by="Score", ascending=False))
+
+# Gráfico de barras
+fig = px.bar(df_producto.sort_values(by="Score", ascending=False).head(15),
+             x="País", y="Score", color="Score", title="Top 15 mercados recomendados")
+st.plotly_chart(fig)
+
+# Mapa de ubicación
+st.markdown("### 🗺️ Mapa de mercados recomendados")
+if "Latitud" in df_producto.columns and "Longitud" in df_producto.columns:
+    fig_map = px.scatter_geo(df_producto,
+                             lat="Latitud", lon="Longitud",
+                             hover_name="País", size="Score",
+                             color="Score", color_continuous_scale="Blues",
+                             title=f"Ubicación geográfica de los mercados recomendados")
+    st.plotly_chart(fig_map)
+else:
+    st.warning("🌐 No se encontraron coordenadas geográficas para mostrar el mapa.")
+
+# Footer
+st.markdown("---")
+st.caption("Desarrollado por CCSUY · Datos ficticios de ejemplo")
