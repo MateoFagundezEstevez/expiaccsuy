@@ -3,16 +3,30 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 from PIL import Image
+import os
+
+# Verificar si los archivos están en el directorio correcto
+if not os.path.exists('./mercados.csv'):
+    st.error("El archivo 'mercados.csv' no se encuentra en el directorio raíz de la aplicación.")
+    st.stop()
+
+if not os.path.exists('./afinidad_producto_país.csv'):
+    st.error("El archivo 'afinidad_producto_país.csv' no se encuentra en el directorio raíz de la aplicación.")
+    st.stop()
+
+if not os.path.exists('./acuerdos_comerciales.csv'):
+    st.error("El archivo 'acuerdos_comerciales.csv' no se encuentra en el directorio raíz de la aplicación.")
+    st.stop()
 
 # Cargar datos
 mercados_df = pd.read_csv('./mercados.csv', encoding='latin1')
-afinidad_df = pd.read_csv('afinidad_producto_país.csv')
-acuerdos_df = pd.read_csv('acuerdos_comerciales.csv', encoding='latin1')
+afinidad_df = pd.read_csv('./afinidad_producto_país.csv')
+acuerdos_df = pd.read_csv('./acuerdos_comerciales.csv', encoding='latin1')
 
 # Logo
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
-    logo = Image.open("logo_ccsuy.png")
+    logo = Image.open("logo_ccsuy.png")  # Asegúrate de tener el archivo de logo en el directorio correcto
     st.image(logo, width=400)
 
 st.title("🌍 Bot de Recomendación de Mercados de Exportación")
