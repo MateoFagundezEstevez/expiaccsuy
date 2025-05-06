@@ -6,7 +6,7 @@ import numpy as np
 # Cargar los archivos CSV con los datos
 mercados_df = pd.read_csv('mercados.csv')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
-acuerdos_comerciales_df = pd.read_csv('acuerdos_comerciales.csv')
+acuerdos_comerciales_df = pd.read_csv('acuerdos_comerciales.csv', encoding='latin1')
 
 # Mostrar columnas de los DataFrames para depuración (esto lo haremos opcional para el usuario)
 if st.checkbox("Mostrar columnas de los DataFrames"):
