@@ -23,6 +23,16 @@ mercados_df = pd.read_csv('./mercados.csv', encoding='latin1')
 afinidad_df = pd.read_csv('./afinidad_producto_país.csv')
 acuerdos_df = pd.read_csv('./acuerdos_comerciales.csv', encoding='latin1')
 
+# Limpiar nombres de columnas
+mercados_df.columns = mercados_df.columns.str.strip()
+afinidad_df.columns = afinidad_df.columns.str.strip()
+acuerdos_df.columns = acuerdos_df.columns.str.strip()
+
+# Verificar las columnas de los DataFrames
+st.write(mercados_df.columns)
+st.write(afinidad_df.columns)
+st.write(acuerdos_df.columns)
+
 # Logo
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
