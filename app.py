@@ -1,19 +1,12 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import numpy as np
 from PIL import Image
 
 # Cargar los archivos CSV con los datos
 mercados_df = pd.read_csv('mercados.csv')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
 acuerdos_comerciales_df = pd.read_csv('acuerdos_comerciales.csv', encoding='latin1')
-
-# Mostrar columnas de los DataFrames para depuración (esto lo hacemos opcional para el usuario)
-if st.checkbox("Mostrar columnas de los DataFrames"):
-    st.write("Columnas de 'mercados_df':", mercados_df.columns)
-    st.write("Columnas de 'afinidad_df':", afinidad_df.columns)
-    st.write("Columnas de 'acuerdos_comerciales_df':", acuerdos_comerciales_df.columns)
 
 # Estilo CSS para personalizar el logo y las secciones
 st.markdown("""
@@ -91,12 +84,12 @@ st.write("Columnas de acuerdos_comerciales_df:", acuerdos_comerciales_df.columns
 # Si se selecciona el checkbox, aplicar el filtro de acuerdo comercial
 if mostrar_acuerdo:
     # Verifica si la columna 'Acuerdo Comercial' existe en los datos cargados
-    if 'Acuerdo Comercial' in mercados_filtrados.columns:
-        # Filtrar los mercados que tienen un acuerdo comercial válido (excluyendo "no" y valores nulos)
-        mercados_filtrados = mercados_filtrados[mercados_filtrados['Acuerdo Comercial'].notnull() & (mercados_filtrados['Acuerdo Comercial'] != "no")]
-        
+    if 'Acuerdo Comercial' in acuerdos_comerciales_df.columns:
         # Realizar la fusión con los datos de acuerdos comerciales
         mercados_filtrados = pd.merge(mercados_filtrados, acuerdos_comerciales_df[['País', 'Acuerdo Comercial', 'Descripción del Acuerdo']], on='País', how='left')
+        
+        # Filtrar los mercados que tienen un acuerdo comercial válido (excluyendo "no" y valores nulos)
+        mercados_filtrados = mercados_filtrados[mercados_filtrados['Acuerdo Comercial'].notnull() & (mercados_filtrados['Acuerdo Comercial'] != "no")]
     else:
         st.error("La columna 'Acuerdo Comercial' no se encuentra en los datos.")
 
@@ -115,7 +108,7 @@ if not mercados_recomendados.empty:
         # Parafraseo amigable de la justificación de la recomendación
         justificacion = f"Este mercado tiene una alta afinidad de **{row['Afinidad']}** con su producto, lo que indica una buena demanda."
         
-        if mostrar_acuerdo and pd.notnull(row['Acuerdo Comercial']):
+        if mostrar_acuerdo and 'Acuerdo Comercial' in row and pd.notnull(row['Acuerdo Comercial']):
             justificacion += f" Además, hay un acuerdo comercial con **{row['Acuerdo Comercial']}**, lo que facilita el acceso y reduce costos."
         
         st.write(justificacion)
