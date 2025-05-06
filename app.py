@@ -99,11 +99,19 @@ with st.form(key='mercados_form'):
     st.checkbox("Mostrar solo mercados con acuerdo comercial", key="acuerdo_comercial")
 
     if st.session_state.get("acuerdo_comercial", False):
-        mercados_filtrados = mercados_filtrados.merge(acuerdos_comerciales_df[acuerdos_comerciales_df['Acuerdo Comercial'] == 'Sí'], on="País")
+        # Verificamos que las columnas 'Acuerdo Comercial' y 'Descripción del Acuerdo' estén presentes
+        if 'Acuerdo Comercial' in acuerdos_comerciales_df.columns and 'Descripción del Acuerdo' in acuerdos_comerciales_df.columns:
+            mercados_filtrados = mercados_filtrados.merge(acuerdos_comerciales_df[acuerdos_comerciales_df['Acuerdo Comercial'] == 'Sí'], on="País")
+        else:
+            st.warning("No se encontraron las columnas de acuerdo comercial o descripción del acuerdo en los datos.")
     
-    # Mostrar los mercados recomendados
-    st.write(f"🛍️ Mercados con afinidad mayor a {slider}:")
-    st.dataframe(mercados_filtrados[['País', 'Afinidad', 'Acuerdo Comercial', 'Descripción del Acuerdo']])
+    # Verificar si las columnas necesarias están presentes antes de intentar acceder a ellas
+    if 'Acuerdo Comercial' in mercados_filtrados.columns and 'Descripción del Acuerdo' in mercados_filtrados.columns:
+        st.write(f"🛍️ Mercados con afinidad mayor a {slider}:")
+        st.dataframe(mercados_filtrados[['País', 'Afinidad', 'Acuerdo Comercial', 'Descripción del Acuerdo']])
+    else:
+        st.write(f"🛍️ Mercados con afinidad mayor a {slider}, pero sin acuerdo comercial o descripción del acuerdo disponibles.")
+        st.dataframe(mercados_filtrados[['País', 'Afinidad']])
 
     # Mostrar un gráfico interactivo de los mercados recomendados
     fig = px.bar(mercados_filtrados, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
@@ -118,7 +126,10 @@ with st.form(key='mercados_form'):
         Los siguientes mercados tienen una alta afinidad para el producto seleccionado, junto con acuerdos comerciales vigentes.
         Los mercados con mayor puntaje de afinidad son los más recomendados.
         """)
-        st.write(mercados_filtrados[['País', 'Afinidad', 'Acuerdo Comercial', 'Descripción del Acuerdo']].sort_values(by='Afinidad', ascending=False))
+        if 'Acuerdo Comercial' in mercados_filtrados.columns and 'Descripción del Acuerdo' in mercados_filtrados.columns:
+            st.write(mercados_filtrados[['País', 'Afinidad', 'Acuerdo Comercial', 'Descripción del Acuerdo']].sort_values(by='Afinidad', ascending=False))
+        else:
+            st.write(mercados_filtrados[['País', 'Afinidad']].sort_values(by='Afinidad', ascending=False))
 
 # Mostrar todos los mercados
 st.markdown('<div class="section-title">📝 Información completa sobre los mercados</div>', unsafe_allow_html=True)
