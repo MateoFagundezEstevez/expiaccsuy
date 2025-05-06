@@ -8,6 +8,9 @@ mercados_df = pd.read_csv('mercados.csv')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
 acuerdos_comerciales_df = pd.read_csv('acuerdos_comerciales.csv')
 
+# Verificar las columnas en el DataFrame de acuerdos comerciales
+st.write("Columnas en acuerdos_comerciales_df:", acuerdos_comerciales_df.columns)
+
 # Estilo CSS para personalizar el logo y las secciones
 st.markdown("""
     <style>
@@ -84,11 +87,8 @@ mostrar_acuerdo = st.checkbox("Mostrar solo mercados con acuerdo comercial")
 
 # Si se selecciona el checkbox, aplicar el filtro de acuerdo comercial
 if mostrar_acuerdo:
-    # Verificar si la columna 'Acuerdo Comercial' está en el DataFrame
-    if 'Acuerdo Comercial' in acuerdos_comerciales_df.columns:
-        mercados_filtrados = mercados_filtrados.merge(acuerdos_comerciales_df[acuerdos_comerciales_df['Acuerdo Comercial'] == 'Sí'], on="País")
-    else:
-        st.error("La columna 'Acuerdo Comercial' no se encuentra en los datos.")
+    # Realizar la fusión con los datos de acuerdos comerciales
+    mercados_filtrados = mercados_filtrados.merge(acuerdos_comerciales_df[['País', 'Acuerdo Comercial', 'Descripción del Acuerdo']], on="País", how='left')
 
 # Ordenar los mercados filtrados por afinidad de mayor a menor
 mercados_filtrados = mercados_filtrados.sort_values(by='Afinidad', ascending=False)
