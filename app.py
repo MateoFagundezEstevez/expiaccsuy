@@ -8,8 +8,11 @@ mercados_df = pd.read_csv('mercados.csv')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
 acuerdos_comerciales_df = pd.read_csv('acuerdos_comerciales.csv')
 
-# Verificar las columnas en el DataFrame de acuerdos comerciales
-st.write("Columnas en acuerdos_comerciales_df:", acuerdos_comerciales_df.columns)
+# Mostrar columnas de los DataFrames para depuración (esto lo haremos opcional para el usuario)
+if st.checkbox("Mostrar columnas de los DataFrames"):
+    st.write("Columnas de 'mercados_df':", mercados_df.columns)
+    st.write("Columnas de 'afinidad_df':", afinidad_df.columns)
+    st.write("Columnas de 'acuerdos_comerciales_df':", acuerdos_comerciales_df.columns)
 
 # Estilo CSS para personalizar el logo y las secciones
 st.markdown("""
@@ -88,7 +91,7 @@ mostrar_acuerdo = st.checkbox("Mostrar solo mercados con acuerdo comercial")
 # Si se selecciona el checkbox, aplicar el filtro de acuerdo comercial
 if mostrar_acuerdo:
     # Realizar la fusión con los datos de acuerdos comerciales
-    mercados_filtrados = mercados_filtrados.merge(acuerdos_comerciales_df[['País', 'Acuerdo Comercial', 'Descripción del Acuerdo']], on="País", how='left')
+    mercados_filtrados = pd.merge(mercados_filtrados, acuerdos_comerciales_df[['País', 'Acuerdo Comercial', 'Descripción del Acuerdo']], on='País', how='left')
 
 # Ordenar los mercados filtrados por afinidad de mayor a menor
 mercados_filtrados = mercados_filtrados.sort_values(by='Afinidad', ascending=False)
@@ -96,7 +99,18 @@ mercados_filtrados = mercados_filtrados.sort_values(by='Afinidad', ascending=Fal
 # Mostrar los mercados recomendados si existen
 if not mercados_filtrados.empty:
     st.markdown(f"### 🌍 Mercados recomendados para {producto_seleccionado} con afinidad superior a {slider}")
-    st.dataframe(mercados_filtrados[['País', 'Afinidad', 'Acuerdo Comercial', 'Descripción del Acuerdo']])
+
+    # Recomendación de mercado
+    for index, row in mercados_filtrados.iterrows():
+        st.write(f"**Recomendación:** {row['País']}")
+        
+        # Justificación de la recomendación
+        justificacion = f"- Afinidad con el producto: **{row['Afinidad']}**"
+        
+        if mostrar_acuerdo and pd.notnull(row['Acuerdo Comercial']):
+            justificacion += f"\n- Acuerdo comercial disponible: **{row['Acuerdo Comercial']}**\n  ({row['Descripción del Acuerdo']})"
+        
+        st.write(justificacion)
     
     # Mostrar un gráfico interactivo de los mercados recomendados
     fig = px.bar(mercados_filtrados, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
