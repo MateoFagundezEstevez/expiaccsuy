@@ -130,3 +130,7 @@ A continuación se muestra la información detallada sobre todos los mercados di
 # Eliminar las columnas 'Latitud' y 'Longitud' antes de mostrar los datos
 mercados_sin_latitud = mercados_df.drop(columns=['Latitud', 'Longitud'], errors='ignore')
 st.dataframe(mercados_sin_latitud)
+
+# Eliminar las columnas 'Latitud' y 'Longitud' antes de mostrar los datos
+mercados_sin_latitud = mercados_df.drop(columns=['Latitud', 'Longitud'], errors='ignore')
+st.dataframe(mercados_sin_latitud)
