@@ -2,13 +2,14 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
+from PIL import Image
 
 # Cargar los archivos CSV con los datos
 mercados_df = pd.read_csv('mercados.csv')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
 acuerdos_comerciales_df = pd.read_csv('acuerdos_comerciales.csv', encoding='latin1')
 
-# Mostrar columnas de los DataFrames para depuración (esto lo haremos opcional para el usuario)
+# Mostrar columnas de los DataFrames para depuración (esto lo hacemos opcional para el usuario)
 if st.checkbox("Mostrar columnas de los DataFrames"):
     st.write("Columnas de 'mercados_df':", mercados_df.columns)
     st.write("Columnas de 'afinidad_df':", afinidad_df.columns)
@@ -52,7 +53,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Logo centrado y grande
-from PIL import Image
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     logo = Image.open("logo_ccsuy.png")
@@ -79,32 +79,37 @@ producto_seleccionado = st.selectbox("🔍 Elija un Producto", productos, index=
 # Filtrar los datos según el producto seleccionado
 df_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
 
-# Slider para ajustar la afinidad mínima
-slider = st.slider("Ajuste la Afinidad mínima para la recomendación", 0, 100, 50)
-
 # Filtro de mercados por afinidad
-mercados_filtrados = df_producto[df_producto['Afinidad'] >= slider]
+mercados_filtrados = df_producto.sort_values(by='Afinidad', ascending=False)
 
 # Checkbox para filtrar por acuerdo comercial
 mostrar_acuerdo = st.checkbox("Mostrar solo mercados con acuerdo comercial")
 
+# Verificar columnas de los DataFrames
+st.write("Columnas de acuerdos_comerciales_df:", acuerdos_comerciales_df.columns)
+
 # Si se selecciona el checkbox, aplicar el filtro de acuerdo comercial
 if mostrar_acuerdo:
-    # Filtramos los mercados que tienen un acuerdo comercial válido (excluyendo "no" y valores nulos)
-    mercados_filtrados = mercados_filtrados[mercados_filtrados['Acuerdo Comercial'].notnull() & (mercados_filtrados['Acuerdo Comercial'] != "no")]
-    
-    # Realizar la fusión con los datos de acuerdos comerciales
-    mercados_filtrados = pd.merge(mercados_filtrados, acuerdos_comerciales_df[['País', 'Acuerdo Comercial', 'Descripción del Acuerdo']], on='País', how='left')
+    # Verifica si la columna 'Acuerdo Comercial' existe en los datos cargados
+    if 'Acuerdo Comercial' in mercados_filtrados.columns:
+        # Filtrar los mercados que tienen un acuerdo comercial válido (excluyendo "no" y valores nulos)
+        mercados_filtrados = mercados_filtrados[mercados_filtrados['Acuerdo Comercial'].notnull() & (mercados_filtrados['Acuerdo Comercial'] != "no")]
+        
+        # Realizar la fusión con los datos de acuerdos comerciales
+        mercados_filtrados = pd.merge(mercados_filtrados, acuerdos_comerciales_df[['País', 'Acuerdo Comercial', 'Descripción del Acuerdo']], on='País', how='left')
+    else:
+        st.error("La columna 'Acuerdo Comercial' no se encuentra en los datos.")
 
-# Ordenar los mercados filtrados por afinidad de mayor a menor
-mercados_filtrados = mercados_filtrados.sort_values(by='Afinidad', ascending=False)
+# Filtrar para obtener solo 5 recomendaciones, con 3 de América
+mercados_américa = mercados_filtrados[mercados_filtrados['País'].str.contains("América")]
+mercados_recomendados = pd.concat([mercados_américa.head(3), mercados_filtrados.head(2)])
 
 # Mostrar los mercados recomendados si existen
-if not mercados_filtrados.empty:
-    st.markdown(f"### 🌍 Mercados recomendados para {producto_seleccionado} con afinidad superior a {slider}")
+if not mercados_recomendados.empty:
+    st.markdown(f"### 🌍 Mercados recomendados para {producto_seleccionado}")
 
     # Recomendación de mercado
-    for index, row in mercados_filtrados.head(5).iterrows():  # Limitar a 5 recomendaciones
+    for index, row in mercados_recomendados.iterrows():
         st.write(f"**Recomendación:** {row['País']}")
         
         # Parafraseo amigable de la justificación de la recomendación
@@ -116,7 +121,7 @@ if not mercados_filtrados.empty:
         st.write(justificacion)
     
     # Mostrar un gráfico interactivo de los mercados recomendados
-    fig = px.bar(mercados_filtrados.head(5), x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
+    fig = px.bar(mercados_recomendados, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
     st.plotly_chart(fig)
 else:
     st.warning("No se encontraron mercados con la afinidad seleccionada o los filtros aplicados.")
@@ -125,7 +130,7 @@ else:
 st.subheader("📍 Mapa de Facilidad para Hacer Negocios")
 
 # Asegurarse de que la columna "Facilidad Negocios (WB 2019)" esté en el DataFrame
-df_producto_map = mercados_df[mercados_df['País'].isin(mercados_filtrados['País'])]
+df_producto_map = mercados_df[mercados_df['País'].isin(mercados_recomendados['País'])]
 
 # Verificar que las columnas de latitud y longitud existan
 if 'Latitud' in df_producto_map.columns and 'Longitud' in df_producto_map.columns:
