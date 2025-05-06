@@ -2,20 +2,13 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
-from PIL import Image
 
 # Cargar los archivos CSV con los datos
 mercados_df = pd.read_csv('mercados.csv')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
 acuerdos_comerciales_df = pd.read_csv('acuerdos_comerciales.csv', encoding='latin1')
 
-# Mostrar columnas de los DataFrames para depuración (esto lo haremos opcional para el usuario)
-if st.checkbox("Mostrar columnas de los DataFrames"):
-    st.write("Columnas de 'mercados_df':", mercados_df.columns)
-    st.write("Columnas de 'afinidad_df':", afinidad_df.columns)
-    st.write("Columnas de 'acuerdos_comerciales_df':", acuerdos_comerciales_df.columns)
-
-# Estilo CSS personalizado
+# Estilo CSS para personalizar el logo y las secciones
 st.markdown("""
     <style>
         .logo-container {
@@ -54,20 +47,13 @@ st.markdown("""
 
 # Logo centrado y grande
 from PIL import Image
-
-# Crear columnas para centrar el logo
 col1, col2, col3 = st.columns([1, 2, 1])
-
 with col2:
-    try:
-        logo = Image.open("logo_ccsuy.png")
-        st.image(logo, width=400)
-    except FileNotFoundError:
-        st.warning("⚠️ No se encontró el archivo 'logo_ccsuy.png'. Verifica que esté en la misma carpeta que este script.")
-
+    logo = Image.open("logo_ccsuy.png")
+    st.image(logo, width=400)
 
 # Título de la aplicación
-st.title("\U0001F30D Bot de Recomendación de Mercados de Exportación")
+st.title("🌍 Bot de Recomendación de Mercados de Exportación")
 
 # Descripción de la herramienta
 st.markdown("""
@@ -75,14 +61,14 @@ st.markdown("""
     <p class="section-description">
         Bienvenido al **Bot de Recomendación de Mercados de Exportación**. 
         Este bot le ayudará a encontrar los mercados más adecuados para exportar sus productos, basándose en una serie de indicadores clave de cada país. 
-        Seleccione un producto y vea los mercados recomendados. \U0001F680
+        Seleccione un producto y vea los mercados recomendados. 🚀
     </p>
 </div>
 """, unsafe_allow_html=True)
 
 # Selección de Producto
 productos = afinidad_df['Producto'].unique()
-producto_seleccionado = st.selectbox("\U0001F50D Elija un Producto", productos, index=0)
+producto_seleccionado = st.selectbox("🔍 Elija un Producto", productos, index=0)
 
 # Filtrar los datos según el producto seleccionado
 df_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
@@ -96,65 +82,55 @@ mercados_filtrados = df_producto[df_producto['Afinidad'] >= slider]
 # Checkbox para filtrar por acuerdo comercial
 mostrar_acuerdo = st.checkbox("Mostrar solo mercados con acuerdo comercial")
 
-# Aplicar el filtro de acuerdo comercial si corresponde
+# Si se selecciona el checkbox, aplicar el filtro de acuerdo comercial
 if mostrar_acuerdo:
+    # Realizar la fusión con los datos de acuerdos comerciales
     mercados_filtrados = pd.merge(mercados_filtrados, acuerdos_comerciales_df[['País', 'Acuerdo Comercial', 'Descripción del Acuerdo']], on='País', how='left')
 
-# Agregar continente desde mercados_df
-mercados_completos = pd.merge(mercados_filtrados, mercados_df[['País', 'Continente']], on='País', how='left')
+# Ordenar los mercados filtrados por afinidad de mayor a menor
+mercados_filtrados = mercados_filtrados.sort_values(by='Afinidad', ascending=False)
 
-# Seleccionar los 5 mejores mercados recomendados, asegurando al menos 3 de América
-mercados_america = mercados_completos[mercados_completos['Continente'] == 'América'].sort_values(by='Afinidad', ascending=False)
-mercados_otro = mercados_completos[mercados_completos['Continente'] != 'América'].sort_values(by='Afinidad', ascending=False)
-top_america = mercados_america.head(3)
-top_otro = mercados_otro.head(2)
-mercados_recomendados = pd.concat([top_america, top_otro])
+# Obtener los 5 mercados recomendados, asegurando que 3 son de América
+mercados_america = mercados_filtrados[mercados_filtrados['País'].isin(['Argentina', 'Brasil', 'México', 'Chile', 'Perú', 'Colombia', 'Ecuador', 'Venezuela', 'Bolivia', 'Paraguay', 'Costa Rica', 'República Dominicana', 'Guatemala', 'Honduras', 'El Salvador', 'Nicaragua', 'Panamá', 'Estados Unidos', 'Canadá'])]
 
-st.markdown(f"### \U0001F30D Mercados recomendados para {producto_seleccionado} (mínimo 3 en América)")
+# Tomamos los 3 mejores de América
+mercados_america_recomendados = mercados_america.head(3)
 
-# Mostrar recomendaciones con justificación
-for index, row in mercados_recomendados.iterrows():
-    st.write(f"**Recomendación:** {row['País']} ({row['Continente']})")
+# Ahora tomamos los 2 mejores mercados fuera de América
+mercados_no_america = mercados_filtrados[~mercados_filtrados['País'].isin(mercados_america_recomendados['País'])]
+mercados_no_america_recomendados = mercados_no_america.head(2)
 
-    justificacion = f"Alta afinidad (**{row['Afinidad']}**) del producto con este mercado."
+# Concatenamos ambas selecciones (3 de América y 2 fuera de América)
+mercados_recomendados = pd.concat([mercados_america_recomendados, mercados_no_america_recomendados])
 
-    if mostrar_acuerdo and 'Acuerdo Comercial' in row and pd.notnull(row['Acuerdo Comercial']):
-        justificacion += f" Cuenta con un acuerdo comercial (**{row['Acuerdo Comercial']}**) que puede facilitar el ingreso."
+# Mostrar los mercados recomendados si existen
+if not mercados_recomendados.empty:
+    st.markdown(f"### 🌍 Mercados recomendados para {producto_seleccionado} con afinidad superior a {slider}")
 
-    if row['Continente'] == 'América':
-        justificacion += " Al estar en América, se favorecen los lazos comerciales y logísticos con Uruguay."
-    else:
-        justificacion += " Aunque fuera del continente, el mercado muestra gran interés en este tipo de producto."
-
-    st.write(justificacion)
-
-# Gráfico de barras
-fig = px.bar(mercados_recomendados, x='País', y='Afinidad', title=f"Afinidad de los 5 principales mercados para {producto_seleccionado}")
-st.plotly_chart(fig)
-
-# Mapa de Facilidad para Hacer Negocios
-st.subheader("\U0001F4CD Mapa de Facilidad para Hacer Negocios")
-df_producto_map = mercados_df[mercados_df['País'].isin(mercados_recomendados['País'])]
-
-if 'Latitud' in df_producto_map.columns and 'Longitud' in df_producto_map.columns:
-    fig_map = px.scatter_geo(df_producto_map,
-                             lat="Latitud",
-                             lon="Longitud",
-                             size="Facilidad Negocios (WB 2019)",
-                             hover_name="País",
-                             size_max=50,
-                             title=f"Facilidad para hacer negocios en los mercados recomendados para {producto_seleccionado}",
-                             color="Facilidad Negocios (WB 2019)",
-                             color_continuous_scale="Viridis")
-    st.plotly_chart(fig_map)
+    # Recomendación de mercado
+    for index, row in mercados_recomendados.iterrows():
+        st.write(f"**Recomendación:** {row['País']}")
+        
+        # Parafraseo amigable de la justificación de la recomendación
+        justificacion = f"Este mercado tiene una alta afinidad de **{row['Afinidad']}** con su producto, lo que indica una buena demanda."
+        
+        if mostrar_acuerdo and pd.notnull(row['Acuerdo Comercial']):
+            justificacion += f" Además, hay un acuerdo comercial con **{row['Acuerdo Comercial']}**, lo que facilita el acceso y reduce costos."
+        
+        st.write(justificacion)
+    
+    # Mostrar un gráfico interactivo de los mercados recomendados
+    fig = px.bar(mercados_recomendados, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
+    st.plotly_chart(fig)
 else:
-    st.error("El archivo de datos no contiene las columnas de Latitud y Longitud necesarias para mostrar el mapa.")
+    st.warning("No se encontraron mercados con la afinidad seleccionada o los filtros aplicados.")
 
-# Mostrar todos los mercados disponibles
-st.markdown('<div class="section-title">\U0001F4DD Información completa sobre los mercados</div>', unsafe_allow_html=True)
+# Mostrar todos los mercados disponibles (sin latitud y longitud)
+st.markdown('<div class="section-title">📝 Información completa sobre los mercados</div>', unsafe_allow_html=True)
 st.write("""
 A continuación se muestra la información detallada sobre todos los mercados disponibles:
 """)
 
+# Eliminar las columnas 'Latitud' y 'Longitud' antes de mostrar los datos
 mercados_sin_latitud = mercados_df.drop(columns=['Latitud', 'Longitud'], errors='ignore')
 st.dataframe(mercados_sin_latitud)
