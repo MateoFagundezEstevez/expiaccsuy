@@ -95,7 +95,7 @@ with st.form(key='mercados_form'):
     slider = st.slider("Ajusta la Afinidad mínima para la recomendación", 0, 100, 50)
     mercados_filtrados = df_producto[df_producto['Afinidad'] >= slider]
 
-    # Mostrar sólo los mercados con acuerdo comercial
+    # Mostrar solo los mercados con acuerdo comercial
     st.checkbox("Mostrar solo mercados con acuerdo comercial", key="acuerdo_comercial")
 
     if st.session_state.get("acuerdo_comercial", False):
@@ -122,26 +122,6 @@ with st.form(key='mercados_form'):
 
 # Mostrar todos los mercados
 st.markdown('<div class="section-title">📝 Información completa sobre los mercados</div>', unsafe_allow_html=True)
-st.write("""
-A continuación se muestra la información detallada sobre todos los mercados disponibles:
-""")
-st.dataframe(mercados_df)
-
-    if submit_button:
-        st.markdown("""
-        ### Recomendaciones:
-        Los siguientes mercados tienen alta afinidad para el producto seleccionado y pueden beneficiarse de acuerdos comerciales.
-        """)
-        st.write(df_producto[['País', 'Afinidad', 'Acuerdo Comercial (Sí/No)', 'Descripción del Acuerdo']].sort_values(by='Afinidad', ascending=False))
-
-    st.subheader("\U0001F501 Personaliza tu Recomendación")
-    slider = st.slider("Ajusta la Afinidad mínima para la recomendación", 0, 100, 50)
-    mercados_filtrados = df_producto[df_producto['Afinidad'] >= slider]
-    st.write(f"\U0001F6CD️ Mercados con afinidad mayor a {slider}:")
-    st.dataframe(mercados_filtrados[['País', 'Afinidad', 'Acuerdo Comercial (Sí/No)', 'Descripción del Acuerdo']])
-
-# Info completa de mercados
-st.markdown('<div class="section-title">\U0001F4DD Información completa sobre los mercados</div>', unsafe_allow_html=True)
 st.write("""
 A continuación se muestra la información detallada sobre todos los mercados disponibles:
 """)
