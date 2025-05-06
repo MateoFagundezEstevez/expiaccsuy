@@ -11,7 +11,6 @@ acuerdos_comerciales_df = pd.read_csv('acuerdos_comerciales.csv')
 # Estilo CSS para personalizar el logo y las secciones
 st.markdown("""
     <style>
-        /* Estilo del logo, títulos y botones */
         .logo-container {
             text-align: center;
         }
@@ -85,24 +84,25 @@ mostrar_acuerdo = st.checkbox("Mostrar solo mercados con acuerdo comercial")
 
 # Si se selecciona el checkbox, aplicar el filtro de acuerdo comercial
 if mostrar_acuerdo:
-    # Filtramos los mercados que tienen acuerdo comercial
-    mercados_filtrados = mercados_filtrados.merge(acuerdos_comerciales_df[acuerdos_comerciales_df['Acuerdo Comercial'] == 'Sí'], on="País")
+    # Verificar si la columna 'Acuerdo Comercial' está en el DataFrame
+    if 'Acuerdo Comercial' in acuerdos_comerciales_df.columns:
+        mercados_filtrados = mercados_filtrados.merge(acuerdos_comerciales_df[acuerdos_comerciales_df['Acuerdo Comercial'] == 'Sí'], on="País")
+    else:
+        st.error("La columna 'Acuerdo Comercial' no se encuentra en los datos.")
 
-# Verificar que la columna 'Descripción del Acuerdo' existe antes de acceder a ella
-if 'Descripción del Acuerdo' in mercados_filtrados.columns:
-    # Ordenar los mercados filtrados por afinidad de mayor a menor
-    mercados_filtrados = mercados_filtrados.sort_values(by='Afinidad', ascending=False)
+# Ordenar los mercados filtrados por afinidad de mayor a menor
+mercados_filtrados = mercados_filtrados.sort_values(by='Afinidad', ascending=False)
 
-    # Mostrar los mercados recomendados
+# Mostrar los mercados recomendados si existen
+if not mercados_filtrados.empty:
     st.markdown(f"### 🌍 Mercados recomendados para {producto_seleccionado} con afinidad superior a {slider}")
     st.dataframe(mercados_filtrados[['País', 'Afinidad', 'Acuerdo Comercial', 'Descripción del Acuerdo']])
-
+    
     # Mostrar un gráfico interactivo de los mercados recomendados
     fig = px.bar(mercados_filtrados, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
     st.plotly_chart(fig)
-
 else:
-    st.error("La columna 'Descripción del Acuerdo' no se encuentra en los datos.")
+    st.warning("No se encontraron mercados con la afinidad seleccionada o los filtros aplicados.")
 
 # Mapa interactivo de la facilidad para hacer negocios
 st.subheader("📍 Mapa de Facilidad para Hacer Negocios")
@@ -131,10 +131,6 @@ st.markdown('<div class="section-title">📝 Información completa sobre los mer
 st.write("""
 A continuación se muestra la información detallada sobre todos los mercados disponibles:
 """)
-
-# Eliminar las columnas 'Latitud' y 'Longitud' antes de mostrar los datos
-mercados_sin_latitud = mercados_df.drop(columns=['Latitud', 'Longitud'], errors='ignore')
-st.dataframe(mercados_sin_latitud)
 
 # Eliminar las columnas 'Latitud' y 'Longitud' antes de mostrar los datos
 mercados_sin_latitud = mercados_df.drop(columns=['Latitud', 'Longitud'], errors='ignore')
