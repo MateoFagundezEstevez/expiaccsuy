@@ -2,12 +2,17 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
-from PIL import Image
 
 # Cargar los archivos CSV con los datos
 mercados_df = pd.read_csv('mercados.csv')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
 acuerdos_comerciales_df = pd.read_csv('acuerdos_comerciales.csv', encoding='latin1')
+
+# Mostrar columnas de los DataFrames para depuración (esto lo haremos opcional para el usuario)
+if st.checkbox("Mostrar columnas de los DataFrames"):
+    st.write("Columnas de 'mercados_df':", mercados_df.columns)
+    st.write("Columnas de 'afinidad_df':", afinidad_df.columns)
+    st.write("Columnas de 'acuerdos_comerciales_df':", acuerdos_comerciales_df.columns)
 
 # Estilo CSS para personalizar el logo y las secciones
 st.markdown("""
@@ -47,6 +52,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Logo centrado y grande
+from PIL import Image
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     logo = Image.open("logo_ccsuy.png")
@@ -84,31 +90,21 @@ mostrar_acuerdo = st.checkbox("Mostrar solo mercados con acuerdo comercial")
 
 # Si se selecciona el checkbox, aplicar el filtro de acuerdo comercial
 if mostrar_acuerdo:
+    # Filtramos los mercados que tienen un acuerdo comercial válido (excluyendo "no" y valores nulos)
+    mercados_filtrados = mercados_filtrados[mercados_filtrados['Acuerdo Comercial'].notnull() & (mercados_filtrados['Acuerdo Comercial'] != "no")]
+    
     # Realizar la fusión con los datos de acuerdos comerciales
     mercados_filtrados = pd.merge(mercados_filtrados, acuerdos_comerciales_df[['País', 'Acuerdo Comercial', 'Descripción del Acuerdo']], on='País', how='left')
 
 # Ordenar los mercados filtrados por afinidad de mayor a menor
 mercados_filtrados = mercados_filtrados.sort_values(by='Afinidad', ascending=False)
 
-# Obtener los 5 mercados recomendados, asegurando que 3 son de América
-mercados_america = mercados_filtrados[mercados_filtrados['País'].isin(['Argentina', 'Brasil', 'México', 'Chile', 'Perú', 'Colombia', 'Ecuador', 'Venezuela', 'Bolivia', 'Paraguay', 'Costa Rica', 'República Dominicana', 'Guatemala', 'Honduras', 'El Salvador', 'Nicaragua', 'Panamá', 'Estados Unidos', 'Canadá'])]
-
-# Tomamos los 3 mejores de América
-mercados_america_recomendados = mercados_america.head(3)
-
-# Ahora tomamos los 2 mejores mercados fuera de América
-mercados_no_america = mercados_filtrados[~mercados_filtrados['País'].isin(mercados_america_recomendados['País'])]
-mercados_no_america_recomendados = mercados_no_america.head(2)
-
-# Concatenamos ambas selecciones (3 de América y 2 fuera de América)
-mercados_recomendados = pd.concat([mercados_america_recomendados, mercados_no_america_recomendados])
-
 # Mostrar los mercados recomendados si existen
-if not mercados_recomendados.empty:
+if not mercados_filtrados.empty:
     st.markdown(f"### 🌍 Mercados recomendados para {producto_seleccionado} con afinidad superior a {slider}")
 
     # Recomendación de mercado
-    for index, row in mercados_recomendados.iterrows():
+    for index, row in mercados_filtrados.head(5).iterrows():  # Limitar a 5 recomendaciones
         st.write(f"**Recomendación:** {row['País']}")
         
         # Parafraseo amigable de la justificación de la recomendación
@@ -120,33 +116,32 @@ if not mercados_recomendados.empty:
         st.write(justificacion)
     
     # Mostrar un gráfico interactivo de los mercados recomendados
-    fig = px.bar(mercados_recomendados, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
+    fig = px.bar(mercados_filtrados.head(5), x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
     st.plotly_chart(fig)
-
-    # Mapa interactivo de la facilidad para hacer negocios
-    st.subheader("📍 Mapa de Facilidad para Hacer Negocios")
-
-    # Asegurarse de que la columna "Facilidad Negocios (WB 2019)" esté en el DataFrame
-    df_producto_map = mercados_df[mercados_df['País'].isin(mercados_recomendados['País'])]
-
-    # Verificar que las columnas de latitud y longitud existan
-    if 'Latitud' in df_producto_map.columns and 'Longitud' in df_producto_map.columns:
-        # Crear el mapa usando latitud y longitud
-        fig_map = px.scatter_geo(df_producto_map,
-                                 lat="Latitud",
-                                 lon="Longitud",
-                                 size="Facilidad Negocios (WB 2019)",
-                                 hover_name="País",
-                                 size_max=50,  # Reducir el tamaño máximo de los globos
-                                 title=f"Facilidad para hacer negocios en los mercados recomendados para {producto_seleccionado}",
-                                 color="Facilidad Negocios (WB 2019)",
-                                 color_continuous_scale="Viridis")
-        st.plotly_chart(fig_map)
-    else:
-        st.error("El archivo de datos no contiene las columnas de Latitud y Longitud necesarias para mostrar el mapa.")
-
 else:
     st.warning("No se encontraron mercados con la afinidad seleccionada o los filtros aplicados.")
+
+# Mapa interactivo de la facilidad para hacer negocios
+st.subheader("📍 Mapa de Facilidad para Hacer Negocios")
+
+# Asegurarse de que la columna "Facilidad Negocios (WB 2019)" esté en el DataFrame
+df_producto_map = mercados_df[mercados_df['País'].isin(mercados_filtrados['País'])]
+
+# Verificar que las columnas de latitud y longitud existan
+if 'Latitud' in df_producto_map.columns and 'Longitud' in df_producto_map.columns:
+    # Crear el mapa usando latitud y longitud
+    fig_map = px.scatter_geo(df_producto_map,
+                             lat="Latitud",
+                             lon="Longitud",
+                             size="Facilidad Negocios (WB 2019)",
+                             hover_name="País",
+                             size_max=50,  # Reducir el tamaño máximo de los globos
+                             title=f"Facilidad para hacer negocios en los mercados recomendados para {producto_seleccionado}",
+                             color="Facilidad Negocios (WB 2019)",
+                             color_continuous_scale="Viridis")
+    st.plotly_chart(fig_map)
+else:
+    st.error("El archivo de datos no contiene las columnas de Latitud y Longitud necesarias para mostrar el mapa.")
 
 # Mostrar todos los mercados disponibles (sin latitud y longitud)
 st.markdown('<div class="section-title">📝 Información completa sobre los mercados</div>', unsafe_allow_html=True)
@@ -157,4 +152,3 @@ A continuación se muestra la información detallada sobre todos los mercados di
 # Eliminar las columnas 'Latitud' y 'Longitud' antes de mostrar los datos
 mercados_sin_latitud = mercados_df.drop(columns=['Latitud', 'Longitud'], errors='ignore')
 st.dataframe(mercados_sin_latitud)
-
