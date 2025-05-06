@@ -100,17 +100,32 @@ mercados_filtrados = mercados_filtrados.sort_values(by='Afinidad', ascending=Fal
 if not mercados_filtrados.empty:
     st.markdown(f"### 🌍 Mercados recomendados para {producto_seleccionado} con afinidad superior a {slider}")
 
-    # Recomendación de mercado
-    for index, row in mercados_filtrados.iterrows():
-        st.write(f"**Recomendación:** {row['País']}")
-        
-        # Parafraseo amigable de la justificación de la recomendación
-        justificacion = f"Este mercado tiene una alta afinidad de **{row['Afinidad']}** con su producto, lo que indica una buena demanda."
-        
-        if mostrar_acuerdo and pd.notnull(row['Acuerdo Comercial']):
-            justificacion += f" Además, hay un acuerdo comercial con **{row['Acuerdo Comercial']}**, lo que facilita el acceso y reduce costos."
-        
-        st.write(justificacion)
+  # Recomendación de mercado con brief estratégico
+for index, row in mercados_filtrados.iterrows():
+    st.markdown(f"### ✅ Recomendación: {row['País']}")
+
+    justificacion = f"""
+    - **Afinidad Alta:** {row['Afinidad']} puntos, lo que indica una demanda favorable del producto en este país.
+    - **Facilidad para Hacer Negocios:** {mercados_df.loc[mercados_df['País'] == row['País'], 'Facilidad para hacer negocios'].values[0]} (según indicadores WB).
+    """
+
+    # Añadir acuerdo comercial si aplica
+    if mostrar_acuerdo and pd.notnull(row['Acuerdo Comercial']):
+        justificacion += f"""
+        - **Acuerdo Comercial Vigente:** {row['Acuerdo Comercial']}, lo cual puede reducir aranceles y facilitar el ingreso.
+        - **Descripción del Acuerdo:** {row['Descripción del Acuerdo']}
+        """
+    else:
+        justificacion += "- **Sin acuerdo comercial relevante con Uruguay**, por lo que podrían aplicarse aranceles plenos."
+
+    # Añadir recomendación estratégica
+    recomendacion = f"""
+    **Brief estratégico:** {row['País']} representa una oportunidad para posicionar este producto aprovechando su afinidad natural y, si aplica, beneficios arancelarios. Se recomienda validar barreras no arancelarias (etiquetado, homologación, logística) antes de exportar.
+    """
+
+    st.markdown(justificacion)
+    st.markdown(recomendacion)
+
     
     # Mostrar un gráfico interactivo de los mercados recomendados
     fig = px.bar(mercados_filtrados, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
