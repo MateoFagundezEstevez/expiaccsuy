@@ -133,9 +133,6 @@ else:
         st.markdown("\n".join(razones))
         st.markdown(estrategia)
 
-else:
-    st.warning("No se encontraron mercados con la afinidad seleccionada o los filtros aplicados.")
-
 # Mapa interactivo de la facilidad para hacer negocios
 st.subheader("📍 Mapa de Facilidad para Hacer Negocios")
 
