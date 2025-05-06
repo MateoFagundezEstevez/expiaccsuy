@@ -9,7 +9,7 @@ from PIL import Image
 @st.cache_data
 def cargar_datos():
     mercados_df = pd.read_csv('mercados.csv')
-    mercados_df.columns = mercados_df.columns.str.strip()  # Eliminar espacios en nombres de columnas
+    mercados_df.columns = mercados_df.columns.str.strip()
     afinidad_df = pd.read_csv('afinidad_producto_país.csv')
     return mercados_df, afinidad_df
 
@@ -59,30 +59,24 @@ with st.expander("📄 Ver Instrucciones", expanded=False):
         st.error("El archivo README.md no se encuentra disponible.")
 
 # -------------------------
-# Selección de producto y filtros globales
+# Selección de producto
 # -------------------------
 st.sidebar.header("🔧 Filtros")
 producto_seleccionado = st.sidebar.selectbox("Seleccione un producto", afinidad_df['Producto'].unique())
 
-# Comprobar existencia de la columna Continente
-if 'Continente' not in mercados_df.columns:
-    st.warning("La columna 'Continente' no se encuentra en el archivo mercados.csv. Se omite el filtro por continente.")
-    continentes = mercados_df['País'].unique()
-    df_continente = mercados_df
-else:
-    continentes = st.sidebar.multiselect("Filtrar por continente", mercados_df['Continente'].unique(), default=mercados_df['Continente'].unique())
-    df_continente = mercados_df[mercados_df['Continente'].isin(continentes)]
-
 # -------------------------
-# Ponderación de factores
+# Ponderación de factores reales
 # -------------------------
-st.sidebar.subheader("⚖️ Ponderación de factores")
+st.sidebar.subheader("⚖️ Ponderación de indicadores")
 pesos = {
-    'Afinidad': st.sidebar.slider("Afinidad", 0, 100, 40),
-    'Facilidad para hacer negocios': st.sidebar.slider("Facilidad Negocios", 0, 100, 20),
-    'Demanda esperada': st.sidebar.slider("Demanda esperada", 0, 100, 20),
-    'Beneficios arancelarios': st.sidebar.slider("Beneficios arancelarios", 0, 100, 10),
-    'Estabilidad política': st.sidebar.slider("Estabilidad política", 0, 100, 10)
+    'Afinidad': st.sidebar.slider("Afinidad", 0, 100, 30),
+    'Facilidad Negocios (WB 2019)': st.sidebar.slider("Facilidad para hacer negocios", 0, 100, 20),
+    'PIB per cápita (USD)': st.sidebar.slider("PIB per cápita", 0, 100, 15),
+    'Crecimiento Anual PIB (%)': st.sidebar.slider("Crecimiento del PIB", 0, 100, 10),
+    'Tamaño del Mercado Total (Millones USD)': st.sidebar.slider("Tamaño del mercado", 0, 100, 10),
+    'Logística (LPI 2023)': st.sidebar.slider("Logística", 0, 100, 5),
+    'Infraestructura Portuaria (LPI 2023)': st.sidebar.slider("Infraestructura portuaria", 0, 100, 5),
+    'Distancia a Uruguay (km)': st.sidebar.slider("Distancia (penaliza)", 0, 100, 5)
 }
 total_peso = sum(pesos.values())
 
@@ -90,53 +84,58 @@ total_peso = sum(pesos.values())
 # Procesamiento de datos
 # -------------------------
 df_prod = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
-df_merged = df_prod.merge(df_continente, on='País')
+df_merged = df_prod.merge(mercados_df, on='País')
 
-# Score combinado
-for k in pesos:
-    if k not in df_merged.columns:
-        df_merged[k] = 0
+# Invertir la distancia (penaliza en lugar de sumar)
+df_merged['Distancia Invertida'] = 1 / (df_merged['Distancia a Uruguay (km)'] + 1)
 
-df_merged['Score'] = sum((pesos[k] / total_peso) * df_merged[k] for k in pesos)
+# Calcular Score
+df_merged['Score'] = (
+    (pesos['Afinidad'] / total_peso) * df_merged['Afinidad'] +
+    (pesos['Facilidad Negocios (WB 2019)'] / total_peso) * df_merged['Facilidad Negocios (WB 2019)'] +
+    (pesos['PIB per cápita (USD)'] / total_peso) * df_merged['PIB per cápita (USD)'] +
+    (pesos['Crecimiento Anual PIB (%)'] / total_peso) * df_merged['Crecimiento Anual PIB (%)'] +
+    (pesos['Tamaño del Mercado Total (Millones USD)'] / total_peso) * df_merged['Tamaño del Mercado Total (Millones USD)'] +
+    (pesos['Logística (LPI 2023)'] / total_peso) * df_merged['Logística (LPI 2023)'] +
+    (pesos['Infraestructura Portuaria (LPI 2023)'] / total_peso) * df_merged['Infraestructura Portuaria (LPI 2023)'] +
+    (pesos['Distancia a Uruguay (km)'] / total_peso) * df_merged['Distancia Invertida']
+)
 
 # -------------------------
-# Resultados y visualización
+# Resultados
 # -------------------------
 st.markdown(f'<div class="section-title">🌎 Recomendaciones para "{producto_seleccionado}"</div>', unsafe_allow_html=True)
-
 st.dataframe(df_merged[['País', 'Score'] + list(pesos.keys())].sort_values(by='Score', ascending=False), use_container_width=True)
 
+# Gráfico
 fig = px.bar(df_merged.sort_values(by='Score'), x='Score', y='País', orientation='h', 
              title="Ranking de países recomendados", color='Score', color_continuous_scale='Blues')
 st.plotly_chart(fig)
 
 # -------------------------
-# Mapa geográfico
+# Mapa
 # -------------------------
 st.subheader("📍 Mapa de mercados sugeridos")
-if 'Latitud' in df_merged.columns and 'Longitud' in df_merged.columns:
-    fig_map = px.scatter_geo(df_merged,
-                             lat="Latitud", lon="Longitud",
-                             size="Score", hover_name="País",
-                             color="Score", color_continuous_scale="Viridis",
-                             projection="natural earth",
-                             title="Ubicación de los mercados recomendados")
-    st.plotly_chart(fig_map)
-else:
-    st.warning("No se encontraron coordenadas geográficas para mostrar el mapa.")
+fig_map = px.scatter_geo(df_merged,
+                         lat="Latitud", lon="Longitud",
+                         size="Score", hover_name="País",
+                         color="Score", color_continuous_scale="Viridis",
+                         projection="natural earth",
+                         title="Ubicación de los mercados recomendados")
+st.plotly_chart(fig_map)
 
 # -------------------------
-# Ficha de país seleccionado (opcional)
+# Ficha detallada
 # -------------------------
 st.subheader("🔎 Información detallada por país")
 selected_pais = st.selectbox("Seleccione un país para ver detalles", df_merged['País'].unique())
 ficha = df_merged[df_merged['País'] == selected_pais].iloc[0]
 st.write(f"**Score total:** {ficha['Score']:.2f}")
 for k in pesos:
-    st.write(f"**{k}:** {ficha[k]}")
+    st.write(f"**{k}:** {ficha.get(k, 'N/A')}")
 
 # -------------------------
-# Información completa
+# Tabla completa
 # -------------------------
 st.markdown('<div class="section-title">📝 Información completa de mercados</div>', unsafe_allow_html=True)
 st.dataframe(mercados_df, use_container_width=True)
