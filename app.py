@@ -52,10 +52,19 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Logo centrado\col1, col2, col3 = st.columns([1, 2, 1])
+# Logo centrado y grande
+from PIL import Image
+
+# Crear columnas para centrar el logo
+col1, col2, col3 = st.columns([1, 2, 1])
+
 with col2:
-    logo = Image.open("logo_ccsuy.png")
-    st.image(logo, width=400)
+    try:
+        logo = Image.open("logo_ccsuy.png")
+        st.image(logo, width=400)
+    except FileNotFoundError:
+        st.warning("⚠️ No se encontró el archivo 'logo_ccsuy.png'. Verifica que esté en la misma carpeta que este script.")
+
 
 # Título de la aplicación
 st.title("\U0001F30D Bot de Recomendación de Mercados de Exportación")
