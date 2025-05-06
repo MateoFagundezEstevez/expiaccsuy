@@ -9,6 +9,7 @@ from PIL import Image
 @st.cache_data
 def cargar_datos():
     mercados_df = pd.read_csv('mercados.csv')
+    mercados_df.columns = mercados_df.columns.str.strip()  # Eliminar espacios en nombres de columnas
     afinidad_df = pd.read_csv('afinidad_producto_país.csv')
     return mercados_df, afinidad_df
 
@@ -62,7 +63,15 @@ with st.expander("📄 Ver Instrucciones", expanded=False):
 # -------------------------
 st.sidebar.header("🔧 Filtros")
 producto_seleccionado = st.sidebar.selectbox("Seleccione un producto", afinidad_df['Producto'].unique())
-continentes = st.sidebar.multiselect("Filtrar por continente", mercados_df['Continente'].unique(), default=mercados_df['Continente'].unique())
+
+# Comprobar existencia de la columna Continente
+if 'Continente' not in mercados_df.columns:
+    st.warning("La columna 'Continente' no se encuentra en el archivo mercados.csv. Se omite el filtro por continente.")
+    continentes = mercados_df['País'].unique()
+    df_continente = mercados_df
+else:
+    continentes = st.sidebar.multiselect("Filtrar por continente", mercados_df['Continente'].unique(), default=mercados_df['Continente'].unique())
+    df_continente = mercados_df[mercados_df['Continente'].isin(continentes)]
 
 # -------------------------
 # Ponderación de factores
@@ -81,8 +90,7 @@ total_peso = sum(pesos.values())
 # Procesamiento de datos
 # -------------------------
 df_prod = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
-df_merged = df_prod.merge(mercados_df, on='País')
-df_merged = df_merged[df_merged['Continente'].isin(continentes)]
+df_merged = df_prod.merge(df_continente, on='País')
 
 # Score combinado
 for k in pesos:
