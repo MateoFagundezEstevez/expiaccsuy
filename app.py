@@ -131,9 +131,11 @@ with st.form(key='mercados_form'):
         else:
             st.write(mercados_filtrados[['País', 'Afinidad']].sort_values(by='Afinidad', ascending=False))
 
-# Mostrar todos los mercados
+# Mostrar todos los mercados (sin latitud y longitud)
 st.markdown('<div class="section-title">📝 Información completa sobre los mercados</div>', unsafe_allow_html=True)
 st.write("""
 A continuación se muestra la información detallada sobre todos los mercados disponibles:
 """)
-st.dataframe(mercados_df)
+# Eliminar las columnas 'Latitud' y 'Longitud' antes de mostrar los datos
+mercados_sin_latitud = mercados_df.drop(columns=['Latitud', 'Longitud'], errors='ignore')
+st.dataframe(mercados_sin_latitud)
