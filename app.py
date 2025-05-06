@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
+from PIL import Image
 
 # Cargar los archivos CSV con los datos
 mercados_df = pd.read_csv('mercados.csv')
@@ -46,7 +47,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Logo centrado y grande
-from PIL import Image
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     logo = Image.open("logo_ccsuy.png")
@@ -122,6 +122,29 @@ if not mercados_recomendados.empty:
     # Mostrar un gráfico interactivo de los mercados recomendados
     fig = px.bar(mercados_recomendados, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
     st.plotly_chart(fig)
+
+    # Mapa interactivo de la facilidad para hacer negocios
+    st.subheader("📍 Mapa de Facilidad para Hacer Negocios")
+
+    # Asegurarse de que la columna "Facilidad Negocios (WB 2019)" esté en el DataFrame
+    df_producto_map = mercados_df[mercados_df['País'].isin(mercados_recomendados['País'])]
+
+    # Verificar que las columnas de latitud y longitud existan
+    if 'Latitud' in df_producto_map.columns and 'Longitud' in df_producto_map.columns:
+        # Crear el mapa usando latitud y longitud
+        fig_map = px.scatter_geo(df_producto_map,
+                                 lat="Latitud",
+                                 lon="Longitud",
+                                 size="Facilidad Negocios (WB 2019)",
+                                 hover_name="País",
+                                 size_max=50,  # Reducir el tamaño máximo de los globos
+                                 title=f"Facilidad para hacer negocios en los mercados recomendados para {producto_seleccionado}",
+                                 color="Facilidad Negocios (WB 2019)",
+                                 color_continuous_scale="Viridis")
+        st.plotly_chart(fig_map)
+    else:
+        st.error("El archivo de datos no contiene las columnas de Latitud y Longitud necesarias para mostrar el mapa.")
+
 else:
     st.warning("No se encontraron mercados con la afinidad seleccionada o los filtros aplicados.")
 
@@ -134,3 +157,4 @@ A continuación se muestra la información detallada sobre todos los mercados di
 # Eliminar las columnas 'Latitud' y 'Longitud' antes de mostrar los datos
 mercados_sin_latitud = mercados_df.drop(columns=['Latitud', 'Longitud'], errors='ignore')
 st.dataframe(mercados_sin_latitud)
+
