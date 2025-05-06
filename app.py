@@ -45,12 +45,21 @@ df_producto['Afinidad Ajustada'] = df_producto.apply(
     axis=1
 )
 
+# Asignar prioridad a las regiones dentro de América
+region_order = {
+    'América Central': 1,
+    'América del Sur': 2,
+    'América del Norte': 3,
+}
+
+df_producto['Región_Prioridad'] = df_producto['Continente'].map(region_order)
+
 # Separar países latinoamericanos
 latam = df_producto[df_producto['Continente'] == 'América Latina']
 resto = df_producto[df_producto['Continente'] != 'América Latina']
 
-# Seleccionar top 5 LatAm y top 2 globales
-top_latam = latam.sort_values(by='Afinidad Ajustada', ascending=False).head(5)
+# Seleccionar top 5 LatAm (priorizando América Central > Sur > Norte) y top 2 globales
+top_latam = latam.sort_values(by=['Región_Prioridad', 'Afinidad Ajustada'], ascending=[True, False]).head(5)
 top_global = resto.sort_values(by='Afinidad Ajustada', ascending=False).head(2)
 
 # Combinar resultados
