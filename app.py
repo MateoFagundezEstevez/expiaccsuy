@@ -34,6 +34,7 @@ solo_con_acuerdo = st.checkbox("🔒 Solo países con acuerdo comercial con Urug
 df_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
 df_producto = df_producto.merge(acuerdos_df[['País', 'Acuerdo Comercial']], on='País', how='left')
 df_producto = df_producto.merge(mercados_df, on='País', how='left')
+df_producto = df_producto.merge(mercados_df[['País', 'Continente']], on='País', how='left')
 
 # Aplicar filtro de acuerdo comercial
 if solo_con_acuerdo:
