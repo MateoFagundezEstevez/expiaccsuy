@@ -3,90 +3,118 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 from PIL import Image
+import os
 
-# Configuración general
-st.set_page_config(page_title="Bot de Recomendación de Mercados", layout="wide")
+# Verificar si los archivos están en el directorio correcto
+if not os.path.exists('./mercados.csv'):
+    st.error("El archivo 'mercados.csv' no se encuentra en el directorio raíz de la aplicación.")
+    st.stop()
 
-# Cargar los datos
-mercados_df = pd.read_csv("mercados.csv")
-afinidad_df = pd.read_csv("afinidad_producto_pais.csv")
-acuerdos_df = pd.read_csv("acuerdos_comerciales.csv", encoding="utf-8", quotechar='"')
+if not os.path.exists('./afinidad_producto_país.csv'):
+    st.error("El archivo 'afinidad_producto_país.csv' no se encuentra en el directorio raíz de la aplicación.")
+    st.stop()
 
-# Preprocesamiento
-acuerdos_df["Acuerdo Comercial"] = acuerdos_df["Acuerdo Comercial"].map({"Sí": 1, "No": 0})
-df = pd.merge(afinidad_df, mercados_df, on="País", how="left")
-df = pd.merge(df, acuerdos_df, on="País", how="left")
+if not os.path.exists('./acuerdos_comerciales.csv'):
+    st.error("El archivo 'acuerdos_comerciales.csv' no se encuentra en el directorio raíz de la aplicación.")
+    st.stop()
 
-# Mostrar logo
+# Cargar datos
+mercados_df = pd.read_csv('./mercados.csv', encoding='latin1')
+afinidad_df = pd.read_csv('./afinidad_producto_país.csv')
+acuerdos_df = pd.read_csv('./acuerdos_comerciales.csv', encoding='latin1')
+
+# Limpiar nombres de columnas
+mercados_df.columns = mercados_df.columns.str.strip()
+afinidad_df.columns = afinidad_df.columns.str.strip()
+acuerdos_df.columns = acuerdos_df.columns.str.strip()
+
+# Verificar las columnas de los DataFrames
+st.write(mercados_df.columns)
+st.write(afinidad_df.columns)
+st.write(acuerdos_df.columns)
+
+# Logo
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
-    logo = Image.open("logo_ccsuy.png")
+    logo = Image.open("logo_ccsuy.png")  # Asegúrate de tener el archivo de logo en el directorio correcto
     st.image(logo, width=400)
 
-# Título y descripción
 st.title("🌍 Bot de Recomendación de Mercados de Exportación")
 
+# Instrucciones y descripción
 st.markdown("""
-Este bot te ayuda a identificar mercados recomendados para exportar productos uruguayos, basándose en:
-- Afinidad histórica del producto en ese mercado
-- Facilidad para hacer negocios
-- Nivel de demanda estimada
-- Existencia de acuerdos comerciales
+Bienvenido al **Bot de Recomendación de Mercados de Exportación**.  
+Esta herramienta identifica los mejores mercados para exportar productos uruguayos, priorizando América Latina y considerando afinidad, acuerdos comerciales y facilidad para hacer negocios.
 """)
 
 # Selección de producto
-productos = df["Producto"].unique()
-producto = st.selectbox("🔍 Selecciona un producto", productos)
+productos = afinidad_df['Producto'].unique()
+producto_seleccionado = st.selectbox("🔍 Elija un Producto", productos)
 
-df_producto = df[df["Producto"] == producto]
+# Filtro de acuerdo comercial
+solo_con_acuerdo = st.checkbox("🔒 Solo países con acuerdo comercial con Uruguay")
 
-# Ponderación de criterios
-st.markdown("### ⚖️ Asigna importancia a cada criterio (suma 100)")
-col1, col2, col3, col4 = st.columns(4)
-peso_afinidad = col1.slider("Afinidad", 0, 100, 30)
-peso_facilidad = col2.slider("Facilidad Negocios", 0, 100, 30)
-peso_demanda = col3.slider("Demanda", 0, 100, 30)
-peso_acuerdo = col4.slider("Acuerdo Comercial", 0, 100, 10)
+# Preparar datos
+df_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
+df_producto = df_producto.merge(acuerdos_df[['País', 'Acuerdo Comercial']], on='País', how='left')
+df_producto = df_producto.merge(mercados_df, on='País', how='left')
+df_producto = df_producto.merge(mercados_df[['País', 'Continente']], on='País', how='left')
 
-peso_total = peso_afinidad + peso_facilidad + peso_demanda + peso_acuerdo
-if peso_total != 100:
-    st.warning("⚠️ La suma de los pesos debe ser 100.")
-    st.stop()
+# Aplicar filtro de acuerdo comercial
+if solo_con_acuerdo:
+    df_producto = df_producto[df_producto['Acuerdo Comercial'] == 'Sí']
 
-# Normalización de columnas relevantes
-df_producto["Afinidad_norm"] = df_producto["Afinidad"] / df_producto["Afinidad"].max()
-df_producto["Facilidad_norm"] = df_producto["Facilidad para hacer negocios"] / df_producto["Facilidad para hacer negocios"].max()
-df_producto["Demanda_norm"] = df_producto["Demanda esperada"] / df_producto["Demanda esperada"].max()
+# Afinidad ajustada con bonus
+df_producto['Afinidad Ajustada'] = df_producto.apply(
+    lambda row: row['Afinidad'] + 5 if row['Acuerdo Comercial'] == 'Sí' else row['Afinidad'],
+    axis=1
+)
 
-# Score ponderado
-df_producto["Score"] = (
-    df_producto["Afinidad_norm"] * peso_afinidad +
-    df_producto["Facilidad_norm"] * peso_facilidad +
-    df_producto["Demanda_norm"] * peso_demanda +
-    df_producto["Acuerdo Comercial"] * peso_acuerdo
-) / 100
+# Asignar prioridad a las regiones dentro de América
+region_order = {
+    'América Central': 1,
+    'América del Sur': 2,
+    'América del Norte': 3,
+}
 
-# Mostrar resultados
-st.markdown("### 📊 Mercados recomendados")
-st.dataframe(df_producto[["País", "Score", "Afinidad", "Facilidad para hacer negocios", "Demanda esperada", "Acuerdo Comercial", "Descripción Acuerdo"]].sort_values(by="Score", ascending=False))
+df_producto['Región_Prioridad'] = df_producto['Continente'].map(region_order)
 
-# Gráfico de barras
-fig = px.bar(df_producto.sort_values(by="Score", ascending=False).head(15),
-             x="País", y="Score", color="Score", title="Top 15 mercados recomendados")
+# Separar países latinoamericanos
+latam = df_producto[df_producto['Continente'] == 'América Latina']
+resto = df_producto[df_producto['Continente'] != 'América Latina']
+
+# Seleccionar top 5 LatAm (priorizando América Central > Sur > Norte) y top 2 globales
+top_latam = latam.sort_values(by=['Región_Prioridad', 'Afinidad Ajustada'], ascending=[True, False]).head(5)
+top_global = resto.sort_values(by='Afinidad Ajustada', ascending=False).head(2)
+
+# Combinar resultados
+top_recomendados = pd.concat([top_latam, top_global])
+
+# Mostrar tabla
+st.subheader("🧭 Recomendaciones Prioritarias")
+st.dataframe(top_recomendados[['País', 'Afinidad Ajustada', 'Acuerdo Comercial', 'Facilidad Negocios (WB 2019)', 'Demanda Esperada']])
+
+# Mostrar gráfico
+fig = px.bar(top_recomendados, x='País', y='Afinidad Ajustada', color='Continente', title="Ranking de Mercados Recomendados")
 st.plotly_chart(fig)
 
-# Mapa de ubicación
-st.markdown("### 🗺️ Mapa de mercados recomendados")
-if "Latitud" in df_producto.columns and "Longitud" in df_producto.columns:
-    fig_map = px.scatter_geo(df_producto,
-                             lat="Latitud", lon="Longitud",
-                             hover_name="País", size="Score",
-                             color="Score", color_continuous_scale="Blues",
-                             title=f"Ubicación geográfica de los mercados recomendados")
-    st.plotly_chart(fig_map)
-else:
-    st.warning("🌐 No se encontraron coordenadas geográficas para mostrar el mapa.")
+# Generar recomendaciones breves
+st.subheader("📝 Recomendaciones Estratégicas")
 
-# Footer
-st.markdown("---")
-st.caption("Desarrollado por CCSUY · Datos ficticios de ejemplo")
+for _, row in top_recomendados.iterrows():
+    nombre = row['País']
+    acuerdo = "cuenta con un acuerdo comercial" if row['Acuerdo Comercial'] == "Sí" else "no cuenta con un acuerdo preferencial"
+    demanda = row['Demanda Esperada']
+    facilidad = row['Facilidad Negocios (WB 2019)']
+
+    recomendacion = (
+        f"**{nombre}** es un mercado atractivo para exportar {producto_seleccionado}. "
+        f"Este país {acuerdo} con Uruguay, lo que influye en los costos y condiciones de acceso. "
+        f"Su nivel de demanda esperada ({demanda}) sugiere un mercado con oportunidades relevantes, "
+        f"y su puntuación de {facilidad} en facilidad para hacer negocios lo posiciona como un entorno "
+        f"moderadamente accesible para empresas uruguayas. Se recomienda investigar barreras no arancelarias "
+        f"y regulaciones específicas del sector antes de avanzar con estrategias comerciales más profundas."
+    )
+
+    st.markdown(f"#### {nombre}")
+    st.markdown(recomendacion)
