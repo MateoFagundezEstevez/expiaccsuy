@@ -2,27 +2,23 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
-from PIL import Image
 
 # Cargar los archivos CSV con los datos
 mercados_df = pd.read_csv('mercados.csv')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
-acuerdos_df = pd.read_csv('acuerdos_comerciales.csv')
 
-# Renombrar la columna para uniformizar
-acuerdos_df.rename(columns={'Acuerdo Comercial': 'Acuerdo Comercial (Sí/No)'}, inplace=True)
-
-# Unir afinidad con acuerdos comerciales
-afinidad_df = afinidad_df.merge(acuerdos_df, on='País', how='left')
+# Agregar la nueva columna de acuerdos comerciales al dataframe
+acuerdos_comerciales_df = pd.read_csv('acuerdos_comerciales.csv')
 
 # Estilo CSS para personalizar el logo y las secciones
 st.markdown("""
     <style>
+        /* Estilo del logo, títulos y botones */
         .logo-container {
             text-align: center;
         }
         .logo-container img {
-            width: 400px;
+            width: 400px;  
         }
         .section-title {
             color: #003B5C;
@@ -39,14 +35,6 @@ st.markdown("""
             margin-bottom: 20px;
             border-radius: 10px;
         }
-        .expander-title {
-            font-size: 20px;
-            color: #003B5C;
-        }
-        .expander-content {
-            font-size: 14px;
-            color: #4A4A4A;
-        }
         .button {
             background-color: #9E2A2F;
             color: white;
@@ -60,17 +48,18 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Logo centrado
+# Logo centrado y grande
+from PIL import Image
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     logo = Image.open("logo_ccsuy.png")
     st.image(logo, width=400)
 
-# Título de la app
-st.title("\U0001F30D Bot de Recomendación de Mercados de Exportación")
+# Título de la aplicación
+st.title("🌍 Bot de Recomendación de Mercados de Exportación")
 
-# Instrucciones
-with st.expander("\U0001F4C4 Ver Instrucciones", expanded=False):
+# Opción para desplegar/ocultar las instrucciones
+with st.expander("📄 Ver Instrucciones", expanded=False):
     try:
         with open("README.md", "r", encoding="utf-8") as file:
             readme_content = file.read()
@@ -82,48 +71,61 @@ with st.expander("\U0001F4C4 Ver Instrucciones", expanded=False):
 st.markdown("""
 <div class="section">
     <p class="section-description">
-        Bienvenido al <strong>Bot de Recomendación de Mercados de Exportación</strong>. 
-        Este bot le ayudará a encontrar los mercados más adecuados para exportar sus productos, basándose en indicadores clave como afinidad del producto, facilidad de negocios y existencia de acuerdos comerciales.\n
+        Bienvenido al **Bot de Recomendación de Mercados de Exportación**. 
+        Este bot le ayudará a encontrar los mercados más adecuados para exportar sus productos, basándose en una serie de indicadores clave de cada país. 
         Seleccione un producto y vea los mercados recomendados. 🚀
     </p>
 </div>
 """, unsafe_allow_html=True)
 
-# Selección de producto
+# Selección de Producto
 productos = afinidad_df['Producto'].unique()
-producto_seleccionado = st.selectbox("\U0001F50D Elija un Producto", productos)
+producto_seleccionado = st.selectbox("🔍 Elija un Producto", productos)
 
-# Filtrar por producto
+# Filtrar los datos según el producto seleccionado
 df_producto = afinidad_df[afinidad_df['Producto'] == producto_seleccionado]
 
-# Formulario
+# Usar un formulario para manejar la interacción
 with st.form(key='mercados_form'):
-    st.markdown(f'<div class="section-title">\U0001F30E Mercados recomendados para {producto_seleccionado}</div>', unsafe_allow_html=True)
-    st.dataframe(df_producto[['País', 'Afinidad', 'Acuerdo Comercial (Sí/No)', 'Descripción del Acuerdo']])
+    st.markdown('<div class="section-title">🌎 Mercados recomendados para {}</div>'.format(producto_seleccionado), unsafe_allow_html=True)
+    st.dataframe(df_producto[['País', 'Afinidad']])
 
-    # Gráfico de afinidad
-    fig = px.bar(df_producto, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
+    # Filtros de afinidad y acuerdos comerciales
+    st.subheader("🔄 Personaliza tu Recomendación")
+    slider = st.slider("Ajusta la Afinidad mínima para la recomendación", 0, 100, 50)
+    mercados_filtrados = df_producto[df_producto['Afinidad'] >= slider]
+
+    # Mostrar sólo los mercados con acuerdo comercial
+    st.checkbox("Mostrar solo mercados con acuerdo comercial", key="acuerdo_comercial")
+
+    if st.session_state.get("acuerdo_comercial", False):
+        mercados_filtrados = mercados_filtrados.merge(acuerdos_comerciales_df[acuerdos_comerciales_df['Acuerdo Comercial'] == 'Sí'], on="País")
+    
+    # Mostrar los mercados recomendados
+    st.write(f"🛍️ Mercados con afinidad mayor a {slider}:")
+    st.dataframe(mercados_filtrados[['País', 'Afinidad', 'Acuerdo Comercial', 'Descripción del Acuerdo']])
+
+    # Mostrar un gráfico interactivo de los mercados recomendados
+    fig = px.bar(mercados_filtrados, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
     st.plotly_chart(fig)
 
-    # Mapa de facilidad de negocios
-    st.subheader("\U0001F4CD Mapa Interactivo de los Mercados - Facilidad para hacer negocios")
-    df_producto_map = mercados_df[mercados_df['País'].isin(df_producto['País'])]
-
-    if 'Latitud' in df_producto_map.columns and 'Longitud' in df_producto_map.columns:
-        fig_map = px.scatter_geo(df_producto_map,
-                                 lat="Latitud",
-                                 lon="Longitud",
-                                 size="Facilidad Negocios (WB 2019)",
-                                 hover_name="País",
-                                 size_max=50,
-                                 title=f"Facilidad para hacer negocios en los mercados recomendados para {producto_seleccionado}",
-                                 color="Facilidad Negocios (WB 2019)",
-                                 color_continuous_scale="Viridis")
-        st.plotly_chart(fig_map)
-    else:
-        st.error("El archivo de datos no contiene columnas de latitud y longitud necesarias.")
-
+    # Botón de recomendación - el botón de 'submit' está en el formulario
     submit_button = st.form_submit_button("Ver Recomendaciones")
+    
+    if submit_button:
+        st.markdown("""
+        ### Recomendaciones:
+        Los siguientes mercados tienen una alta afinidad para el producto seleccionado, junto con acuerdos comerciales vigentes.
+        Los mercados con mayor puntaje de afinidad son los más recomendados.
+        """)
+        st.write(mercados_filtrados[['País', 'Afinidad', 'Acuerdo Comercial', 'Descripción del Acuerdo']].sort_values(by='Afinidad', ascending=False))
+
+# Mostrar todos los mercados
+st.markdown('<div class="section-title">📝 Información completa sobre los mercados</div>', unsafe_allow_html=True)
+st.write("""
+A continuación se muestra la información detallada sobre todos los mercados disponibles:
+""")
+st.dataframe(mercados_df)
 
     if submit_button:
         st.markdown("""
