@@ -100,36 +100,39 @@ mercados_filtrados = mercados_filtrados.sort_values(by='Afinidad', ascending=Fal
 if not mercados_filtrados.empty:
     st.markdown(f"### 🌍 Mercados recomendados para {producto_seleccionado} con afinidad superior a {slider}")
 
-  # Recomendación de mercado con brief estratégico
-for index, row in mercados_filtrados.iterrows():
-    st.markdown(f"### ✅ Recomendación: {row['País']}")
+# Obtener lista de países por continente si aún no existe
+if 'Continente' not in mercados_df.columns:
+    st.warning("Falta la columna 'Continente' en el archivo 'mercados.csv'. Para aplicar esta lógica, necesitás clasificar los países por continente.")
+else:
+    # Unir datos de mercados_df al dataframe filtrado para usar el continente
+    mercados_filtrados = pd.merge(mercados_filtrados, mercados_df[['País', 'Continente', 'Facilidad para hacer negocios']], on='País', how='left')
 
-    justificacion = f"""
-    - **Afinidad Alta:** {row['Afinidad']} puntos, lo que indica una demanda favorable del producto en este país.
-    - **Facilidad para Hacer Negocios:** {mercados_df.loc[mercados_df['País'] == row['País'], 'Facilidad para hacer negocios'].values[0]} (según indicadores WB).
-    """
-
-    # Añadir acuerdo comercial si aplica
-    if mostrar_acuerdo and pd.notnull(row['Acuerdo Comercial']):
-        justificacion += f"""
-        - **Acuerdo Comercial Vigente:** {row['Acuerdo Comercial']}, lo cual puede reducir aranceles y facilitar el ingreso.
-        - **Descripción del Acuerdo:** {row['Descripción del Acuerdo']}
-        """
-    else:
-        justificacion += "- **Sin acuerdo comercial relevante con Uruguay**, por lo que podrían aplicarse aranceles plenos."
-
-    # Añadir recomendación estratégica
-    recomendacion = f"""
-    **Brief estratégico:** {row['País']} representa una oportunidad para posicionar este producto aprovechando su afinidad natural y, si aplica, beneficios arancelarios. Se recomienda validar barreras no arancelarias (etiquetado, homologación, logística) antes de exportar.
-    """
-
-    st.markdown(justificacion)
-    st.markdown(recomendacion)
-
+    # Asegurar al menos 3 de América entre los 5 mejores
+    mercados_america = mercados_filtrados[mercados_filtrados['Continente'] == 'América'].sort_values(by='Afinidad', ascending=False).head(3)
+    restantes = mercados_filtrados[~mercados_filtrados['País'].isin(mercados_america['País'])].sort_values(by='Afinidad', ascending=False).head(2)
     
-    # Mostrar un gráfico interactivo de los mercados recomendados
-    fig = px.bar(mercados_filtrados, x='País', y='Afinidad', title=f"Afinidad de los mercados para {producto_seleccionado}")
-    st.plotly_chart(fig)
+    top_mercados = pd.concat([mercados_america, restantes]).sort_values(by='Afinidad', ascending=False).head(5)
+
+    st.markdown(f"### 🌎 Top 5 Mercados Recomendados para **{producto_seleccionado}** (con al menos 3 de América)")
+
+    for _, row in top_mercados.iterrows():
+        st.markdown(f"#### ✅ {row['País']}")
+
+        razones = [
+            f"- **Alta afinidad**: {row['Afinidad']} puntos, lo que indica coincidencia entre demanda y oferta del producto.",
+            f"- **Facilidad para hacer negocios**: {row['Facilidad para hacer negocios']} según WB (2019)."
+        ]
+
+        if mostrar_acuerdo and pd.notnull(row.get('Acuerdo Comercial')):
+            razones.append(f"- **Acuerdo vigente**: {row['Acuerdo Comercial']}. {row.get('Descripción del Acuerdo', '')}")
+        else:
+            razones.append("- **Sin acuerdo comercial preferencial vigente** con Uruguay.")
+
+        estrategia = f"**Recomendación estratégica:** Se sugiere explorar este mercado por su perfil compatible y las condiciones institucionales. Identificar canales de distribución y validar requisitos específicos de acceso."
+
+        st.markdown("\n".join(razones))
+        st.markdown(estrategia)
+
 else:
     st.warning("No se encontraron mercados con la afinidad seleccionada o los filtros aplicados.")
 
