@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image
 
 # Cargar datos
-mercados_df = pd.read_csv('mercados.csv', encoding='latin1')
+mercados_df = pd.read_csv('./mercados.csv', encoding='latin1')
 afinidad_df = pd.read_csv('afinidad_producto_país.csv')
 acuerdos_df = pd.read_csv('acuerdos_comerciales.csv', encoding='latin1')
 
