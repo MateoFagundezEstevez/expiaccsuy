@@ -120,28 +120,21 @@ st.plotly_chart(fig)
 # Mapa geográfico
 # -------------------------
 st.subheader("📍 Mapa de mercados sugeridos")
+geo_data = df_merged.dropna(subset=['Latitud', 'Longitud'])
 
-# Asegurar que los datos de latitud, longitud y score sean numéricos
-df_merged['Latitud'] = pd.to_numeric(df_merged['Latitud'], errors='coerce')
-df_merged['Longitud'] = pd.to_numeric(df_merged['Longitud'], errors='coerce')
-df_merged['Score'] = pd.to_numeric(df_merged['Score'], errors='coerce')
-
-g
-eo_data = df_merged.dropna(subset=['Latitud', 'Longitud', 'Score'])
+# Imprimir para depuración: Verifica el contenido de geo_data
+st.write(geo_data.head())  # Imprimir las primeras filas de geo_data
 
 if not geo_data.empty:
-    try:
-        fig_map = px.scatter_geo(geo_data,
-                                 lat="Latitud", lon="Longitud",
-                                 size="Score", hover_name="País",
-                                 color="Score", color_continuous_scale="Viridis",
-                                 projection="natural earth",
-                                 title="Ubicación de los mercados recomendados")
-        st.plotly_chart(fig_map)
-    except Exception as e:
-        st.error(f"❌ Error al generar el mapa: {e}")
+    fig_map = px.scatter_geo(geo_data,
+                             lat="Latitud", lon="Longitud",
+                             size="Score", hover_name="País",
+                             color="Score", color_continuous_scale="Viridis",
+                             projection="natural earth",
+                             title="Ubicación de los mercados recomendados")
+    st.plotly_chart(fig_map)
 else:
-    st.warning("⚠️ No se encontraron coordenadas válidas para mostrar el mapa.")
+    st.warning("No se encontraron coordenadas válidas para mostrar el mapa.")
 
 # -------------------------
 # Ficha de país seleccionado (opcional)
@@ -159,4 +152,3 @@ if not df_merged.empty:
 # -------------------------
 st.markdown('<div class="section-title">📝 Información completa de mercados</div>', unsafe_allow_html=True)
 st.dataframe(mercados_df, use_container_width=True)
-
